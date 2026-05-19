@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — FunnelHaus</title>
+  <meta name="description" content="An independent design & growth studio based in Vancouver. We turn service and product businesses into high-performing digital machines — through systems, not services." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/logos/funnelhaus-logo-blue.svg" type="image/svg+xml" />
+  <link rel="mask-icon" href="/assets/logos/funnelhaus-logo-blue.svg" color="#2C60EF" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FunnelHaus" />
+  <meta property="og:title" content="About — FunnelHaus" />
+  <meta property="og:description" content="The studio in brief — Vancouver-based, calm, intentional, systems over services." />
+  <meta property="og:url" content="https://funnelhaus.ca/about" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ─── NIELA FONT ────────────────────────────────────────── */
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraLight.woff2') format('woff2'); font-weight: 200; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    :root {
+      --bg:      #0b0b0b;
+      --paper:   #f4f1ec;
+      --ink:     #efeae2;
+      --ink-50:  rgba(239,234,226,0.5);
+      --ink-30:  rgba(239,234,226,0.3);
+      --ink-15:  rgba(239,234,226,0.15);
+      --line:    rgba(239,234,226,0.12);
+      --accent:  #5884FC;
+      --yellow:  #FDC942;
+      --blue:    #2C60EF;
+      --red:     #DD120E;
+      --page:    var(--yellow);
+      --page-rgb: 253, 201, 66;
+    }
+
+    html.lenis { height: auto; }
+    html.lenis.lenis-smooth { scroll-behavior: auto; }
+    html.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    html.lenis.lenis-stopped body { overflow: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    ::selection { background: var(--ink); color: var(--bg); }
+
+    .mono {
+      font-family: 'Niela', monospace;
+      font-feature-settings: "tnum" 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.2,0.7,0.2,1), transform 0.9s cubic-bezier(0.2,0.7,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    /* Word-rise reveal — wraps each word in .word-wrap, animates from below */
+    .word-wrap {
+      display: inline-block;
+      overflow-y: clip;
+      overflow-x: visible;
+      vertical-align: top;
+      padding: 0.04em 0.12em 0.04em 0;
+    }
+    .word-wrap > span {
+      display: inline-block;
+      transform: translateY(110%);
+      animation: wordRise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    @keyframes wordRise { to { transform: translateY(0); } }
+
+    .hl[data-highlight] { --hl-color: #2C60EF; --hl-base: var(--ink); color: var(--hl-base); }
+    .hl-secondary[data-highlight] { --hl-color: #ffffff; --hl-base: rgba(239,234,226,0.5); }
+    .hl[data-highlight] .ltr-hl { color: var(--hl-base); transition: color 0.18s cubic-bezier(0.5, 0, 0.5, 1); }
+    .hl[data-highlight] .ltr-hl.lit { color: var(--hl-color); }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 32px;
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+    .nav-logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #fff;
+    }
+    .nav-logo .logo-mark { width: 22px; height: 22px; display: block; mix-blend-mode: normal; isolation: isolate; flex-shrink: 0; }
+    .nav-logo .wordmark { display: inline-flex; align-items: baseline; mix-blend-mode: difference; }
+    .nav-links { display: flex; gap: 28px; list-style: none; mix-blend-mode: difference; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #fff; position: relative;
+    }
+    .nav-links a::before { content: '/'; color: rgba(255,255,255,0.4); margin-right: 16px; display: inline-block; }
+    .nav-links li:first-child a::before { display: none; }
+    .nav-links a:hover { color: rgba(255,255,255,0.7); }
+    .nav-links a.is-current { color: rgba(255,255,255,0.55); }
+
+    /* CAPABILITIES DROPDOWN */
+    .nav-dropdown {
+      position: fixed;
+      top: 56px; left: 0;
+      z-index: 99;
+      min-width: 280px;
+      padding: 8px;
+      background: #0b0b0b;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; gap: 2px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .nav-dropdown.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .nav-dropdown .dropdown-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border-radius: 2px;
+      transition: color 0.2s, padding 0.2s, background-color 0.2s;
+    }
+    .nav-dropdown .dropdown-item:hover {
+      color: #fff;
+      background-color: rgba(255,255,255,0.05);
+      padding-left: 18px;
+    }
+    .nav-dropdown .dropdown-overview {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 768px) {
+      .nav-dropdown { display: none !important; }
+    }
+
+    /* ─── HERO (dark) ────────────────────────────────────────── */
+    .about-hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 32px 32px;
+      background: var(--bg);
+      color: var(--ink);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 32px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .about-hero-title-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      max-width: 1480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .about-hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--ink-30);
+    }
+    .about-hero-title {
+      font-size: clamp(64px, 13vw, 220px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .about-hero-title .ital {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-50);
+    }
+    .about-hero-lede {
+      max-width: 720px;
+      font-size: clamp(18px, 1.6vw, 26px);
+      line-height: 1.45;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .about-hero-lede .em { font-weight: 600; }
+
+    .about-hero-foot {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      max-width: 1480px;
+      margin: 0 auto;
+      width: 100%;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .about-scroll-cue {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 32px;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+    .about-scroll-cue:hover { color: var(--blue); }
+    .about-scroll-cue::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 1px; height: 18px;
+      background: var(--ink);
+      transform-origin: top;
+      animation:
+        scrollLine 1.8s ease-in-out infinite,
+        scrollLineColor 5.4s step-end infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      45%  { transform: scaleY(1); transform-origin: top; }
+      55%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    @keyframes scrollLineColor {
+      0%      { background: var(--blue); }
+      33.333% { background: var(--red); }
+      66.666% { background: var(--yellow); }
+      100%    { background: var(--blue); }
+    }
+
+    /* ─── STATEMENT (heading-left / body-right) ─────────────── */
+    .statement { padding: 140px 32px; border-bottom: 1px solid var(--line); }
+    .statement-inner { max-width: 1280px; margin: 0 auto; }
+    .statement-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .statement-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .statement-meta h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .statement-meta h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .statement-body p {
+      font-size: clamp(16px, 1.3vw, 19px);
+      line-height: 1.65;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+    .statement-body p + p { margin-top: 1.4em; }
+    .statement-body p strong { font-weight: 600; color: var(--ink); }
+    .statement-body p em { font-style: italic; color: var(--ink-50); }
+    .statement + .statement { padding-top: 100px; }
+
+    /* ─── PRINCIPLES (4-up grid) ────────────────────────────── */
+    .principles {
+      padding: 120px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .principles-inner { max-width: 1280px; margin: 0 auto; }
+    .principles-head {
+      margin-bottom: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 32px;
+    }
+    .principles-head h2 {
+      font-size: clamp(32px, 4.4vw, 56px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .principles-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .principle {
+      padding: 40px 32px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: background-color 0.3s;
+    }
+    .principle:hover { background-color: rgba(239,234,226,0.03); }
+    .principle .num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .principle .label {
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .principle .label .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .principle .desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-50);
+      max-width: 44ch;
+    }
+
+    /* ─── STUDIO ─────────────────────────────────────────────── */
+    .studio {
+      padding: 140px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .studio-inner { max-width: 1280px; margin: 0 auto; }
+    .studio-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 80px;
+    }
+    .studio-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .studio-meta h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .studio-meta h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .studio-body p {
+      font-size: clamp(16px, 1.3vw, 19px);
+      line-height: 1.65;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+    .studio-body p + p { margin-top: 1.4em; }
+    .studio-body p strong { font-weight: 600; }
+
+    .studio-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .studio-fact {
+      padding: 32px 24px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .studio-fact:last-child { border-right: none; }
+    .studio-fact .k {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .studio-fact .v {
+      font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .studio-fact .v .ital { font-style: italic; font-weight: 400; color: var(--ink-50); font-size: 0.7em; display: block; margin-top: 4px; }
+    .studio-fact .v .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 8px var(--yellow);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* ─── CTA ───────────────────────────────────────────────── */
+    .cta { padding: 160px 32px; border-bottom: 1px solid var(--line); }
+    .cta-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+    }
+    .cta h2 {
+      font-size: clamp(44px, 7.2vw, 120px);
+      font-weight: 900; line-height: 0.86; letter-spacing: -0.05em;
+    }
+    .cta h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .cta-right { padding-bottom: 16px; }
+    .cta-right p {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.65; color: var(--ink); margin-bottom: 32px;
+    }
+    .cta-actions { display: flex; flex-direction: column; gap: 0; }
+    .cta-link {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 20px; margin: 0 -20px;
+      border-top: 1px solid var(--line); border-radius: 0;
+      font-size: 18px; font-weight: 500;
+      transition: background-color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.3s, border-color 0.35s;
+    }
+    .cta-link:last-child { border-bottom: 1px solid var(--line); }
+    .cta-link:hover {
+      background-color: var(--blue);
+      color: #ffffff;
+      border-color: transparent;
+      padding-left: 32px;
+    }
+    .cta-link .arrow { transition: transform 0.3s; }
+    .cta-link:hover .arrow { transform: translateX(6px); }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--blue); color: #ffffff;
+      padding: 80px 32px 24px;
+      position: relative; overflow: hidden;
+      --footer-ink: #ffffff;
+      --footer-ink-50: rgba(255,255,255,0.65);
+      --footer-ink-30: rgba(255,255,255,0.4);
+      --footer-line: rgba(255,255,255,0.18);
+    }
+    .footer-inner { max-width: 1480px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 80px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 360px; }
+    .footer-brand-row { display: flex; align-items: center; gap: 12px; }
+    .footer-brand-row img { width: 32px; height: 32px; }
+    .footer-brand-row .wordmark { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .footer-brand-tag { font-size: 13px; line-height: 1.55; color: var(--footer-ink-50); font-style: italic; }
+    .footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .footer-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--footer-ink-30); margin-bottom: 4px;
+    }
+    .footer-col a, .footer-col span:not(.footer-label) {
+      font-size: 14px; color: var(--footer-ink);
+      display: inline-block;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .footer-col a:hover { color: var(--yellow); transform: translateX(4px); }
+
+    .footer-mark-big {
+      display: block; width: 100%; height: auto;
+      overflow: visible; padding: 16px 0 8px;
+      opacity: 0.07; user-select: none; pointer-events: none;
+    }
+    .footer-mark-big text { font-family: inherit; font-weight: 900; fill: var(--footer-ink); }
+    .footer-meta {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;
+      padding-top: 32px; border-top: 1px solid var(--footer-line);
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--footer-ink-50);
+    }
+    .footer-meta .meta-left { display: flex; gap: 24px; }
+    .footer-meta .meta-right { display: flex; gap: 24px; justify-content: flex-end; }
+    .footer-meta a:hover { color: var(--footer-ink); }
+    .footer-meta .dot {
+      display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--yellow);
+      box-shadow: 0 0 8px var(--yellow);
+      margin-right: 6px; vertical-align: middle;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .statement-row, .studio-row { grid-template-columns: 1fr; gap: 32px; }
+      .statement-meta, .studio-meta { position: static; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .studio-meta-grid { grid-template-columns: repeat(2, 1fr); }
+      .studio-fact:nth-child(2) { border-right: none; }
+      .studio-fact:nth-child(1), .studio-fact:nth-child(2) { border-bottom: 1px solid var(--line); }
+      .cta-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 18px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; }
+      .nav-links a::before { margin-right: 10px; }
+      .about-hero { padding: 100px 20px 28px; gap: 18px; }
+      .statement { padding: 80px 20px; }
+      .principles { padding: 80px 20px; }
+      .studio { padding: 80px 20px; }
+      .studio-meta-grid { grid-template-columns: 1fr; }
+      .studio-fact { border-right: none !important; border-bottom: 1px solid var(--line); }
+      .studio-fact:last-child { border-bottom: none; }
+      .cta { padding: 80px 20px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-meta { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+      .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logos/funnelhaus-logo-blue.svg" alt="" class="logo-mark" />
+      <span class="wordmark">FunnelHaus</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-dropdown"><a href="capabilities.html">Capabilities</a></li>
+      <li><a href="about.html" class="is-current">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Capabilities dropdown (positioned by JS) -->
+  <div class="nav-dropdown" id="caps-dropdown" role="menu" aria-label="Capabilities">
+    <a href="capabilities.html" class="dropdown-item dropdown-overview">All Capabilities</a>
+    <a href="design-and-build.html" class="dropdown-item">Design &amp; Build</a>
+    <a href="creative-and-content.html" class="dropdown-item">Creative &amp; Content</a>
+    <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero-title-wrap">
+      <span class="about-hero-eyebrow">The studio</span>
+      <h1 class="about-hero-title">
+        About<br>
+        <span class="ital">The studio in brief.</span>
+      </h1>
+      <p class="about-hero-lede">
+        An independent design &amp; growth studio based in Vancouver. We turn
+        service and product businesses into <span class="em">high-performing
+        digital machines</span> — through systems, not services.
+      </p>
+    </div>
+
+    <div class="about-hero-foot">
+      <a href="#why" class="about-scroll-cue">Why we exist</a>
+    </div>
+  </section>
+
+  <!-- STANCE — Why we exist -->
+  <section class="statement" id="why">
+    <div class="statement-inner">
+      <div class="statement-row">
+        <div class="statement-meta">
+          <h2 class="reveal">
+            Why we exist<br>
+            <span class="ital hl hl-secondary" data-highlight>Systems, not symptoms.</span>
+          </h2>
+        </div>
+        <div class="statement-body">
+          <p class="reveal">
+            Most businesses don't have a growth problem — they have a
+            <strong>systems problem</strong>. Disconnected tools, unclear
+            messaging, decisions made on instinct instead of insight. The
+            friction is everywhere, and a new logo or campaign won't fix it.
+          </p>
+          <p class="reveal reveal-d1">
+            FunnelHaus exists to close that gap. We connect strategy, creative,
+            and performance as <strong>one integrated system</strong> where
+            every move supports the next — and the funnel compounds quarter
+            after quarter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANCE — How we work -->
+  <section class="statement">
+    <div class="statement-inner">
+      <div class="statement-row">
+        <div class="statement-meta">
+          <h2 class="reveal">
+            Posture<br>
+            <span class="ital hl hl-secondary" data-highlight>Independent. By design.</span>
+          </h2>
+        </div>
+        <div class="statement-body">
+          <p class="reveal">
+            We're a small studio on purpose. A handful of clients per quarter
+            — never more — so the work stays deep, the systems stay sharp,
+            and your team has direct access to the people doing it.
+          </p>
+          <p class="reveal reveal-d1">
+            We work the way the best in-house teams work: <strong>strategy,
+            design, build, and growth happen together</strong>, not as a
+            relay race. We bring AI tools where they make us faster, taste
+            where machines fall short, and the discipline to ship every
+            week, not every quarter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="principles">
+    <div class="principles-inner">
+      <div class="principles-head">
+        <h2 class="reveal">
+          Principles<br>
+          <span class="ital hl hl-secondary" data-highlight>Four ways we work.</span>
+        </h2>
+      </div>
+
+      <div class="principles-grid">
+
+        <div class="principle reveal">
+          <span class="num">Principle 01</span>
+          <span class="label">Discover, then decide.</span>
+          <span class="desc">Clarity before execution. Audit, interviews, and goals — the work starts with understanding the problem, not the deliverable.</span>
+        </div>
+
+        <div class="principle reveal reveal-d1">
+          <span class="num">Principle 02</span>
+          <span class="label">Structured thinking.</span>
+          <span class="desc">Every brief becomes a system. Scope, sequence, deliverables, and the metric that says it worked — written down before the work begins.</span>
+        </div>
+
+        <div class="principle reveal reveal-d2">
+          <span class="num">Principle 03</span>
+          <span class="label">Collaborate, don't hand off.</span>
+          <span class="desc">Strategy, design, build, and growth happen together. No throws over the wall, no scope-creep theater. One team, one cadence.</span>
+        </div>
+
+        <div class="principle reveal reveal-d3">
+          <span class="num">Principle 04</span>
+          <span class="label">Decisions grounded in insight.</span>
+          <span class="desc">Trends are loud. Data is quieter. We work from research, evidence, and what the funnel says — not what's hot this quarter.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO -->
+  <section class="studio">
+    <div class="studio-inner">
+
+      <div class="studio-row">
+        <div class="studio-meta">
+          <h2 class="reveal">
+            Studio<br>
+            <span class="ital hl hl-secondary" data-highlight>Based in Canada. Working globally.</span>
+          </h2>
+        </div>
+        <div class="studio-body">
+          <p class="reveal">
+            FunnelHaus is headquartered in <strong>Vancouver, BC</strong>,
+            and serves clients across North America and beyond. We work
+            asynchronously by default and on-site when the work calls for
+            it — coast-to-coast and across time zones.
+          </p>
+          <p class="reveal reveal-d1">
+            Engagements run on quarterly sprints. We take a small number of
+            new clients each quarter, which means availability is real but
+            limited. If timing matters, get in touch early — most of our
+            work books a quarter ahead.
+          </p>
+        </div>
+      </div>
+
+      <div class="studio-meta-grid">
+        <div class="studio-fact reveal">
+          <span class="k">Location</span>
+          <span class="v">Vancouver<span class="ital">British Columbia, Canada</span></span>
+        </div>
+        <div class="studio-fact reveal reveal-d1">
+          <span class="k">Time zone</span>
+          <span class="v">PST<span class="ital">UTC −8 / −7</span></span>
+        </div>
+        <div class="studio-fact reveal reveal-d2">
+          <span class="k">Capacity</span>
+          <span class="v">3–4<span class="ital">clients per quarter</span></span>
+        </div>
+        <div class="studio-fact reveal reveal-d3">
+          <span class="k">Status</span>
+          <span class="v"><span class="dot"></span>Open<span class="ital">Sprint slots — May 2026</span></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-inner">
+      <h2 class="reveal" data-split-on-scroll>
+        Build with<br>
+        <span class="ital">FunnelHaus</span>
+      </h2>
+
+      <div class="cta-right">
+        <p class="reveal reveal-d1">
+          We partner with founders, teams, and organizations looking to build
+          systems that scale. Whether you have a clear brief or need help
+          defining the problem, we'll meet you where you are.
+        </p>
+        <p class="reveal reveal-d2">
+          Engagements are deliberately small in number — a handful of clients
+          per quarter — so the work stays deep, the systems stay sharp, and
+          your team has direct access to the people doing it.
+        </p>
+
+        <div class="cta-actions">
+          <a href="contact.html#form" class="cta-link reveal reveal-d3">
+            <span>Start a Project</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="contact.html" class="cta-link reveal reveal-d4">
+            <span>Not sure where to start?</span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="assets/logos/funnelhaus-logo-blue.svg" alt="FunnelHaus">
+            <span class="wordmark">FunnelHaus</span>
+          </div>
+          <p class="footer-brand-tag">
+            An independent design &amp; growth studio
+            building digital systems that compound.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Capabilities</span>
+          <a href="design-and-build.html">Design &amp; Build</a>
+          <a href="creative-and-content.html">Creative &amp; Content</a>
+          <a href="growth-and-performance.html">Growth &amp; Performance</a>
+          <a href="capabilities.html">All Services</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Studio</span>
+          <a href="about.html">About</a>
+          <a href="careers.html">Careers</a>
+          <a href="index.html#statement">Approach</a>
+          <a href="index.html#index">Clients</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Connect</span>
+          <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
+          <a href="contact.html">Contact</a>
+          <a href="contact.html#form">Start a Project</a>
+        </div>
+      </div>
+
+      <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
+        <text x="950" y="210" text-anchor="middle" font-size="280" letter-spacing="-12">FUNNELHAUS</text>
+      </svg>
+
+      <div class="footer-meta">
+        <div class="meta-left">
+          <span><span class="dot"></span>Sprint slots — May open</span>
+          <span>Vancouver, BC</span>
+        </div>
+        <div class="meta-center">
+          <span>©2026 FunnelHaus Studio</span>
+        </div>
+        <div class="meta-right">
+          <span>Built with AI</span>
+          <a href="#" id="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Word splitter (preserves inline tags like .ital)
+    function splitWords(root, baseDelay = 0) {
+      const stagger = 0.05;
+      let i = 0;
+      const wrapText = (text) => {
+        return text.split(/(\s+)/).map(token => {
+          if (/^\s+$/.test(token)) return token;
+          if (!token) return '';
+          const delay = (baseDelay + i * stagger).toFixed(3);
+          i++;
+          return `<span class="word-wrap"><span style="animation-delay:${delay}s">${token}</span></span>`;
+        }).join('');
+      };
+      const walk = (node) => {
+        Array.from(node.childNodes).forEach(child => {
+          if (child.nodeType === Node.TEXT_NODE) {
+            const wrapped = wrapText(child.textContent);
+            const tmp = document.createElement('span');
+            tmp.innerHTML = wrapped;
+            const frag = document.createDocumentFragment();
+            while (tmp.firstChild) frag.appendChild(tmp.firstChild);
+            child.replaceWith(frag);
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            if (child.classList && (child.classList.contains('line') || child.classList.contains('ital'))) {
+              walk(child);
+            } else {
+              const inner = child.innerHTML;
+              if (inner && /\S/.test(child.textContent)) {
+                child.innerHTML = wrapText(inner);
+              }
+            }
+          }
+        });
+      };
+      walk(root);
+    }
+    const splitObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.split) {
+          entry.target.dataset.split = '1';
+          splitWords(entry.target, 0);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('[data-split-on-scroll]').forEach(el => splitObserver.observe(el));
+
+    (function () {
+      const highlightTargets = document.querySelectorAll('[data-highlight]');
+      if (!highlightTargets.length) return;
+
+      const letterMap = new Map();
+      highlightTargets.forEach(el => {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const textNodes = [];
+        let node;
+        while ((node = walker.nextNode())) textNodes.push(node);
+
+        const letters = [];
+        textNodes.forEach(tn => {
+          const text = tn.textContent;
+          if (!text) return;
+          const frag = document.createDocumentFragment();
+          for (const ch of text) {
+            if (/\s/.test(ch)) {
+              frag.appendChild(document.createTextNode(ch));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'ltr-hl';
+              span.textContent = ch;
+              frag.appendChild(span);
+              letters.push(span);
+            }
+          }
+          tn.replaceWith(frag);
+        });
+        letterMap.set(el, letters);
+      });
+
+      let ticking = false;
+      function update() {
+        const vh = window.innerHeight;
+        highlightTargets.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const isSecondary = el.classList.contains('hl-secondary');
+          const offset = isSecondary ? vh * 0.14 : 0;
+          const startPx = vh * 1.0 - offset;
+          const endPx = vh * 0.4 - offset;
+          let progress = (startPx - rect.top) / (startPx - endPx);
+          progress = Math.max(0, Math.min(1, progress));
+          const letters = letterMap.get(el);
+          if (!letters) return;
+          const litCount = Math.round(progress * letters.length);
+          letters.forEach((ltr, i) => {
+            const shouldBeLit = i < litCount;
+            if (ltr.classList.contains('lit') !== shouldBeLit) {
+              ltr.classList.toggle('lit', shouldBeLit);
+            }
+          });
+        });
+        ticking = false;
+      }
+      function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    })();
+
+    document.getElementById('back-top')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      lenis.scrollTo(0, { duration: 1.5 });
+    });
+
+    // ── Capabilities dropdown
+    (function () {
+      const trigger = document.querySelector('.nav-links li.has-dropdown > a');
+      const li = trigger?.closest('li');
+      const dropdown = document.getElementById('caps-dropdown');
+      if (!trigger || !li || !dropdown) return;
+
+      function positionDropdown() {
+        const rect = trigger.getBoundingClientRect();
+        dropdown.style.top = (rect.bottom + 12) + 'px';
+        dropdown.style.left = rect.left + 'px';
+      }
+
+      let hideTimer;
+      function show() {
+        clearTimeout(hideTimer);
+        positionDropdown();
+        dropdown.classList.add('is-open');
+      }
+      function hide() {
+        hideTimer = setTimeout(() => dropdown.classList.remove('is-open'), 150);
+      }
+
+      li.addEventListener('mouseenter', show);
+      li.addEventListener('mouseleave', hide);
+      dropdown.addEventListener('mouseenter', show);
+      dropdown.addEventListener('mouseleave', hide);
+      trigger.addEventListener('focus', show);
+      dropdown.addEventListener('focusout', (e) => {
+        if (!dropdown.contains(e.relatedTarget) && e.relatedTarget !== trigger) hide();
+      });
+      window.addEventListener('resize', () => {
+        if (dropdown.classList.contains('is-open')) positionDropdown();
+      });
+    })();
+  </script>
+</body>
+</html>

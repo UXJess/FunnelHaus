@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find your fit — FunnelHaus</title>
+  <meta name="description" content="Three quick questions and we'll point you to the right pillar to start with — Design & Build, Creative & Content, or Growth & Performance." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/logos/funnelhaus-logo-blue.svg" type="image/svg+xml" />
+  <link rel="mask-icon" href="/assets/logos/funnelhaus-logo-blue.svg" color="#2C60EF" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FunnelHaus" />
+  <meta property="og:title" content="Find your fit — FunnelHaus" />
+  <meta property="og:description" content="Three quick questions. We'll point you to the right pillar to start with." />
+  <meta property="og:url" content="https://funnelhaus.ca/find-your-fit" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ─── NIELA FONT ────────────────────────────────────────── */
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraLight.woff2') format('woff2'); font-weight: 200; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    :root {
+      --bg:      #0b0b0b;
+      --paper:   #f4f1ec;
+      --ink:     #efeae2;
+      --ink-50:  rgba(239,234,226,0.5);
+      --ink-30:  rgba(239,234,226,0.3);
+      --ink-15:  rgba(239,234,226,0.15);
+      --line:    rgba(239,234,226,0.12);
+      --accent:  #5884FC;
+      --yellow:  #FDC942;
+      --blue:    #2C60EF;
+      --red:     #DD120E;
+    }
+
+    html.lenis { height: auto; }
+    html.lenis.lenis-smooth { scroll-behavior: auto; }
+    html.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    html.lenis.lenis-stopped body { overflow: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    ::selection { background: var(--ink); color: var(--bg); }
+
+    .mono {
+      font-family: 'Niela', monospace;
+      font-feature-settings: "tnum" 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.2,0.7,0.2,1), transform 0.9s cubic-bezier(0.2,0.7,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 32px;
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+    .nav-logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #fff;
+    }
+    .nav-logo .logo-mark { width: 22px; height: 22px; display: block; flex-shrink: 0; }
+    .nav-logo .wordmark { display: inline-flex; align-items: baseline; mix-blend-mode: difference; }
+    .nav-links { display: flex; gap: 28px; list-style: none; mix-blend-mode: difference; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #fff; position: relative;
+    }
+    .nav-links a::before { content: '/'; color: rgba(255,255,255,0.4); margin-right: 16px; display: inline-block; }
+    .nav-links li:first-child a::before { display: none; }
+    .nav-links a:hover { color: rgba(255,255,255,0.7); }
+    .nav-links a.is-current { color: rgba(255,255,255,0.55); }
+
+    /* CAPABILITIES DROPDOWN */
+    .nav-dropdown {
+      position: fixed;
+      top: 56px; left: 0;
+      z-index: 99;
+      min-width: 280px;
+      padding: 8px;
+      background: #0b0b0b;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; gap: 2px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .nav-dropdown.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .nav-dropdown .dropdown-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border-radius: 2px;
+      transition: color 0.2s, padding 0.2s, background-color 0.2s;
+    }
+    .nav-dropdown .dropdown-item:hover {
+      color: #fff;
+      background-color: rgba(255,255,255,0.05);
+      padding-left: 18px;
+    }
+    .nav-dropdown .dropdown-overview {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 768px) {
+      .nav-dropdown { display: none !important; }
+    }
+
+    /* ─── QUIZ FRAME ────────────────────────────────────────── */
+    .quiz {
+      min-height: 100vh;
+      padding: 88px 32px 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Progress bar — sits below nav, only shown on question screens */
+    .quiz-progress {
+      position: relative;
+      height: 2px;
+      background: var(--line);
+      margin: 32px 0 24px;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .quiz-progress.is-shown { opacity: 1; }
+    .quiz-progress-fill {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      background: var(--ink);
+      width: 0%;
+      transition: width 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    /* Top bar above screens — eyebrow + back link */
+    .quiz-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      margin-bottom: 64px;
+      min-height: 18px;
+    }
+    .quiz-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-50);
+      transition: color 0.2s, gap 0.2s;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0;
+    }
+    .quiz-back:hover { color: var(--ink); gap: 12px; }
+    .quiz-back .arrow { display: inline-block; transition: transform 0.2s; }
+
+    /* Screens — fade + rise transition on each .is-active swap */
+    .screen {
+      display: none;
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      flex-direction: column;
+    }
+    .screen.is-active {
+      display: flex;
+      animation: screenIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger entrance for question screen elements */
+    .screen.is-active .q-title    { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s backwards; }
+    .screen.is-active .q-helper   { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.16s backwards; }
+    .screen.is-active .q-options  { animation: itemUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.22s backwards; }
+    .screen.is-active .q-actions  { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.38s backwards; }
+    @keyframes itemUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stagger entrance for result screen elements */
+    .screen.is-active .result-head       { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s backwards; }
+    .screen.is-active .result-card       { animation: cardIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s backwards; }
+    .screen.is-active .result-meta       { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s backwards; }
+    .screen.is-active .result-cta-row    { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s backwards; }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    /* ─── INTRO SCREEN ──────────────────────────────────────── */
+    .intro-inner {
+      flex: 1;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .intro-title-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      max-width: 920px;
+    }
+    .intro-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .intro-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--ink-30);
+    }
+    .intro-title {
+      font-size: clamp(56px, 11vw, 180px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .intro-title .ital {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-50);
+    }
+    .intro-lede {
+      max-width: 620px;
+      font-size: clamp(17px, 1.5vw, 22px);
+      line-height: 1.5;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .intro-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, padding-right 0.2s, border-color 0.2s;
+      border: 1px solid transparent;
+    }
+    .btn .arrow { display: inline-block; transition: transform 0.2s; }
+    .btn-primary {
+      background: var(--blue);
+      color: #ffffff;
+      border-color: var(--blue);
+    }
+    .btn-primary:hover {
+      background: #1f4dd6;
+      border-color: #1f4dd6;
+      padding-right: 32px;
+    }
+    .btn-primary:hover .arrow { transform: translate(4px, -4px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink-30);
+    }
+    .btn-secondary:hover {
+      border-color: var(--ink);
+      padding-right: 32px;
+    }
+    .btn-secondary:hover .arrow { transform: translate(4px, -4px); }
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* ─── QUESTION SCREEN ───────────────────────────────────── */
+    .q-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .q-title {
+      font-size: clamp(36px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 920px;
+    }
+    .q-options {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--line);
+      max-width: 920px;
+    }
+    .q-option {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: padding 0.3s, color 0.3s, border-color 0.3s;
+      background: transparent;
+      font-family: inherit;
+      text-align: left;
+      width: 100%;
+      color: var(--ink);
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+    }
+    .q-option:hover { padding-left: 12px; }
+    .q-option .radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--ink-30);
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .q-option.is-selected .radio {
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+    .q-option.is-selected .radio::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: indicatorPop 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    @keyframes indicatorPop {
+      from { transform: scale(0); }
+      to   { transform: scale(1); }
+    }
+    .q-option .label {
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.35;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      flex: 1;
+    }
+    .q-option.is-selected {
+      border-bottom-color: var(--blue);
+    }
+
+    /* Helper text (e.g. "Choose up to 3.") */
+    .q-helper {
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--ink-50);
+      margin-top: -32px;
+      max-width: 920px;
+    }
+
+    /* Checkbox indicator for multi-select questions */
+    .q-option .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      border: 1px solid var(--ink-30);
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .q-option.is-selected .checkbox {
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+    .q-option.is-selected .checkbox::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid #ffffff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      animation: checkPop 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    @keyframes checkPop {
+      from { transform: rotate(45deg) scale(0); opacity: 0; }
+      to   { transform: rotate(45deg) scale(1); opacity: 1; }
+    }
+
+    /* Dim unselected options when multi-select max is reached */
+    .q-options.is-maxed .q-option:not(.is-selected) {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .q-options.is-maxed .q-option:not(.is-selected):hover {
+      padding-left: 0;
+    }
+
+    .q-actions {
+      display: flex;
+      justify-content: center;
+      padding-top: 32px;
+    }
+
+    /* ─── RESULT SCREEN ─────────────────────────────────────── */
+    .result-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+      padding-bottom: 80px;
+    }
+    .result-head {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 920px;
+    }
+    .result-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .result-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--ink-30);
+    }
+    .result-title {
+      font-size: clamp(44px, 8vw, 120px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+    .result-title .ital {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-50);
+    }
+    .result-lede {
+      max-width: 640px;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    /* Pillar card */
+    .result-card {
+      max-width: 920px;
+      padding: 56px 48px;
+      border: 1px solid rgba(239,234,226,0.3);
+      border-radius: 4px;
+      background: rgba(239,234,226,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .result-card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .result-card-tag .accent { color: var(--ink); }
+
+    /* Brand diamond — always white, animates in with rotation */
+    .result-card-star {
+      width: 32px;
+      height: 32px;
+      margin-bottom: -4px;
+      color: var(--ink);
+      animation: starIn 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s backwards;
+    }
+    @keyframes starIn {
+      from { transform: rotate(0deg)  scale(0); opacity: 0; }
+      to   { transform: rotate(90deg) scale(1); opacity: 1; }
+    }
+
+    .result-card-name {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .result-card-desc {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.55;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+    .result-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .result-meta {
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--ink-50);
+      max-width: 720px;
+      font-style: italic;
+    }
+
+    .result-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--blue);
+      color: #ffffff;
+      padding: 80px 32px 24px;
+      position: relative;
+      overflow: hidden;
+      --footer-ink: #ffffff;
+      --footer-ink-50: rgba(255,255,255,0.65);
+      --footer-ink-30: rgba(255,255,255,0.4);
+      --footer-line: rgba(255,255,255,0.18);
+    }
+    .footer-inner { max-width: 1480px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 80px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 360px; }
+    .footer-brand-row { display: flex; align-items: center; gap: 12px; }
+    .footer-brand-row img { width: 32px; height: 32px; }
+    .footer-brand-row .wordmark { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .footer-brand-tag { font-size: 13px; line-height: 1.55; color: var(--footer-ink-50); font-style: italic; }
+    .footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .footer-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--footer-ink-30); margin-bottom: 4px;
+    }
+    .footer-col a, .footer-col span:not(.footer-label) {
+      font-size: 14px; color: var(--footer-ink);
+      display: inline-block;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .footer-col a:hover { color: var(--yellow); transform: translateX(4px); }
+    .footer-mark-big {
+      display: block; width: 100%; height: auto;
+      overflow: visible; padding: 16px 0 8px;
+      opacity: 0.07; user-select: none; pointer-events: none;
+    }
+    .footer-mark-big text { font-family: inherit; font-weight: 900; fill: var(--footer-ink); }
+    .footer-meta {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;
+      padding-top: 32px; border-top: 1px solid var(--footer-line);
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--footer-ink-50);
+    }
+    .footer-meta .meta-left { display: flex; gap: 24px; }
+    .footer-meta .meta-right { display: flex; gap: 24px; justify-content: flex-end; }
+    .footer-meta a:hover { color: var(--footer-ink); }
+    .footer-meta .dot {
+      display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--yellow);
+      box-shadow: 0 0 8px var(--yellow);
+      margin-right: 6px; vertical-align: middle;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav { padding: 18px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; }
+      .nav-links a::before { margin-right: 10px; }
+      .quiz { padding: 100px 20px 0; }
+      .q-actions { justify-content: stretch; }
+      .q-actions .btn { width: 100%; justify-content: center; }
+      .intro-actions { flex-direction: column; }
+      .intro-actions .btn { width: 100%; justify-content: center; }
+      .result-card { padding: 32px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-meta { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+      .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logos/funnelhaus-logo-blue.svg" alt="" class="logo-mark" />
+      <span class="wordmark">FunnelHaus</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-dropdown"><a href="capabilities.html">Capabilities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Capabilities dropdown (positioned by JS) -->
+  <div class="nav-dropdown" id="caps-dropdown" role="menu" aria-label="Capabilities">
+    <a href="capabilities.html" class="dropdown-item dropdown-overview">All Capabilities</a>
+    <a href="design-and-build.html" class="dropdown-item">Design &amp; Build</a>
+    <a href="creative-and-content.html" class="dropdown-item">Creative &amp; Content</a>
+    <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
+  </div>
+
+  <main class="quiz" id="quiz">
+
+    <!-- Progress bar — visible only on question screens -->
+    <div class="quiz-progress" id="progress" aria-hidden="true">
+      <div class="quiz-progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Top bar (eyebrow + back) — content swapped per screen -->
+    <div class="quiz-topbar" id="topbar">
+      <span id="topbarEyebrow">New business</span>
+      <button class="quiz-back" id="backBtn" type="button" style="visibility: hidden;">
+        <span class="arrow">←</span>
+        <span>Go back</span>
+      </button>
+    </div>
+
+    <!-- ─── INTRO SCREEN ─── -->
+    <section class="screen is-active" id="screen-intro">
+      <div class="intro-inner">
+        <div class="intro-title-wrap">
+          <span class="intro-eyebrow">Find your fit</span>
+          <h1 class="intro-title">
+            Not sure where<br>
+            <span class="ital">to start?</span>
+          </h1>
+          <p class="intro-lede">
+            That's the most common place to be. Three quick questions, two
+            minutes — and we'll point you to the right pillar to start with.
+            No commitment, no follow-up sales sequence.
+          </p>
+        </div>
+        <div class="intro-actions">
+          <button class="btn btn-primary" id="startBtn" type="button">
+            <span>Help me figure it out</span>
+            <span class="arrow">↗</span>
+          </button>
+          <a class="btn btn-secondary" href="contact.html#form">
+            <span>I already know what I need</span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── QUESTION SCREEN ─── (one screen, populated by JS) -->
+    <section class="screen" id="screen-question">
+      <div class="q-inner">
+        <h2 class="q-title" id="qTitle"></h2>
+        <p class="q-helper" id="qHelper" style="display: none;"></p>
+        <div class="q-options" id="qOptions"></div>
+        <div class="q-actions">
+          <button class="btn btn-primary" id="nextBtn" type="button" aria-disabled="true">
+            <span id="nextLabel">Next</span>
+            <span class="arrow">↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── RESULT SCREEN ─── (one screen, populated by JS) -->
+    <section class="screen" id="screen-result">
+      <div class="result-inner">
+        <div class="result-head">
+          <span class="result-eyebrow" id="resultEyebrow">Your fit</span>
+          <h2 class="result-title">
+            Here's where<br>
+            <span class="ital">we'd start.</span>
+          </h2>
+          <p class="result-lede" id="resultLede"></p>
+        </div>
+
+        <div class="result-card" id="resultCard" data-pillar="db">
+          <svg class="result-card-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+          <span class="result-card-tag"><span class="accent" id="resultCardEyebrow">Recommended pillar</span></span>
+          <h3 class="result-card-name" id="resultCardName"></h3>
+          <p class="result-card-desc" id="resultCardDesc"></p>
+          <div class="result-card-actions">
+            <a class="btn btn-primary" id="resultCardLink" href="#">
+              <span>View capability</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="result-meta">This doesn't lock you into anything — it's just a starting point.</p>
+
+        <div class="result-cta-row">
+          <a class="btn btn-primary" id="startProjectBtn" href="contact.html#form">
+            <span>Start a project</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="btn btn-secondary" href="mailto:hello@funnelhaus.ca?subject=Book%20a%20virtual%20meeting">
+            <span>Book a virtual meeting</span>
+            <span class="arrow">↗</span>
+          </a>
+          <button class="btn btn-secondary" id="restartBtn" type="button">
+            <span>Restart the quiz</span>
+            <span class="arrow">↻</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="assets/logos/funnelhaus-logo-blue.svg" alt="FunnelHaus">
+            <span class="wordmark">FunnelHaus</span>
+          </div>
+          <p class="footer-brand-tag">
+            An independent design &amp; growth studio
+            building digital systems that compound.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Capabilities</span>
+          <a href="design-and-build.html">Design &amp; Build</a>
+          <a href="creative-and-content.html">Creative &amp; Content</a>
+          <a href="growth-and-performance.html">Growth &amp; Performance</a>
+          <a href="capabilities.html">All Services</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Studio</span>
+          <a href="about.html">About</a>
+          <a href="careers.html">Careers</a>
+          <a href="index.html#statement">Approach</a>
+          <a href="index.html#index">Clients</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Connect</span>
+          <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
+          <a href="contact.html">Contact</a>
+          <a href="contact.html#form">Work with us</a>
+        </div>
+      </div>
+
+      <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
+        <text x="950" y="210" text-anchor="middle" font-size="280" letter-spacing="-12">FUNNELHAUS</text>
+      </svg>
+
+      <div class="footer-meta">
+        <div class="meta-left">
+          <span><span class="dot"></span>Sprint slots — May open</span>
+          <span>Vancouver, BC</span>
+        </div>
+        <div class="meta-center">
+          <span>©2026 FunnelHaus Studio</span>
+        </div>
+        <div class="meta-right">
+          <span>Built with AI</span>
+          <a href="#" id="back-top">↑ Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // ── Back to top
+    document.getElementById('back-top')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      lenis.scrollTo(0, { duration: 1.5 });
+    });
+
+    // ── Capabilities dropdown
+    (function () {
+      const trigger = document.querySelector('.nav-links li.has-dropdown > a');
+      const li = trigger?.closest('li');
+      const dropdown = document.getElementById('caps-dropdown');
+      if (!trigger || !li || !dropdown) return;
+
+      function positionDropdown() {
+        const rect = trigger.getBoundingClientRect();
+        dropdown.style.top = (rect.bottom + 12) + 'px';
+        dropdown.style.left = rect.left + 'px';
+      }
+      let hideTimer;
+      function show() {
+        clearTimeout(hideTimer);
+        positionDropdown();
+        dropdown.classList.add('is-open');
+      }
+      function hide() {
+        hideTimer = setTimeout(() => dropdown.classList.remove('is-open'), 150);
+      }
+      li.addEventListener('mouseenter', show);
+      li.addEventListener('mouseleave', hide);
+      dropdown.addEventListener('mouseenter', show);
+      dropdown.addEventListener('mouseleave', hide);
+      trigger.addEventListener('focus', show);
+      dropdown.addEventListener('focusout', (e) => {
+        if (!dropdown.contains(e.relatedTarget) && e.relatedTarget !== trigger) hide();
+      });
+      window.addEventListener('resize', () => {
+        if (dropdown.classList.contains('is-open')) positionDropdown();
+      });
+    })();
+
+    // ─── QUIZ STATE MACHINE ─────────────────────────────────────────
+    // Edit `questions` to add/remove/reword. Each option awards points to
+    // pillars: db = Design & Build, cc = Creative & Content, gp = Growth
+    // & Performance. Empty scores object = neutral (counts toward the
+    // "let's talk" fallback if all answers are neutral).
+    const quiz = {
+      step: 'intro',  // 'intro' | 'q0' | 'q1' | 'q2' | 'result'
+      currentQ: 0,
+      answers: [],
+      scores: { db: 0, cc: 0, gp: 0 },
+
+      questions: [
+        {
+          title: "Which of these feels closest to where you're at?",
+          options: [
+            { label: "I'm starting something new",                            scores: { db: 2, cc: 1 } },
+            { label: "I have a website, but it's not working",                 scores: { db: 1, gp: 2 } },
+            { label: "I'm growing and things feel disconnected",               scores: { cc: 2 } },
+            { label: "I'm not sure — I just know something needs fixing",     scores: {} }
+          ]
+        },
+        {
+          title: "What's the main challenge you're dealing with?",
+          options: [
+            { label: "My website doesn't reflect my business",                  scores: { db: 2 } },
+            { label: "I'm not getting enough leads or conversions",             scores: { gp: 2 } },
+            { label: "My brand or content feels unclear",                       scores: { cc: 2 } },
+            { label: "I don't know what's working or what to focus on",         scores: {} }
+          ]
+        },
+        {
+          // Multi-select with cap. Each pick adds points (halved vs Q1/Q2
+          // so multi-pick can't dominate clear single answers).
+          title: "What would \"working better\" look like?",
+          multi: true,
+          maxSelect: 3,
+          helper: "Choose up to 3.",
+          options: [
+            { label: "A clearer website and message",       scores: { db: 0.5, cc: 0.5 } },
+            { label: "Stronger conversions",                 scores: { gp: 1, db: 0.5 } },
+            { label: "Better brand presence",                scores: { cc: 1 } },
+            { label: "Clearer insight into performance",     scores: { gp: 1 } },
+            { label: "Confidence in what to do next",        scores: {} }
+          ]
+        }
+      ],
+
+      results: {
+        db: {
+          eyebrow: "Pillar one · Design & Build",
+          lede: "Based on what you shared, it sounds like your foundation and messaging could use some clarity before focusing on growth.",
+          name: "Design & Build",
+          desc: "Websites and digital experiences designed to scale with clarity and conversion in mind.",
+          link: "design-and-build.html",
+          serviceParam: "design-build"
+        },
+        cc: {
+          eyebrow: "Pillar two · Creative & Content",
+          lede: "Based on what you shared, the clearest opportunity is sharpening your story and content so your brand connects and converts.",
+          name: "Creative & Content",
+          desc: "Photography, film, and campaigns that bring your brand to life and support the funnel.",
+          link: "creative-and-content.html",
+          serviceParam: "creative-content"
+        },
+        gp: {
+          eyebrow: "Pillar three · Growth & Performance",
+          lede: "Based on what you shared, the fastest path is measurement and optimization so you can see what's working and improve from there.",
+          name: "Growth & Performance",
+          desc: "SEO, analytics, and CRO that turn the funnel into a measurable engine.",
+          link: "growth-and-performance.html",
+          serviceParam: "growth-performance"
+        },
+        talk: {
+          eyebrow: "Let's talk",
+          lede: "Hard to say from here — let's hop on a call. The right starting point usually becomes clear in 15 minutes of conversation, especially when there's more than one issue in play.",
+          name: "Open a conversation",
+          desc: "Tell us a bit about what's going on and we'll suggest where to start. No proposal, no pressure — just a 30-minute conversation between humans.",
+          link: "contact.html#form",
+          serviceParam: "multiple"
+        }
+      },
+
+      init() {
+        document.getElementById('startBtn').addEventListener('click', () => this.startQuiz());
+        document.getElementById('backBtn').addEventListener('click', () => this.goBack());
+        document.getElementById('nextBtn').addEventListener('click', () => this.goNext());
+        document.getElementById('restartBtn').addEventListener('click', () => this.restart());
+      },
+
+      startQuiz() {
+        this.currentQ = 0;
+        this.answers = [];
+        this.scores = { db: 0, cc: 0, gp: 0 };
+        this.showQuestion();
+      },
+
+      showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('is-active'));
+        document.getElementById(id).classList.add('is-active');
+      },
+
+      updateTopbar(showBack, eyebrowText) {
+        document.getElementById('topbarEyebrow').textContent = eyebrowText;
+        document.getElementById('backBtn').style.visibility = showBack ? 'visible' : 'hidden';
+      },
+
+      updateProgress(pct) {
+        const bar = document.getElementById('progress');
+        const fill = document.getElementById('progressFill');
+        if (pct === null) {
+          bar.classList.remove('is-shown');
+        } else {
+          bar.classList.add('is-shown');
+          fill.style.width = pct + '%';
+        }
+      },
+
+      showQuestion() {
+        const i = this.currentQ;
+        const q = this.questions[i];
+        const total = this.questions.length;
+        const pct = ((i + 1) / total) * 100;
+
+        // Ensure answer slot is always an array
+        if (!Array.isArray(this.answers[i])) this.answers[i] = [];
+
+        this.updateProgress(pct);
+        this.updateTopbar(true, `Question ${i + 1} of ${total}`);
+
+        document.getElementById('qTitle').textContent = q.title;
+
+        // Helper text (e.g. "Choose up to 3.")
+        const helperEl = document.getElementById('qHelper');
+        if (q.helper) {
+          helperEl.textContent = q.helper;
+          helperEl.style.display = '';
+        } else {
+          helperEl.style.display = 'none';
+        }
+
+        const optionsEl = document.getElementById('qOptions');
+        optionsEl.innerHTML = '';
+        optionsEl.classList.toggle('is-multi', !!q.multi);
+
+        q.options.forEach((opt, optIdx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'q-option';
+          const indicatorClass = q.multi ? 'checkbox' : 'radio';
+          btn.innerHTML = `<span class="${indicatorClass}"></span><span class="label"></span>`;
+          btn.querySelector('.label').textContent = opt.label;
+          btn.addEventListener('click', () => this.selectOption(i, optIdx));
+          optionsEl.appendChild(btn);
+        });
+
+        this.renderOptionStates(i);
+
+        const isLast = i === total - 1;
+        document.getElementById('nextLabel').textContent = isLast ? 'See result' : 'Next';
+
+        this.updateNextBtn();
+
+        this.showScreen('screen-question');
+        lenis.scrollTo(0, { duration: 0.6 });
+      },
+
+      selectOption(qIdx, optIdx) {
+        const q = this.questions[qIdx];
+        const current = this.answers[qIdx] || [];
+
+        if (q.multi) {
+          const isSelected = current.includes(optIdx);
+          if (isSelected) {
+            this.answers[qIdx] = current.filter(i => i !== optIdx);
+          } else {
+            const max = q.maxSelect || Infinity;
+            if (current.length >= max) return;  // at cap, ignore click
+            this.answers[qIdx] = [...current, optIdx];
+          }
+        } else {
+          this.answers[qIdx] = [optIdx];
+        }
+
+        this.renderOptionStates(qIdx);
+        this.updateNextBtn();
+      },
+
+      renderOptionStates(qIdx) {
+        const q = this.questions[qIdx];
+        const selected = this.answers[qIdx] || [];
+        const optionsEl = document.getElementById('qOptions');
+        document.querySelectorAll('.q-option').forEach((el, i) => {
+          el.classList.toggle('is-selected', selected.includes(i));
+        });
+        if (q.multi) {
+          const max = q.maxSelect || Infinity;
+          optionsEl.classList.toggle('is-maxed', selected.length >= max);
+        } else {
+          optionsEl.classList.remove('is-maxed');
+        }
+      },
+
+      updateNextBtn() {
+        const selected = this.answers[this.currentQ] || [];
+        const hasAnswer = selected.length > 0;
+        document.getElementById('nextBtn').setAttribute('aria-disabled', hasAnswer ? 'false' : 'true');
+      },
+
+      goNext() {
+        const selected = this.answers[this.currentQ] || [];
+        if (selected.length === 0) return;
+        if (this.currentQ < this.questions.length - 1) {
+          this.currentQ++;
+          this.showQuestion();
+        } else {
+          this.computeAndShowResult();
+        }
+      },
+
+      goBack() {
+        if (this.currentQ === 0) {
+          this.showIntro();
+        } else {
+          this.currentQ--;
+          this.showQuestion();
+        }
+      },
+
+      showIntro() {
+        this.updateProgress(null);
+        this.updateTopbar(false, 'Find your fit');
+        this.showScreen('screen-intro');
+        lenis.scrollTo(0, { duration: 0.6 });
+      },
+
+      computeAndShowResult() {
+        this.scores = { db: 0, cc: 0, gp: 0 };
+        this.answers.forEach((selected, qIdx) => {
+          if (!Array.isArray(selected)) return;
+          const opts = this.questions[qIdx].options;
+          selected.forEach(optIdx => {
+            const opt = opts[optIdx];
+            if (!opt) return;
+            Object.entries(opt.scores).forEach(([pillar, pts]) => {
+              this.scores[pillar] = (this.scores[pillar] || 0) + pts;
+            });
+          });
+        });
+
+        const total = this.scores.db + this.scores.cc + this.scores.gp;
+        let winner;
+        if (total === 0) {
+          winner = 'talk';
+        } else {
+          // Tie-break: db > cc > gp
+          const sorted = Object.entries(this.scores).sort((a, b) => {
+            if (b[1] !== a[1]) return b[1] - a[1];
+            const order = { db: 0, cc: 1, gp: 2 };
+            return order[a[0]] - order[b[0]];
+          });
+          winner = sorted[0][0];
+        }
+
+        this.showResult(winner);
+      },
+
+      showResult(pillar) {
+        const r = this.results[pillar];
+        document.getElementById('resultCardEyebrow').textContent = r.eyebrow;
+        document.getElementById('resultLede').textContent = r.lede;
+        document.getElementById('resultCardName').textContent = r.name;
+        document.getElementById('resultCardDesc').textContent = r.desc;
+        document.getElementById('resultCard').setAttribute('data-pillar', pillar);
+
+        const cardLink = document.getElementById('resultCardLink');
+        cardLink.href = r.link;
+        cardLink.querySelector('span').textContent = pillar === 'talk' ? 'Open a conversation' : 'View capability';
+
+        // Pre-fill service in contact form via URL param
+        const startProjectBtn = document.getElementById('startProjectBtn');
+        if (r.serviceParam) {
+          startProjectBtn.href = `contact.html?service=${r.serviceParam}#form`;
+        } else {
+          startProjectBtn.href = 'contact.html#form';
+        }
+
+        this.updateProgress(null);
+        this.updateTopbar(false, 'Your fit');
+        this.showScreen('screen-result');
+        lenis.scrollTo(0, { duration: 0.6 });
+      },
+
+      restart() {
+        this.showIntro();
+      }
+    };
+
+    quiz.init();
+  </script>
+</body>
+</html>

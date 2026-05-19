@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Don't index the redirect stub
+Disallow: /start-a-project.html
+Disallow: /start-a-project
+
+Sitemap: https://funnelhaus.ca/sitemap.xml

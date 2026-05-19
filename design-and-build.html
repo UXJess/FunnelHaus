@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design &amp; Build — FunnelHaus</title>
+  <meta name="description" content="Websites and digital experiences engineered for clarity, speed, and conversion. AI-built, system-shaped, made to scale with the business." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/logos/funnelhaus-logo-blue.svg" type="image/svg+xml" />
+  <link rel="mask-icon" href="/assets/logos/funnelhaus-logo-blue.svg" color="#2C60EF" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FunnelHaus" />
+  <meta property="og:title" content="Design &amp; Build — FunnelHaus" />
+  <meta property="og:description" content="Websites designed to scale. AI-built, system-shaped, made to convert." />
+  <meta property="og:url" content="https://funnelhaus.ca/design-and-build" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#FDC942" />
+
+  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ─── NIELA FONT ────────────────────────────────────────── */
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraLight.woff2') format('woff2'); font-weight: 200; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+    @font-face { font-family: 'Niela'; src: url('assets/fonts/Niela-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    :root {
+      --bg:      #0b0b0b;
+      --paper:   #f4f1ec;
+      --ink:     #efeae2;
+      --ink-50:  rgba(239,234,226,0.5);
+      --ink-30:  rgba(239,234,226,0.3);
+      --ink-15:  rgba(239,234,226,0.15);
+      --line:    rgba(239,234,226,0.12);
+      --accent:  #5884FC;
+      --yellow:  #FDC942;
+      --blue:    #2C60EF;
+      --red:     #DD120E;
+    }
+
+    html.lenis { height: auto; }
+    html.lenis.lenis-smooth { scroll-behavior: auto; }
+    html.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    html.lenis.lenis-stopped body { overflow: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    ::selection { background: var(--ink); color: var(--bg); }
+
+    /* ─── GLOBAL TEXT TREATMENTS ────────────────────────────── */
+    .mono {
+      font-family: 'Niela', monospace;
+      font-feature-settings: "tnum" 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .word-wrap {
+      display: inline-block;
+      overflow-y: clip;
+      overflow-x: visible;
+      vertical-align: top;
+      padding: 0.04em 0.12em 0.04em 0;
+    }
+    .word-wrap > span {
+      display: inline-block;
+      transform: translateY(110%);
+      animation: wordRise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    @keyframes wordRise { to { transform: translateY(0); } }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.2,0.7,0.2,1), transform 0.9s cubic-bezier(0.2,0.7,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    /* Section title highlight — scroll-driven */
+    .hl[data-highlight] {
+      --hl-color: #2C60EF;
+      --hl-base: var(--ink);
+      color: var(--hl-base);
+    }
+    .hl-secondary[data-highlight] {
+      --hl-color: #ffffff;
+      --hl-base: rgba(239,234,226,0.5);
+    }
+    .hl[data-highlight] .ltr-hl {
+      color: var(--hl-base);
+      transition: color 0.18s cubic-bezier(0.5, 0, 0.5, 1);
+    }
+    .hl[data-highlight] .ltr-hl.lit {
+      color: var(--hl-color);
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 32px;
+      pointer-events: none;
+    }
+    .nav > * { pointer-events: auto; }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .nav-logo .logo-mark {
+      width: 22px;
+      height: 22px;
+      display: block;
+      mix-blend-mode: normal;
+      isolation: isolate;
+      flex-shrink: 0;
+    }
+    .nav-logo .wordmark { display: inline-flex; align-items: baseline; mix-blend-mode: difference; }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      mix-blend-mode: difference;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      position: relative;
+    }
+    .nav-links a::before {
+      content: '/';
+      color: rgba(255,255,255,0.4);
+      margin-right: 16px;
+      display: inline-block;
+    }
+    .nav-links li:first-child a::before { display: none; }
+    .nav-links a:hover { color: rgba(255,255,255,0.7); }
+    .nav-links a.is-current { color: rgba(255,255,255,0.55); }
+
+    /* ─── CAPABILITIES DROPDOWN ─────────────────────────────── */
+    .nav-dropdown {
+      position: fixed;
+      top: 56px; left: 0;
+      z-index: 99;
+      min-width: 280px;
+      padding: 8px;
+      background: #0b0b0b;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      display: flex; flex-direction: column; gap: 2px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .nav-dropdown.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-dropdown .dropdown-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border-radius: 2px;
+      transition: color 0.2s, padding 0.2s, background-color 0.2s;
+    }
+    .nav-dropdown .dropdown-item:hover {
+      color: #fff;
+      background-color: rgba(255,255,255,0.05);
+      padding-left: 18px;
+    }
+    .nav-dropdown .dropdown-overview {
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+    .nav-dropdown .dropdown-overview .meta {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.12em;
+    }
+    .nav-dropdown .dropdown-item .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nav-dropdown .dropdown-item .dot[data-color="blue"]   { background: var(--blue); }
+    .nav-dropdown .dropdown-item .dot[data-color="yellow"] { background: var(--yellow); }
+    .nav-dropdown .dropdown-item .dot[data-color="red"]    { background: var(--red); }
+    .nav-dropdown .dropdown-item .label { flex: 1; }
+    @media (max-width: 768px) {
+      .nav-dropdown { display: none !important; }
+    }
+
+    /* ─── HERO (yellow) ──────────────────────────────────────── */
+    .svc-hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 32px 32px;
+      background: var(--yellow);
+      color: #0b0b0b;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 48px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(11,11,11,0.12);
+    }
+
+    .svc-hero-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(11,11,11,0.65);
+    }
+    .svc-hero-status .left { display: inline-flex; align-items: center; gap: 8px; }
+    .svc-hero-status .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 0 rgba(44,96,239,0.6);
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(44,96,239,0.55); transform: scale(0.9); }
+      50%      { box-shadow: 0 0 0 6px rgba(44,96,239,0);    transform: scale(1.05); }
+    }
+
+    .svc-hero-title-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      max-width: 1480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .svc-hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(11,11,11,0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .svc-hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--blue);
+    }
+    .svc-hero-eyebrow .accent { color: var(--blue); }
+
+    .svc-hero-title {
+      font-size: clamp(64px, 14vw, 240px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.03em;
+      color: #0b0b0b;
+    }
+    .svc-hero-title .ital {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: rgba(11,11,11,0.55);
+    }
+
+    .svc-hero-lede {
+      max-width: 720px;
+      font-size: clamp(18px, 1.6vw, 26px);
+      line-height: 1.45;
+      color: #0b0b0b;
+      letter-spacing: -0.005em;
+    }
+    .svc-hero-lede .em { font-weight: 600; }
+
+    .svc-hero-foot {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      border-top: 1px solid rgba(11,11,11,0.18);
+      padding-top: 22px;
+      max-width: 1480px;
+      margin: 0 auto;
+      width: 100%;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(11,11,11,0.65);
+    }
+    .svc-scroll-cue {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 32px;
+      color: #0b0b0b;
+      transition: color 0.2s;
+    }
+    .svc-scroll-cue:hover { color: var(--blue); }
+    .svc-scroll-cue::after {
+      content: '';
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 1px; height: 18px;
+      background: #0b0b0b;
+      transform-origin: top;
+      animation:
+        scrollLine 1.8s ease-in-out infinite,
+        scrollLineColor 5.4s step-end infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      45%  { transform: scaleY(1); transform-origin: top; }
+      55%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    @keyframes scrollLineColor {
+      0%      { background: var(--blue); }
+      33.333% { background: var(--red); }
+      66.666% { background: #0b0b0b; }
+      100%    { background: var(--blue); }
+    }
+
+    /* ─── STATEMENT (heading-left / body-right) ─────────────── */
+    .statement {
+      padding: 140px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .statement-inner { max-width: 1280px; margin: 0 auto; }
+    .statement-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .statement-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .statement-meta h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .statement-meta h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+
+    .statement-body p {
+      font-size: clamp(16px, 1.3vw, 19px);
+      line-height: 1.65;
+      color: var(--ink);
+      font-weight: 400;
+      max-width: 56ch;
+    }
+    .statement-body p + p { margin-top: 1.4em; }
+    .statement-body p strong { font-weight: 600; color: var(--ink); }
+    .statement-body p em { font-style: italic; color: var(--ink-50); }
+
+    .statement + .statement { padding-top: 100px; }
+
+    /* ─── WHAT WE BUILD (sub-services) ──────────────────────── */
+    .svc-list {
+      padding: 140px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .svc-list-inner { max-width: 1480px; margin: 0 auto; }
+    .svc-list-head {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      margin-bottom: 64px;
+      align-items: start;
+    }
+    .svc-list-head h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .svc-list-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .svc-list-head .lede {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+
+    .svc-rows { border-top: 1px solid var(--line); }
+    .svc-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 1.4fr 80px;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      transition: padding 0.3s;
+      cursor: pointer;
+    }
+    .svc-row:hover { padding-left: 16px; padding-right: 0; }
+    .svc-row:hover .svc-name { color: var(--yellow); }
+    .svc-row:hover .arrow { color: var(--yellow); transform: translateX(6px); }
+
+    .svc-row .cap-star {
+      width: 22px;
+      height: 22px;
+      color: var(--ink-50);
+      align-self: flex-start;
+      margin-top: 6px;
+      transition: color 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .svc-row:hover .cap-star {
+      color: var(--yellow);
+      transform: rotate(90deg);
+    }
+
+    .svc-row .svc-name {
+      font-size: clamp(28px, 3.6vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      transition: color 0.3s;
+    }
+    .svc-row .svc-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .svc-row .svc-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 50ch;
+    }
+    .svc-row .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .svc-row .svc-tags span::after {
+      content: '·';
+      margin-left: 12px;
+      color: var(--ink-30);
+    }
+    .svc-row .svc-tags span:last-child::after { content: ''; }
+    .svc-row .arrow {
+      font-size: 22px;
+      color: var(--ink-50);
+      align-self: flex-start;
+      margin-top: 8px;
+      text-align: right;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    /* ─── PROCESS ───────────────────────────────────────────── */
+    .process {
+      padding: 120px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .process-inner { max-width: 1280px; margin: 0 auto; }
+    .process-head {
+      margin-bottom: 64px;
+    }
+    .process-head h2 {
+      font-size: clamp(32px, 4.4vw, 56px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .process-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .step {
+      padding: 36px 28px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: background-color 0.3s;
+    }
+    .step:last-child { border-right: none; }
+    .step:hover { background-color: rgba(239,234,226,0.03); }
+    .step .num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .step .label {
+      font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .step .desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink-50);
+    }
+
+    /* ─── FEATURED WORK ─────────────────────────────────────── */
+    .featured {
+      padding: 120px 32px 80px;
+      border-bottom: 1px solid var(--line);
+    }
+    .featured-inner { max-width: 1480px; margin: 0 auto; }
+    .featured-head {
+      margin-bottom: 32px;
+    }
+    .featured-head h2 {
+      font-size: clamp(32px, 4.4vw, 56px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .featured-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+
+    .featured-details {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      margin-bottom: 28px;
+    }
+    .featured-details .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      padding-top: 4px;
+    }
+    .featured-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 48px;
+    }
+    .featured-meta-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      align-items: baseline;
+    }
+    .featured-meta-row .k {
+      color: var(--ink-50);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .featured-meta-row .v { color: var(--ink); }
+    .featured-meta-row .v a {
+      border-bottom: 1px solid var(--ink-30);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+    .featured-meta-row .v a:hover { border-color: var(--ink); }
+
+    .featured-image {
+      width: 70vw;
+      max-width: 100%;
+      height: 90vh;
+      max-height: 90vh;
+      margin: 24px auto;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+    }
+    .featured-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 50%, rgba(88,132,252,0.12), transparent 60%),
+        linear-gradient(135deg, #1a1a1c 0%, #050506 100%);
+    }
+    .featured-mock {
+      position: absolute;
+      inset: 28px;
+      background: #111;
+      border-radius: 4px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .featured-mock-bar {
+      flex: 0 0 32px;
+      background: #1c1c1d;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 6px;
+    }
+    .featured-mock-bar > div.dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+    }
+    .featured-mock-bar .url {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      padding: 4px 12px;
+      max-width: 380px;
+      margin-left: auto; margin-right: auto;
+    }
+    .featured-mock-bar .url::before { content: '↳ '; opacity: 0.5; }
+    .featured-mock-frame {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .featured-mock-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 200%;
+      height: 200%;
+      border: 0;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .featured-mock-frame iframe::-webkit-scrollbar { display: none; }
+
+    .featured-cta { display: flex; justify-content: center; padding: 16px 0 8px; }
+    .featured-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: var(--blue);
+      padding: 12px 18px;
+      border: 1px solid var(--blue);
+      border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s, padding 0.2s, background 0.2s;
+    }
+    .featured-cta-link:hover {
+      background: #1f4dd6;
+      border-color: #1f4dd6;
+      padding-right: 24px;
+    }
+    .featured-cta-link .arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .featured-cta-link:hover .arrow { transform: translate(4px, -4px); }
+
+    /* ─── UP NEXT (other pillars) ───────────────────────────── */
+    .upnext {
+      padding: 140px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .upnext-inner { max-width: 1480px; margin: 0 auto; }
+    .upnext-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 48px;
+      gap: 32px;
+    }
+    .upnext-head h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .upnext-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .upnext-head .mono { color: var(--ink-50); }
+
+    .upnext-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .upnext-card {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 28px;
+      padding: 48px 36px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: padding 0.3s, background-color 0.3s;
+      position: relative;
+      min-height: 320px;
+    }
+    .upnext-card:last-child { border-right: none; }
+    .upnext-card:hover { padding-left: 52px; padding-right: 20px; }
+
+    .upnext-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    .upnext-tag::before {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: var(--ink-30);
+    }
+    .upnext-card[data-pillar="creative"] .upnext-tag .accent { color: var(--yellow); }
+    .upnext-card[data-pillar="growth"]   .upnext-tag .accent { color: var(--red); }
+
+    .upnext-name {
+      font-size: clamp(36px, 4.4vw, 64px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      transition: color 0.3s;
+    }
+    .upnext-card[data-pillar="creative"]:hover .upnext-name { color: var(--yellow); }
+    .upnext-card[data-pillar="growth"]:hover   .upnext-name { color: var(--red); }
+
+    .upnext-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-50);
+      max-width: 44ch;
+    }
+    .upnext-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--ink);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--ink-30);
+      transition: border-color 0.2s, color 0.2s, gap 0.2s;
+      width: max-content;
+    }
+    .upnext-cta:hover { gap: 16px; border-color: var(--ink); }
+
+    /* ─── CTA ───────────────────────────────────────────────── */
+    .cta {
+      padding: 160px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cta-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+    .cta h2 {
+      font-size: clamp(44px, 7.2vw, 120px);
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.05em;
+    }
+    .cta h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
+    .cta-right { padding-bottom: 16px; }
+    .cta-right p {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+    .cta-actions { display: flex; flex-direction: column; gap: 0; }
+    .cta-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 20px;
+      margin: 0 -20px;
+      border-top: 1px solid var(--line);
+      border-radius: 0;
+      font-size: 18px;
+      font-weight: 500;
+      transition: background-color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.3s, border-color 0.35s;
+    }
+    .cta-link:last-child { border-bottom: 1px solid var(--line); }
+    .cta-link:hover {
+      background-color: var(--blue);
+      color: #ffffff;
+      border-color: transparent;
+      padding-left: 32px;
+    }
+    .cta-link .arrow { transition: transform 0.3s; }
+    .cta-link:hover .arrow { transform: translateX(6px); }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--blue);
+      color: #ffffff;
+      padding: 80px 32px 24px;
+      position: relative;
+      overflow: hidden;
+      --footer-ink: #ffffff;
+      --footer-ink-50: rgba(255,255,255,0.65);
+      --footer-ink-30: rgba(255,255,255,0.4);
+      --footer-line: rgba(255,255,255,0.18);
+    }
+    .footer-inner { max-width: 1480px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 360px; }
+    .footer-brand-row { display: flex; align-items: center; gap: 12px; }
+    .footer-brand-row img { width: 32px; height: 32px; }
+    .footer-brand-row .wordmark { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .footer-brand-tag { font-size: 13px; line-height: 1.55; color: var(--footer-ink-50); font-style: italic; }
+    .footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .footer-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--footer-ink-30);
+      margin-bottom: 4px;
+    }
+    .footer-col a, .footer-col span:not(.footer-label) {
+      font-size: 14px;
+      color: var(--footer-ink);
+      display: inline-block;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .footer-col a:hover { color: var(--yellow); transform: translateX(4px); }
+
+    .footer-mark-big {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      padding: 16px 0 8px;
+      opacity: 0.07;
+      user-select: none;
+      pointer-events: none;
+    }
+    .footer-mark-big text {
+      font-family: inherit;
+      font-weight: 900;
+      fill: var(--footer-ink);
+    }
+
+    .footer-meta {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--footer-line);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--footer-ink-50);
+    }
+    .footer-meta .meta-left { display: flex; gap: 24px; }
+    .footer-meta .meta-right { display: flex; gap: 24px; justify-content: flex-end; }
+    .footer-meta a:hover { color: var(--footer-ink); }
+    .footer-meta .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 8px var(--yellow);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .statement-row, .svc-list-head { grid-template-columns: 1fr; gap: 32px; }
+      .statement-meta { position: static; }
+      .svc-row { grid-template-columns: 40px 1fr 60px; }
+      .svc-row .svc-meta { grid-column: 2 / -1; }
+      .upnext-grid { grid-template-columns: 1fr; }
+      .upnext-card { border-right: none; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .step:nth-child(2) { border-right: none; }
+      .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--line); }
+      .cta-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 18px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; }
+      .nav-links a::before { margin-right: 10px; }
+      .svc-hero { padding: 100px 20px 28px; gap: 28px; }
+      .statement { padding: 80px 20px; }
+      .statement + .statement { padding-top: 0; }
+      .svc-list { padding: 80px 20px; }
+      .process { padding: 80px 20px; }
+      .process-grid { grid-template-columns: 1fr; }
+      .step { border-right: none !important; border-bottom: 1px solid var(--line); }
+      .step:last-child { border-bottom: none; }
+      .featured { padding: 80px 20px; }
+      .featured-image { width: 100%; height: 60vh; }
+      .featured-meta-grid { grid-template-columns: 1fr; }
+      .upnext { padding: 80px 20px; }
+      .upnext-card { padding: 32px 20px; }
+      .cta { padding: 80px 20px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-meta { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+      .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logos/funnelhaus-logo-blue.svg" alt="" class="logo-mark" />
+      <span class="wordmark">FunnelHaus</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-dropdown"><a href="capabilities.html" class="is-current">Capabilities</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Capabilities dropdown (positioned by JS) -->
+  <div class="nav-dropdown" id="caps-dropdown" role="menu" aria-label="Capabilities">
+    <a href="capabilities.html" class="dropdown-item dropdown-overview">All Capabilities</a>
+    <a href="design-and-build.html" class="dropdown-item">Design &amp; Build</a>
+    <a href="creative-and-content.html" class="dropdown-item">Creative &amp; Content</a>
+    <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="svc-hero-status">
+      <span class="left"><span class="dot"></span><a href="capabilities.html">Capabilities</a> · Pillar 01 of 03</span>
+      <span>Design &amp; Build</span>
+    </div>
+
+    <div class="svc-hero-title-wrap">
+      <span class="svc-hero-eyebrow"><span class="accent">Pillar one</span></span>
+      <h1 class="svc-hero-title">
+        Design &amp;<br>
+        <span class="ital">Build.</span>
+      </h1>
+      <p class="svc-hero-lede">
+        Websites and digital experiences engineered for
+        <span class="em">clarity, speed, and conversion</span> —
+        AI-built, system-shaped, made to scale with the business.
+      </p>
+    </div>
+
+    <div class="svc-hero-foot">
+      <a href="#what-we-build" class="svc-scroll-cue">What we build</a>
+    </div>
+  </section>
+
+  <!-- STANCE -->
+  <section class="statement">
+    <div class="statement-inner">
+      <div class="statement-row">
+        <div class="statement-meta">
+          <h2 class="reveal">
+            Stance<br>
+            <span class="ital hl hl-secondary" data-highlight>Built to perform.</span>
+          </h2>
+        </div>
+        <div class="statement-body">
+          <p class="reveal">
+            Design that doesn't ship is a slide deck. Build that didn't start
+            with strategy is a mess. We refuse the choice — <strong>strategy,
+            design, and engineering happen together</strong>, in one team, on
+            one cadence.
+          </p>
+          <p class="reveal reveal-d1">
+            AI changes how websites get made. Faster prototypes, leaner code,
+            fewer abstractions between idea and shipped page. We've rebuilt
+            the build stack around that — and the sites that come out
+            <strong>load faster, rank higher, and convert better</strong> than
+            the templated alternative.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE BUILD -->
+  <section class="svc-list" id="what-we-build">
+    <div class="svc-list-inner">
+      <div class="svc-list-head">
+        <h2 class="reveal">
+          What we build<br>
+          <span class="ital hl hl-secondary" data-highlight>Four moves, one system.</span>
+        </h2>
+        <p class="lede reveal reveal-d1">
+          Four interlocking disciplines that move a website from idea to
+          measurable outcome. They're sold as one engagement because they
+          only work as one engagement.
+        </p>
+      </div>
+
+      <div class="svc-rows">
+
+        <a href="#" class="svc-row">
+          <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+          <span class="svc-name">UX Strategy</span>
+          <span class="svc-meta">
+            <span class="svc-desc">Research, IA, and flows that align the product with what users actually do — where every page lives, why it lives there, and what it has to earn.</span>
+            <span class="svc-tags"><span>Research</span><span>Information architecture</span><span>User flows</span><span>Wireframes</span></span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+        <a href="#" class="svc-row">
+          <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+          <span class="svc-name">Web Design</span>
+          <span class="svc-meta">
+            <span class="svc-desc">Visual systems for digital products and brand sites. Type, grid, motion, and component libraries that scale from landing page to full site.</span>
+            <span class="svc-tags"><span>Brand systems</span><span>UI design</span><span>Component libraries</span><span>Prototyping</span></span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+        <a href="#" class="svc-row">
+          <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+          <span class="svc-name">AI Build</span>
+          <span class="svc-meta">
+            <span class="svc-desc">Production builds engineered with AI tooling and modern stacks. Clean code, lean components, full ownership of the codebase. CMS-ready, fast on Lighthouse, easy to extend.</span>
+            <span class="svc-tags"><span>Production code</span><span>CMS</span><span>Performance</span><span>Speed</span></span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+        <a href="#" class="svc-row">
+          <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+          <span class="svc-name">Conversion Architecture</span>
+          <span class="svc-meta">
+            <span class="svc-desc">The page-level mechanics: forms, funnels, modals, and state. Built in lock-step with growth and analytics so every interaction is instrumented and accountable.</span>
+            <span class="svc-tags"><span>Funnels</span><span>Forms</span><span>Modals</span><span>Page logic</span></span>
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-inner">
+      <div class="process-head">
+        <h2 class="reveal">
+          Practice<br>
+          <span class="ital hl hl-secondary" data-highlight>Brief to shipped.</span>
+        </h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="step reveal">
+          <span class="num">Step 01</span>
+          <span class="label">Discover</span>
+          <span class="desc">Audit, interviews, and goals. Define what the site has to do and which signals will say it's working.</span>
+        </div>
+        <div class="step reveal reveal-d1">
+          <span class="num">Step 02</span>
+          <span class="label">Design</span>
+          <span class="desc">Wireframes, brand systems, and prototypes. Decide before we build, so the build is fast.</span>
+        </div>
+        <div class="step reveal reveal-d2">
+          <span class="num">Step 03</span>
+          <span class="label">Build</span>
+          <span class="desc">AI-engineered production code. Ship in weeks, not quarters — clean, instrumented, owned.</span>
+        </div>
+        <div class="step reveal reveal-d3">
+          <span class="num">Step 04</span>
+          <span class="label">Optimize</span>
+          <span class="desc">Measure, iterate, tune. The launch is day one — the system improves from there.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section class="featured">
+    <div class="featured-inner">
+      <div class="featured-head">
+        <h2 class="reveal">
+          Recent<br>
+          <span class="ital hl hl-secondary" data-highlight>Rocky Mountain Solutions.</span>
+        </h2>
+      </div>
+
+      <div class="featured-details">
+        <span class="label">Project</span>
+        <div class="featured-meta-grid">
+          <div class="featured-meta-row"><span class="k">Year</span><span class="v">2026</span></div>
+          <div class="featured-meta-row"><span class="k">Scope</span><span class="v">Design · AI Build · CRO</span></div>
+          <div class="featured-meta-row"><span class="k">Sector</span><span class="v">Construction Safety · Strata · Renovation</span></div>
+          <div class="featured-meta-row"><span class="k">Site</span><span class="v"><a href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">rockymountainsolutions.ca</a></span></div>
+        </div>
+      </div>
+
+      <div class="featured-image">
+        <div class="featured-mock">
+          <div class="featured-mock-bar">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <span class="url">rockymountainsolutions.ca</span>
+          </div>
+          <div class="featured-mock-frame">
+            <iframe src="https://rockymountainsolutions.ca" title="Rocky Mountain Solutions" loading="lazy" scrolling="no"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="featured-cta">
+        <a class="featured-cta-link" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
+          <span>Visit site</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UP NEXT -->
+  <section class="upnext">
+    <div class="upnext-inner">
+      <div class="upnext-head">
+        <h2 class="reveal">
+          Up next<br>
+          <span class="ital hl hl-secondary" data-highlight>The other two pillars.</span>
+        </h2>
+        <span class="mono reveal reveal-d1">02 / 03</span>
+      </div>
+
+      <div class="upnext-grid">
+
+        <a href="creative-and-content.html" class="upnext-card" data-pillar="creative">
+          <span class="upnext-tag"><span class="accent">Pillar two</span></span>
+          <span class="upnext-name">Creative &amp; Content</span>
+          <span class="upnext-desc">Photography, film, and campaign creative that bring the brand to life across every channel — content designed to support the funnel.</span>
+          <span class="upnext-cta">
+            <span>Explore</span>
+            <span class="arrow">↗</span>
+          </span>
+        </a>
+
+        <a href="growth-and-performance.html" class="upnext-card" data-pillar="growth">
+          <span class="upnext-tag"><span class="accent">Pillar three</span></span>
+          <span class="upnext-name">Growth &amp; Performance</span>
+          <span class="upnext-desc">SEO, analytics, and CRO programs that turn the website and the marketing engine into a measurable system — replacing guesswork with clarity.</span>
+          <span class="upnext-cta">
+            <span>Explore</span>
+            <span class="arrow">↗</span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-inner">
+      <h2 class="reveal" data-split-on-scroll>
+        Build with<br>
+        <span class="ital">FunnelHaus</span>
+      </h2>
+
+      <div class="cta-right">
+        <p class="reveal reveal-d1">
+          We partner with founders, teams, and organizations looking to build
+          systems that scale. Whether you have a clear brief or need help
+          defining the problem, we'll meet you where you are.
+        </p>
+        <p class="reveal reveal-d2">
+          Engagements are deliberately small in number — a handful of clients
+          per quarter — so the work stays deep, the systems stay sharp, and
+          your team has direct access to the people doing it.
+        </p>
+
+        <div class="cta-actions">
+          <a href="contact.html#form" class="cta-link reveal reveal-d3">
+            <span>Start a Project</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="contact.html" class="cta-link reveal reveal-d4">
+            <span>Not sure where to start?</span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="assets/logos/funnelhaus-logo-blue.svg" alt="FunnelHaus">
+            <span class="wordmark">FunnelHaus</span>
+          </div>
+          <p class="footer-brand-tag">
+            An independent design &amp; growth studio
+            building digital systems that compound.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Capabilities</span>
+          <a href="design-and-build.html">Design &amp; Build</a>
+          <a href="creative-and-content.html">Creative &amp; Content</a>
+          <a href="growth-and-performance.html">Growth &amp; Performance</a>
+          <a href="capabilities.html">All Services</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Studio</span>
+          <a href="about.html">About</a>
+          <a href="careers.html">Careers</a>
+          <a href="index.html#statement">Approach</a>
+          <a href="index.html#index">Clients</a>
+        </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Connect</span>
+          <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
+          <a href="contact.html">Contact</a>
+          <a href="contact.html#form">Start a Project</a>
+        </div>
+      </div>
+
+      <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
+        <text x="950" y="210" text-anchor="middle" font-size="280" letter-spacing="-12">FUNNELHAUS</text>
+      </svg>
+
+      <div class="footer-meta">
+        <div class="meta-left">
+          <span><span class="dot"></span>Sprint slots — May open</span>
+          <span>Vancouver, BC</span>
+        </div>
+        <div class="meta-center">
+          <span>©2026 FunnelHaus Studio</span>
+        </div>
+        <div class="meta-right">
+          <span>Built with AI</span>
+          <a href="#" id="back-top">↑ Back to top</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // ── Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // ── Scroll reveals
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Word splitter (preserves inline tags like .ital)
+    function splitWords(root, baseDelay = 0) {
+      const stagger = 0.05;
+      let i = 0;
+      const wrapText = (text) => {
+        return text.split(/(\s+)/).map(token => {
+          if (/^\s+$/.test(token)) return token;
+          if (!token) return '';
+          const delay = (baseDelay + i * stagger).toFixed(3);
+          i++;
+          return `<span class="word-wrap"><span style="animation-delay:${delay}s">${token}</span></span>`;
+        }).join('');
+      };
+      const walk = (node) => {
+        Array.from(node.childNodes).forEach(child => {
+          if (child.nodeType === Node.TEXT_NODE) {
+            const wrapped = wrapText(child.textContent);
+            const tmp = document.createElement('span');
+            tmp.innerHTML = wrapped;
+            const frag = document.createDocumentFragment();
+            while (tmp.firstChild) frag.appendChild(tmp.firstChild);
+            child.replaceWith(frag);
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            if (child.classList && (child.classList.contains('line') || child.classList.contains('ital'))) {
+              walk(child);
+            } else {
+              const inner = child.innerHTML;
+              if (inner && /\S/.test(child.textContent)) {
+                child.innerHTML = wrapText(inner);
+              }
+            }
+          }
+        });
+      };
+      walk(root);
+    }
+    const splitObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.split) {
+          entry.target.dataset.split = '1';
+          splitWords(entry.target, 0);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('[data-split-on-scroll]').forEach(el => splitObserver.observe(el));
+
+    // ── Title highlight sweep — scroll-tied; per-letter snap.
+    // Walks text nodes only so nested <span class="ital"> structure is preserved.
+    (function () {
+      const highlightTargets = document.querySelectorAll('[data-highlight]');
+      if (!highlightTargets.length) return;
+
+      const letterMap = new Map();
+      highlightTargets.forEach(el => {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const textNodes = [];
+        let node;
+        while ((node = walker.nextNode())) textNodes.push(node);
+
+        const letters = [];
+        textNodes.forEach(tn => {
+          const text = tn.textContent;
+          if (!text) return;
+          const frag = document.createDocumentFragment();
+          for (const ch of text) {
+            if (/\s/.test(ch)) {
+              frag.appendChild(document.createTextNode(ch));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'ltr-hl';
+              span.textContent = ch;
+              frag.appendChild(span);
+              letters.push(span);
+            }
+          }
+          tn.replaceWith(frag);
+        });
+        letterMap.set(el, letters);
+      });
+
+      let ticking = false;
+      function update() {
+        const vh = window.innerHeight;
+        highlightTargets.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const isSecondary = el.classList.contains('hl-secondary');
+          const offset = isSecondary ? vh * 0.14 : 0;
+          const startPx = vh * 1.0 - offset;
+          const endPx = vh * 0.4 - offset;
+          let progress = (startPx - rect.top) / (startPx - endPx);
+          progress = Math.max(0, Math.min(1, progress));
+          const letters = letterMap.get(el);
+          if (!letters) return;
+          const litCount = Math.round(progress * letters.length);
+          letters.forEach((ltr, i) => {
+            const shouldBeLit = i < litCount;
+            if (ltr.classList.contains('lit') !== shouldBeLit) {
+              ltr.classList.toggle('lit', shouldBeLit);
+            }
+          });
+        });
+        ticking = false;
+      }
+      function onScroll() {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    })();
+
+    // ── Back to top
+    document.getElementById('back-top')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      lenis.scrollTo(0, { duration: 1.5 });
+    });
+
+    // ── Capabilities dropdown
+    (function () {
+      const trigger = document.querySelector('.nav-links li.has-dropdown > a');
+      const li = trigger?.closest('li');
+      const dropdown = document.getElementById('caps-dropdown');
+      if (!trigger || !li || !dropdown) return;
+
+      function positionDropdown() {
+        const rect = trigger.getBoundingClientRect();
+        dropdown.style.top = (rect.bottom + 12) + 'px';
+        dropdown.style.left = rect.left + 'px';
+      }
+
+      let hideTimer;
+      function show() {
+        clearTimeout(hideTimer);
+        positionDropdown();
+        dropdown.classList.add('is-open');
+      }
+      function hide() {
+        hideTimer = setTimeout(() => dropdown.classList.remove('is-open'), 150);
+      }
+
+      li.addEventListener('mouseenter', show);
+      li.addEventListener('mouseleave', hide);
+      dropdown.addEventListener('mouseenter', show);
+      dropdown.addEventListener('mouseleave', hide);
+      trigger.addEventListener('focus', show);
+      dropdown.addEventListener('focusout', (e) => {
+        if (!dropdown.contains(e.relatedTarget) && e.relatedTarget !== trigger) hide();
+      });
+      window.addEventListener('resize', () => {
+        if (dropdown.classList.contains('is-open')) positionDropdown();
+      });
+    })();
+  </script>
+</body>
+</html>
