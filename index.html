@@ -17,7 +17,7 @@
   <meta property="og:description" content="An independent design & growth studio in Vancouver. Systems, not services." />
   <meta property="og:url" content="https://funnelhaus.ca/" />
   <meta name="twitter:card" content="summary" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#070508" />
 
   <!-- HubSpot tracking — Portal 343245815 (NA3) -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
@@ -42,13 +42,13 @@
     html, body { height: 100%; }
 
     :root {
-      --bg:      #ffffff;
-      --paper:   #f4f1ec;
-      --ink:     #0f0f0f;
-      --ink-50:  rgba(15,15,15,0.5);
-      --ink-30:  rgba(15,15,15,0.3);
-      --ink-15:  rgba(15,15,15,0.15);
-      --line:    rgba(15,15,15,0.12);
+      --bg:      #2C60EF;
+      --paper:   #1E50D9;
+      --ink:     #ffffff;
+      --ink-50:  rgba(255,255,255,0.5);
+      --ink-30:  rgba(255,255,255,0.3);
+      --ink-15:  rgba(255,255,255,0.15);
+      --line:    rgba(255,255,255,0.12);
       --accent:  #5884FC;
     }
 
@@ -153,16 +153,16 @@
     .nav-logo {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
+      gap: 17px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #fff;
     }
     .nav-logo .logo-mark {
-      width: 22px;
-      height: 22px;
+      width: 37px;
+      height: 37px;
       display: block;
       mix-blend-mode: normal;
       isolation: isolate;
@@ -204,7 +204,6 @@
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.12);
       border-radius: 4px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
       display: flex; flex-direction: column; gap: 2px;
       opacity: 0;
       transform: translateY(-8px);
@@ -246,7 +245,7 @@
       border-radius: 50%;
       flex-shrink: 0;
     }
-    .nav-dropdown .dropdown-item .dot[data-color="blue"]   { background: #2C60EF; }
+    .nav-dropdown .dropdown-item .dot[data-color="blue"]   { background: #0f0f0f; }
     .nav-dropdown .dropdown-item .dot[data-color="yellow"] { background: #FDC942; }
     .nav-dropdown .dropdown-item .dot[data-color="red"]    { background: #DD120E; }
     .nav-dropdown .dropdown-item .label { flex: 1; }
@@ -257,13 +256,14 @@
     /* ─── SECTION 1: HERO ───────────────────────────────────── */
     .hero {
       position: relative;
-      min-height: 100vh;
-      padding: 88px 32px 32px;
-      display: grid;
-      grid-template-rows: auto auto 1fr auto auto;
-      gap: 24px;
+      height: 100vh;
+      background: #FFFFFA;
+      --ink: #0f0f0f;
+      --ink-50: rgba(15,15,15,0.5);
+      --ink-30: rgba(15,15,15,0.3);
+      --ink-15: rgba(15,15,15,0.15);
+      --line: rgba(15,15,15,0.12);
       overflow: hidden;
-      border-bottom: 1px solid var(--line);
     }
 
     /* Top status row — flush corners */
@@ -311,11 +311,14 @@
 
     /* Monolith */
     .hero-title-wrap {
+      position: absolute;
+      top: 50vh;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      padding: 0;
     }
     .hero-title {
       font-size: clamp(52px, 16vw, 270px);
@@ -400,9 +403,13 @@
 
     /* Bottom row — coords / scroll / index */
     .hero-foot {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: end;
+      position: absolute;
+      bottom: 56px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 32px;
       border-top: 1px solid var(--line);
       padding-top: 22px;
@@ -417,7 +424,7 @@
     }
     .hero-foot .foot-col .mono { color: var(--ink); }
     .hero-foot .foot-right { text-align: right; }
-    .hero-foot .foot-right p { margin-left: auto; }
+    .hero-foot .foot-right p { margin-left: auto; display: flex; justify-content: flex-start; }
     .hero-foot .foot-center { text-align: center; }
 
     .scroll-cue {
@@ -450,10 +457,10 @@
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
     @keyframes scrollLineColor {
-      0%      { background: #2C60EF; }
+      0%      { background: #0f0f0f; }
       33.333% { background: #DD120E; }
       66.666% { background: #FDC942; }
-      100%    { background: #2C60EF; }
+      100%    { background: #0f0f0f; }
     }
 
     /* Discipline marquee — subtle perpetual scroll across very bottom */
@@ -461,9 +468,9 @@
       position: absolute;
       left: 0; right: 0; bottom: 0;
       overflow: hidden;
-      background: #FDC942;
+      background: #FFFFFA;
       padding: 14px 0;
-      pointer-events: none;
+      pointer-events: auto;
       display: none; /* enabled on wide screens via media below */
     }
     .hero-marquee-track {
@@ -477,7 +484,14 @@
       text-transform: uppercase;
       color: #0b0b0b;
     }
-    .hero-marquee-track span::before {
+    .hero-marquee-track a {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .hero-marquee-track a:hover { color: #2C60EF; }
+    .hero-marquee-track a::before {
       content: '◆';
       margin-right: 56px;
       color: #0b0b0b;
@@ -499,7 +513,7 @@
       .hero-tm { top: 8%; right: 16px; }
       .hero-eyebrow, .hero-sub { padding: 0; flex-direction: column; align-items: flex-start; gap: 12px; }
       .hero-sub-tag { text-align: left; }
-      .hero-foot { grid-template-columns: 1fr; gap: 18px; }
+      .hero-foot { flex-direction: column; align-items: flex-start; gap: 18px; }
       .hero-foot .foot-right { text-align: left; }
       .hero-foot .foot-right p { margin-left: 0; }
       .hero-foot .foot-center { text-align: left; }
@@ -621,8 +635,8 @@
       letter-spacing: 0.06em;
     }
     .cap-item .cap-star {
-      width: 22px;
-      height: 22px;
+      width: 37px;
+      height: 37px;
       color: var(--ink-50);
       transition: color 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
@@ -678,6 +692,12 @@
     .featured {
       min-height: 100vh;
       padding: 80px 32px 56px;
+      background: #0f0f0f;
+      --ink: #ffffff;
+      --ink-50: rgba(255,255,255,0.5);
+      --ink-30: rgba(255,255,255,0.3);
+      --ink-15: rgba(255,255,255,0.15);
+      --line: rgba(255,255,255,0.12);
       border-bottom: 1px solid var(--line);
       display: flex;
       flex-direction: column;
@@ -944,7 +964,7 @@
     /* ─── SECTION 6: CTA ────────────────────────────────────── */
     .cta {
       padding: 160px 32px;
-      border-bottom: 1px solid var(--line);
+      background: #0f0f0f;
     }
     .cta-inner {
       max-width: 1280px;
@@ -1198,7 +1218,7 @@
       position: fixed;
       inset: 0;
       z-index: 90;
-      background: #ffffff;
+      background: #2C60EF;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0.4s;
@@ -1219,14 +1239,14 @@
     }
     .mobile-menu-link {
       display: block;
-      color: #0f0f0f;
+      color: #ffffff;
       text-decoration: none;
       font-size: 32px;
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.02em;
       padding: 18px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       transition: color 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), padding-left 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
     .mobile-menu-link:hover,
@@ -1240,7 +1260,7 @@
     }
     .mobile-menu-group {
       padding: 18px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -1249,12 +1269,12 @@
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 6px;
     }
     .mobile-menu-sublink {
       display: block;
-      color: #0f0f0f;
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
       font-size: 20px;
       font-weight: 500;
@@ -1270,17 +1290,17 @@
     .mobile-menu-footer {
       margin-top: 32px;
       padding-top: 24px;
-      border-top: 1px solid rgba(0,0,0,0.12);
+      border-top: 1px solid rgba(255,255,255,0.15);
       display: flex;
       flex-direction: column;
       gap: 6px;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.5);
     }
     .mobile-menu-footer a {
-      color: #0f0f0f;
+      color: #ffffff;
       text-decoration: none;
     }
 
@@ -1289,6 +1309,16 @@
       .nav-links { display: none; }
     }
 
+
+    /* ─── NAV: dynamic light/dark theme (set by JS) ─────────── */
+    .nav--light .nav-logo { color: #0f0f0f; }
+    .nav--light .nav-logo .wordmark { mix-blend-mode: normal; color: #0f0f0f; }
+    .nav--light .nav-links { mix-blend-mode: normal; }
+    .nav--light .nav-links a { color: #0f0f0f; }
+    .nav--light .nav-links a::before { color: rgba(0,0,0,0.35); }
+    .nav--light .nav-links a:hover { color: rgba(0,0,0,0.6); }
+    .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
+    .nav--light .nav-hamburger span { background: #0f0f0f; }
   </style>
 </head>
 <body>
@@ -1343,16 +1373,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <!-- Top status row -->
-    <div class="hero-status">
-      <span class="mono"><span class="dot"></span>&nbsp;Sprint&nbsp;slots&nbsp;<span class="bracket">—</span>&nbsp;May&nbsp;open</span>
-    </div>
-
-    <!-- Eyebrow -->
-    <div class="hero-eyebrow">
-      <p class="lead">An independent <span class="accent">design &amp; growth studio</span> based in Vancouver, building digital systems that compound.</p>
-    </div>
-
     <!-- Monolith title -->
     <div class="hero-title-wrap">
       <h1 class="hero-title" aria-label="FunnelHaus">
@@ -1360,39 +1380,27 @@
       </h1>
     </div>
 
-    <!-- Subtitle row -->
-    <div class="hero-sub">
-      <p class="hero-sub-line"><span class="ital">— Engineered for </span>brands that treat their website, content, and growth engine as one system.</p>
-    </div>
-
     <!-- Bottom row -->
     <div class="hero-foot">
       <div class="foot-col">
-        <span class="mono">Studio</span>
-        <p>Vancouver, British Columbia. Founder-led, four disciplines, one team.</p>
-      </div>
-      <div class="foot-col foot-center">
-        <a href="#statement" class="scroll-cue"><span>Scroll&nbsp;to&nbsp;Read</span></a>
+        <p>An independent design &amp; growth studio based in Vancouver, building digital systems that compound.</p>
       </div>
       <div class="foot-col foot-right">
-        <span class="mono">Practice</span>
-        <p>Strategy · Design · Content · Performance.</p>
+        <p>for brands that treat their website, content, and growth engine as one system.</p>
       </div>
     </div>
 
     <!-- Subtle marquee strip -->
-    <div class="hero-marquee" aria-hidden="true">
+    <div class="hero-marquee">
       <div class="hero-marquee-track">
-        <span>Design &amp; Build</span>
-        <span>Creative &amp; Content</span>
-        <span>Growth &amp; Performance</span>
-        <span>Strategy</span>
-        <span>Vancouver, BC</span>
-        <span>Design &amp; Build</span>
-        <span>Creative &amp; Content</span>
-        <span>Growth &amp; Performance</span>
-        <span>Strategy</span>
-        <span>Vancouver, BC</span>
+        <a href="design-and-build.html">Design &amp; Build</a>
+        <a href="creative-and-content.html">Creative &amp; Content</a>
+        <a href="growth-and-performance.html">Growth &amp; Performance</a>
+        <a href="contact.html">Work with Us</a>
+        <a href="design-and-build.html">Design &amp; Build</a>
+        <a href="creative-and-content.html">Creative &amp; Content</a>
+        <a href="growth-and-performance.html">Growth &amp; Performance</a>
+        <a href="contact.html">Work with Us</a>
       </div>
     </div>
   </section>
@@ -1685,7 +1693,7 @@
 
       <div class="footer-meta">
         <div class="meta-left">
-          <span><span class="dot"></span>Sprint slots — May open</span>
+          <span><span class="dot"></span>Sprint slots — <span class="sprint-month">May</span> open</span>
           <span>Vancouver, BC</span>
         </div>
         <div class="meta-center">
@@ -1958,6 +1966,38 @@
       });
     })();
 
+  </script>
+  <script>
+    (function(){
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var name = months[new Date().getMonth()];
+      document.querySelectorAll('.sprint-month').forEach(function(el){ el.textContent = name; });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var nav = document.querySelector('.nav');
+      if (!nav) return;
+      function updateNavTheme() {
+        var els = document.elementsFromPoint(window.innerWidth / 2, 48);
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el === nav || nav.contains(el)) continue;
+          var bg = window.getComputedStyle(el).backgroundColor;
+          if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+            var m = bg.match(/\d+/g);
+            if (m) {
+              var lum = (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255;
+              nav.classList.toggle('nav--light', lum > 0.65);
+              return;
+            }
+          }
+        }
+      }
+      window.addEventListener('scroll', updateNavTheme, { passive: true });
+      updateNavTheme();
+    })();
   </script>
 </body>
 </html>

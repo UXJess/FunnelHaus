@@ -17,7 +17,7 @@
   <meta property="og:description" content="Three quick questions. We'll point you to the right pillar to start with." />
   <meta property="og:url" content="https://funnelhaus.ca/find-your-fit" />
   <meta name="twitter:card" content="summary" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#070508" />
 
   <!-- HubSpot tracking — Portal 343245815 (NA3) -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
@@ -41,13 +41,13 @@
     html, body { height: 100%; }
 
     :root {
-      --bg:      #ffffff;
-      --paper:   #f4f1ec;
-      --ink:     #0f0f0f;
-      --ink-50:  rgba(15,15,15,0.5);
-      --ink-30:  rgba(15,15,15,0.3);
-      --ink-15:  rgba(15,15,15,0.15);
-      --line:    rgba(15,15,15,0.12);
+      --bg:      #2C60EF;
+      --paper:   #1E50D9;
+      --ink:     #ffffff;
+      --ink-50:  rgba(255,255,255,0.5);
+      --ink-30:  rgba(255,255,255,0.3);
+      --ink-15:  rgba(255,255,255,0.15);
+      --line:    rgba(255,255,255,0.12);
       --accent:  #5884FC;
       --yellow:  #FDC942;
       --blue:    #2C60EF;
@@ -103,11 +103,11 @@
     }
     .nav > * { pointer-events: auto; }
     .nav-logo {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      display: inline-flex; align-items: center; gap: 17px;
+      font-size: 22px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; color: #fff;
     }
-    .nav-logo .logo-mark { width: 22px; height: 22px; display: block; flex-shrink: 0; }
+    .nav-logo .logo-mark { width: 37px; height: 37px; display: block; flex-shrink: 0; }
     .nav-logo .wordmark { display: inline-flex; align-items: baseline; mix-blend-mode: difference; }
     .nav-links { display: flex; gap: 28px; list-style: none; mix-blend-mode: difference; }
     .nav-links a {
@@ -129,7 +129,6 @@
       background: #ffffff;
       border: 1px solid rgba(0,0,0,0.12);
       border-radius: 4px;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
       display: flex; flex-direction: column; gap: 2px;
       opacity: 0;
       transform: translateY(-8px);
@@ -728,7 +727,7 @@
       position: fixed;
       inset: 0;
       z-index: 90;
-      background: #ffffff;
+      background: #2C60EF;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0.4s;
@@ -749,14 +748,14 @@
     }
     .mobile-menu-link {
       display: block;
-      color: #0f0f0f;
+      color: #ffffff;
       text-decoration: none;
       font-size: 32px;
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.02em;
       padding: 18px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       transition: color 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), padding-left 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
     .mobile-menu-link:hover,
@@ -770,7 +769,7 @@
     }
     .mobile-menu-group {
       padding: 18px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -779,12 +778,12 @@
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 6px;
     }
     .mobile-menu-sublink {
       display: block;
-      color: #0f0f0f;
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
       font-size: 20px;
       font-weight: 500;
@@ -800,17 +799,17 @@
     .mobile-menu-footer {
       margin-top: 32px;
       padding-top: 24px;
-      border-top: 1px solid rgba(0,0,0,0.12);
+      border-top: 1px solid rgba(255,255,255,0.15);
       display: flex;
       flex-direction: column;
       gap: 6px;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.5);
     }
     .mobile-menu-footer a {
-      color: #0f0f0f;
+      color: #ffffff;
       text-decoration: none;
     }
 
@@ -819,6 +818,16 @@
       .nav-links { display: none; }
     }
 
+
+    /* ─── NAV: dynamic light/dark theme (set by JS) ─────────── */
+    .nav--light .nav-logo { color: #0f0f0f; }
+    .nav--light .nav-logo .wordmark { mix-blend-mode: normal; color: #0f0f0f; }
+    .nav--light .nav-links { mix-blend-mode: normal; }
+    .nav--light .nav-links a { color: #0f0f0f; }
+    .nav--light .nav-links a::before { color: rgba(0,0,0,0.35); }
+    .nav--light .nav-links a:hover { color: rgba(0,0,0,0.6); }
+    .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
+    .nav--light .nav-hamburger span { background: #0f0f0f; }
   </style>
 </head>
 <body>
@@ -1021,7 +1030,7 @@
 
       <div class="footer-meta">
         <div class="meta-left">
-          <span><span class="dot"></span>Sprint slots — May open</span>
+          <span><span class="dot"></span>Sprint slots — <span class="sprint-month">May</span> open</span>
           <span>Vancouver, BC</span>
         </div>
         <div class="meta-center">
@@ -1417,6 +1426,38 @@
       });
     })();
 
+  </script>
+  <script>
+    (function(){
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var name = months[new Date().getMonth()];
+      document.querySelectorAll('.sprint-month').forEach(function(el){ el.textContent = name; });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var nav = document.querySelector('.nav');
+      if (!nav) return;
+      function updateNavTheme() {
+        var els = document.elementsFromPoint(window.innerWidth / 2, 48);
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el === nav || nav.contains(el)) continue;
+          var bg = window.getComputedStyle(el).backgroundColor;
+          if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+            var m = bg.match(/\d+/g);
+            if (m) {
+              var lum = (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255;
+              nav.classList.toggle('nav--light', lum > 0.65);
+              return;
+            }
+          }
+        }
+      }
+      window.addEventListener('scroll', updateNavTheme, { passive: true });
+      updateNavTheme();
+    })();
   </script>
 </body>
 </html>
