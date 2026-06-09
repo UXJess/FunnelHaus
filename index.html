@@ -254,16 +254,83 @@
     }
 
     /* ─── SECTION 1: HERO ───────────────────────────────────── */
-    .hero {
+    .hero-scroll-track {
       position: relative;
+      height: 400vh;
+    }
+    .hero {
+      position: sticky;
+      top: 0;
       height: 100vh;
-      background: #FFFFFA;
+      background: #000;
+      isolation: isolate;
       --ink: #0f0f0f;
       --ink-50: rgba(15,15,15,0.5);
       --ink-30: rgba(15,15,15,0.3);
       --ink-15: rgba(15,15,15,0.15);
       --line: rgba(15,15,15,0.12);
       overflow: hidden;
+    }
+
+    /* Full-hero background video — never scaled */
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Secondary text reveal panel — slides up over the expanded FunnelHaus */
+    .hero-reveal {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100%;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10vw;
+      background: #FFFFFA;
+      transform: translateY(100%);
+      will-change: transform;
+      pointer-events: none;
+    }
+    .hero-reveal-inner {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(16px, 2.5vh, 40px);
+      max-width: 820px;
+    }
+    .hero-reveal-line {
+      font-size: clamp(30px, 4.5vw, 76px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: #0f0f0f;
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+                  transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .hero-reveal-line-2 {
+      color: #2C60EF;
+      transition-delay: 0.5s;
+    }
+    .hero-reveal--entered .hero-reveal-line {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Full-hero white mask — screen blend punches text-shaped holes to reveal video */
+    .vt-mask {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFA;
+      mix-blend-mode: screen;
+      z-index: 1;
     }
 
     /* Top status row — flush corners */
@@ -407,6 +474,7 @@
       bottom: 56px;
       left: 32px;
       right: 32px;
+      z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -469,6 +537,7 @@
       left: 0; right: 0; bottom: 0;
       overflow: hidden;
       background: #FFFFFA;
+      z-index: 2;
       padding: 14px 0;
       pointer-events: auto;
       display: none; /* enabled on wide screens via media below */
@@ -1372,21 +1441,30 @@
   </div>
 
   <!-- HERO -->
+  <div class="hero-scroll-track">
   <section class="hero">
-    <!-- Monolith title -->
-    <div class="hero-title-wrap">
-      <h1 class="hero-title" aria-label="FunnelHaus">
-        <span class="ltr"><i>F</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>e</i></span><span class="ltr"><i>l</i></span><span class="ltr"><i>H</i></span><span class="ltr"><i>a</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>s</i></span>
-      </h1>
+    <!-- Background video: full-hero, never scaled -->
+    <video class="hero-bg-video" autoplay muted loop playsinline>
+      <source src="assets/videos/hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- Full-hero white mask: screen blend reveals video only through text -->
+    <div class="vt-mask">
+      <!-- Title wrap: this is what JS scales — mask stays fixed -->
+      <div class="hero-title-wrap">
+        <h1 class="hero-title" aria-label="FunnelHaus">
+          <span class="ltr"><i>F</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>e</i></span><span class="ltr"><i>l</i></span><span class="ltr"><i>H</i></span><span class="ltr"><i>a</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>s</i></span>
+        </h1>
+      </div>
     </div>
 
     <!-- Bottom row -->
     <div class="hero-foot">
       <div class="foot-col">
-        <p>An independent design &amp; growth studio based in Vancouver, building digital systems that compound.</p>
+        <p>Design &amp; growth studio. Vancouver, BC.</p>
       </div>
       <div class="foot-col foot-right">
-        <p>for brands that treat their website, content, and growth engine as one system.</p>
+        <p>Scroll to explore.</p>
       </div>
     </div>
 
@@ -1403,7 +1481,16 @@
         <a href="contact.html">Work with Us</a>
       </div>
     </div>
+
+    <!-- Secondary reveal panel — slides up over the expanded video text -->
+    <div class="hero-reveal" aria-hidden="true">
+      <div class="hero-reveal-inner">
+        <p class="hero-reveal-line hero-reveal-line-1">An independent design &amp; growth studio in Vancouver.</p>
+        <p class="hero-reveal-line hero-reveal-line-2">For brands that want to grow,<br>not just look good.</p>
+      </div>
+    </div>
   </section>
+  </div><!-- /hero-scroll-track -->
 
   <!-- STATEMENT -->
   <section class="statement" id="statement">
@@ -1892,32 +1979,47 @@
       });
     })();
 
-    // ── Hero title scroll-driven scale (letters expand to fill the viewport)
+    // ── Hero: two-phase scroll sequence
+    // Phase 1 (0–55%): FunnelHaus text grows 1× → 8×, video reveals through letters
+    // Phase 2 (55–100%): white panel slides up carrying the studio tagline
     (function () {
-      const heroSection = document.querySelector('.hero');
-      const heroTitle = document.querySelector('.hero-title');
-      if (!heroSection || !heroTitle) return;
-
-      const fadeTargets = document.querySelectorAll(
-        '.hero-status, .hero-eyebrow, .hero-sub, .hero-foot, .hero-tm'
-      );
+      const track = document.querySelector('.hero-scroll-track');
+      const titleWrap = document.querySelector('.hero-title-wrap');
+      const foot = document.querySelector('.hero-foot');
+      const marquee = document.querySelector('.hero-marquee');
+      const reveal = document.querySelector('.hero-reveal');
+      const line1 = document.querySelector('.hero-reveal-line-1');
+      const line2 = document.querySelector('.hero-reveal-line-2');
+      if (!track || !titleWrap) return;
 
       let ticking = false;
 
       function update() {
-        const heroHeight = heroSection.offsetHeight || window.innerHeight;
-        const scrolled = window.scrollY || window.pageYOffset || 0;
-        const progress = Math.max(0, Math.min(1, scrolled / heroHeight));
+        const trackTop = track.getBoundingClientRect().top;
+        const scrolled = -trackTop;
+        const totalScrollable = Math.max(1, track.offsetHeight - window.innerHeight);
+        const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
 
-        // Ease-in curve: most of the shrinking happens later in the scroll
-        const eased = Math.pow(progress, 1.4);
-        const scale = 1 - eased * 0.92; // 1 → 0.08
+        // ── Phase 1: zoom (0 → 55%)
+        const p1 = Math.min(1, progress / 0.55);
+        const e1 = 1 - Math.pow(1 - p1, 2.4);
+        const scale = 1 + e1 * 7;
+        titleWrap.style.transform = `translateY(-50%) scale(${scale.toFixed(4)})`;
 
-        heroTitle.style.transform = `scale(${scale.toFixed(3)})`;
+        // Fade hero-foot + marquee
+        const fadeOut = Math.max(0, 1 - progress * 8);
+        if (foot) foot.style.opacity = fadeOut;
+        if (marquee) marquee.style.opacity = fadeOut;
 
-        // Fade surrounding hero content out alongside the shrink
-        const fade = Math.max(0, 1 - progress * 2.4);
-        fadeTargets.forEach(el => { el.style.opacity = fade; });
+        // ── Phase 2: reveal panel slides up (55% → 100%)
+        if (reveal) {
+          const p2 = Math.max(0, (progress - 0.55) / 0.45);
+          const e2 = 1 - Math.pow(1 - p2, 2.6);
+          reveal.style.transform = `translateY(${((1 - e2) * 100).toFixed(2)}%)`;
+
+          // Once panel is ~60% in, trigger CSS transitions (line2 auto-delays 500ms via CSS)
+          reveal.classList.toggle('hero-reveal--entered', p2 >= 0.6);
+        }
 
         ticking = false;
       }
@@ -1931,7 +2033,7 @@
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
-      update(); // initial state
+      update();
     })();
   
     // ── Mobile hamburger menu
