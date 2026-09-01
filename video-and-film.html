@@ -233,13 +233,13 @@
     .svc-hero-status .dot {
       display: inline-block;
       width: 6px; height: 6px; border-radius: 50%;
-      background: #0b0b0b;
-      box-shadow: 0 0 0 0 rgba(11,11,11,0.55);
+      background: var(--blue);
+      box-shadow: 0 0 0 0 rgba(44,96,239,0.55);
       animation: dotPulse 1.8s ease-in-out infinite;
     }
     @keyframes dotPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(11,11,11,0.55); transform: scale(0.9); }
-      50%      { box-shadow: 0 0 0 6px rgba(11,11,11,0);    transform: scale(1.05); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(44,96,239,0.55); transform: scale(0.9); }
+      50%      { box-shadow: 0 0 0 6px rgba(44,96,239,0);    transform: scale(1.05); }
     }
 
     .svc-hero-title-wrap {
@@ -251,8 +251,8 @@
       color: rgba(11,11,11,0.6);
       display: inline-flex; align-items: center; gap: 12px;
     }
-    .svc-hero-eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: #0b0b0b; }
-    .svc-hero-eyebrow .accent { color: #0b0b0b; }
+    .svc-hero-eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: var(--blue); }
+    .svc-hero-eyebrow .accent { color: var(--blue); }
     .svc-hero-title {
       font-size: clamp(64px, 14vw, 240px);
       font-weight: 900; line-height: 0.86; letter-spacing: -0.03em;
@@ -1076,7 +1076,6 @@
           <span>©2026 FunnelHaus Studio</span>
         </div>
         <div class="meta-right">
-          <span>Built with AI</span>
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
         </div>
       </div>

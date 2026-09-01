@@ -324,13 +324,12 @@
       transform: none;
     }
 
-    /* Full-hero white mask — screen blend punches text-shaped holes to reveal video */
+    /* Full-hero cream overlay — SVG mask punches letter-shaped holes to the video */
     .vt-mask {
       position: absolute;
       inset: 0;
-      background: #FFFFFA;
-      mix-blend-mode: screen;
       z-index: 1;
+      pointer-events: none;
     }
 
     /* Top status row — flush corners */
@@ -376,59 +375,38 @@
       text-transform: uppercase;
     }
 
-    /* Monolith */
+    /* Monolith — full-hero SVG so scroll zoom redraws vectors instead of a bitmap */
     .hero-title-wrap {
       position: absolute;
-      top: 50vh;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .hero-title {
-      font-size: clamp(52px, 16vw, 270px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.075em;
-      text-align: center;
-      white-space: nowrap;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
       color: var(--ink);
-      position: relative;
       opacity: 0;
-      transform-origin: center center;
-      will-change: transform, opacity;
       animation: titleFade 0.9s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
     }
     @keyframes titleFade {
       to { opacity: 1; }
     }
+    .hero-title-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      overflow: hidden;
+      shape-rendering: geometricPrecision;
+    }
     .hero-title .ltr {
-      display: inline-block;
-      vertical-align: baseline;
-      padding: 0.05em 0.03em;
-      cursor: pointer;
+      pointer-events: none;
     }
-    .hero-title .ltr > i {
-      font-style: normal;
-      transition: color 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
-      display: inline-block;
-    }
-    .hero-title .ltr:hover > i {
-      transform: translateY(-4px);
-    }
-    /* Random per-letter hover colors — cycling 3 brand hues */
-    .hero-title .ltr:nth-child(1):hover  > i { color: #FDC942; } /* F */
-    .hero-title .ltr:nth-child(2):hover  > i { color: #2C60EF; } /* u */
-    .hero-title .ltr:nth-child(3):hover  > i { color: #DD120E; } /* n */
-    .hero-title .ltr:nth-child(4):hover  > i { color: #FDC942; } /* n */
-    .hero-title .ltr:nth-child(5):hover  > i { color: #2C60EF; } /* e */
-    .hero-title .ltr:nth-child(6):hover  > i { color: #DD120E; } /* l */
-    .hero-title .ltr:nth-child(7):hover  > i { color: #FDC942; } /* H */
-    .hero-title .ltr:nth-child(8):hover  > i { color: #2C60EF; } /* a */
-    .hero-title .ltr:nth-child(9):hover  > i { color: #DD120E; } /* u */
-    .hero-title .ltr:nth-child(10):hover > i { color: #FDC942; } /* s */
 
     .hero-tm {
       position: absolute;
@@ -578,7 +556,6 @@
 
     @media (max-width: 768px) {
       .hero { padding: 80px 20px 24px; gap: 18px; }
-      .hero-title { font-size: clamp(36px, 13vw, 72px); letter-spacing: -0.05em; }
       .hero-tm { top: 8%; right: 16px; }
       .hero-eyebrow, .hero-sub { padding: 0; flex-direction: column; align-items: flex-start; gap: 12px; }
       .hero-sub-tag { text-align: left; }
@@ -1536,12 +1513,33 @@
       <source src="assets/videos/hero.mp4" type="video/mp4">
     </video>
 
-    <!-- Full-hero white mask: screen blend reveals video only through text -->
+    <!-- Cream overlay: SVG mask reveals video only through the wordmark -->
     <div class="vt-mask">
-      <!-- Title wrap: this is what JS scales — mask stays fixed -->
+      <!-- Title wrap: wordmark is an SVG scaled in vector space so the mask stays sharp -->
       <div class="hero-title-wrap">
         <h1 class="hero-title" aria-label="FunnelHaus">
-          <span class="ltr"><i>F</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>n</i></span><span class="ltr"><i>e</i></span><span class="ltr"><i>l</i></span><span class="ltr"><i>H</i></span><span class="ltr"><i>a</i></span><span class="ltr"><i>u</i></span><span class="ltr"><i>s</i></span>
+          <svg class="hero-title-svg" aria-hidden="true" focusable="false">
+            <defs>
+              <mask id="hero-word-mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                <rect class="hero-mask-fill" width="100%" height="100%" fill="#fff"/>
+                <g class="hero-wordmark" fill="#000">
+                  <g transform="translate(-2806 356.5)">
+                    <path class="ltr" d="M553 -549H220V-448H522V-268H220V0H30V-729H553Z"/>
+                    <path class="ltr" d="M1142 0H979L963 -67Q939 -29 902 -9Q865 11 806 11Q703 11 645.5 -42Q588 -95 588 -211V-555H778V-275Q778 -231 782.5 -205Q787 -179 805.5 -160.5Q824 -142 865 -142Q917 -142 934.5 -178Q952 -214 952 -275V-555H1142Z"/>
+                    <path class="ltr" d="M1177 -555H1340L1356 -488Q1380 -526 1417 -546Q1454 -566 1513 -566Q1616 -566 1673.5 -513Q1731 -460 1731 -344V0H1541V-280Q1541 -324 1536.5 -350Q1532 -376 1513.5 -394.5Q1495 -413 1454 -413Q1402 -413 1384.5 -377Q1367 -341 1367 -280V0H1177Z"/>
+                    <path class="ltr" d="M1766 -555H1929L1945 -488Q1969 -526 2006 -546Q2043 -566 2102 -566Q2205 -566 2262.5 -513Q2320 -460 2320 -344V0H2130V-280Q2130 -324 2125.5 -350Q2121 -376 2102.5 -394.5Q2084 -413 2043 -413Q1991 -413 1973.5 -377Q1956 -341 1956 -280V0H1766Z"/>
+                    <path class="ltr" d="M2633 14Q2550 14 2487 -22Q2424 -58 2389.5 -123Q2355 -188 2355 -273V-294Q2355 -374 2390 -437Q2425 -500 2488.5 -535.5Q2552 -571 2637 -571Q2718 -571 2781.5 -536Q2845 -501 2880.5 -438Q2916 -375 2916 -294V-252H2546Q2550 -204 2572 -176.5Q2594 -149 2635 -149Q2665 -149 2686 -165.5Q2707 -182 2713 -206H2909Q2894 -105 2819 -45.5Q2744 14 2633 14ZM2710 -363Q2685 -408 2638 -408Q2585 -408 2561 -363Z"/>
+                    <path class="ltr" d="M2951 -729H3141V0H2951Z"/>
+                    <path class="ltr" d="M3176 -729H3366V-448H3636V-729H3826V0H3636V-268H3366V0H3176Z"/>
+                    <path class="ltr" d="M3861 -162Q3861 -235 3909 -284.5Q3957 -334 4080 -334H4228V-359Q4228 -392 4207.5 -406Q4187 -420 4158 -420Q4135 -420 4115.5 -409Q4096 -398 4093 -371H3890Q3901 -467 3975.5 -520Q4050 -573 4161 -573Q4284 -573 4351.5 -520Q4419 -467 4419 -363V0H4237L4220 -64Q4195 -32 4178 -17.5Q4161 -3 4131 5Q4101 13 4046 13Q3991 13 3949 -11.5Q3907 -36 3884 -76Q3861 -116 3861 -162ZM4229 -224H4173Q4123 -224 4098 -218Q4073 -212 4065 -201.5Q4057 -191 4057 -173Q4057 -154 4078.5 -138Q4100 -122 4145 -122Q4181 -122 4199 -133.5Q4217 -145 4229 -166Z"/>
+                    <path class="ltr" d="M5008 0H4845L4829 -67Q4805 -29 4768 -9Q4731 11 4672 11Q4569 11 4511.5 -42Q4454 -95 4454 -211V-555H4644V-275Q4644 -231 4648.5 -205Q4653 -179 4671.5 -160.5Q4690 -142 4731 -142Q4783 -142 4800.5 -178Q4818 -214 4818 -275V-555H5008Z"/>
+                    <path class="ltr" d="M5043 -181H5235Q5244 -152 5268.5 -140.5Q5293 -129 5317 -129Q5356 -129 5374 -136Q5392 -143 5392 -169Q5392 -184 5383.5 -191.5Q5375 -199 5357 -203Q5339 -207 5294 -213L5246 -219Q5157 -231 5107.5 -273.5Q5058 -316 5058 -387Q5058 -494 5129 -531.5Q5200 -569 5325 -569Q5428 -569 5490.5 -518Q5553 -467 5563 -381H5370Q5367 -388 5362 -397.5Q5357 -407 5346 -413.5Q5335 -420 5313 -419Q5248 -419 5248 -389Q5248 -360 5325 -349Q5405 -338 5459.5 -319Q5514 -300 5548 -261Q5582 -222 5582 -156Q5582 -105 5549 -66Q5516 -27 5457.5 -5.5Q5399 16 5325 16Q5175 16 5109 -40Q5043 -96 5043 -181Z"/>
+                  </g>
+                </g>
+              </mask>
+            </defs>
+            <rect class="hero-paper" width="100%" height="100%" fill="#FFFFFA" mask="url(#hero-word-mask)"/>
+          </svg>
         </h1>
       </div>
     </div>
@@ -1875,7 +1873,6 @@
           <span>©2026 FunnelHaus Studio</span>
         </div>
         <div class="meta-right">
-          <span>Built with AI</span>
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
         </div>
       </div>
@@ -2072,13 +2069,30 @@
     // Phase 2 (55–100%): white panel slides up carrying the studio tagline
     (function () {
       const track = document.querySelector('.hero-scroll-track');
-      const titleWrap = document.querySelector('.hero-title-wrap');
+      const svg = document.querySelector('.hero-title-svg');
+      const wordmark = document.querySelector('.hero-wordmark');
+      const paper = document.querySelector('.hero-paper');
+      const maskFill = document.querySelector('.hero-mask-fill');
       const foot = document.querySelector('.hero-foot');
       const marquee = document.querySelector('.hero-marquee');
       const reveal = document.querySelector('.hero-reveal');
       const line1 = document.querySelector('.hero-reveal-line-1');
       const line2 = document.querySelector('.hero-reveal-line-2');
-      if (!track || !titleWrap) return;
+      if (!track || !svg || !wordmark || !paper || !maskFill) return;
+
+      // Niela Black UPM = 1000. Scale the vector wordmark inside a viewport-sized
+      // SVG mask so the letters stay sharp as they grow.
+      const UPM = 1000;
+      const WORD_UNITS = 5612; // FunnelHaus width at +0.05em tracking
+
+      function baseFontSize() {
+        const vw = window.innerWidth;
+        let size = vw <= 768
+          ? Math.min(72, Math.max(36, vw * 0.13))
+          : Math.min(270, Math.max(52, vw * 0.16));
+        const maxSize = (vw * 0.92) * UPM / WORD_UNITS;
+        return Math.min(size, maxSize);
+      }
 
       let ticking = false;
 
@@ -2091,8 +2105,15 @@
         // ── Phase 1: zoom (0 → 55%)
         const p1 = Math.min(1, progress / 0.55);
         const e1 = 1 - Math.pow(1 - p1, 2.4);
-        const scale = 1 + e1 * 7;
-        titleWrap.style.transform = `translateY(-50%) scale(${scale.toFixed(4)})`;
+        const scale = (baseFontSize() / UPM) * (1 + e1 * 7);
+        const w = svg.clientWidth || window.innerWidth;
+        const h = svg.clientHeight || window.innerHeight;
+        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+        paper.setAttribute('width', w);
+        paper.setAttribute('height', h);
+        maskFill.setAttribute('width', w);
+        maskFill.setAttribute('height', h);
+        wordmark.setAttribute('transform', `translate(${w / 2} ${h / 2}) scale(${scale.toFixed(5)})`);
 
         // Fade hero-foot + marquee
         const fadeOut = Math.max(0, 1 - progress * 8);
@@ -2121,6 +2142,7 @@
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
+      if (typeof lenis !== 'undefined') lenis.on('scroll', onScroll);
       update();
     })();
   
@@ -2198,6 +2220,12 @@
         for (var i = 0; i < els.length; i++) {
           var el = els[i];
           if (el === nav || nav.contains(el)) continue;
+          // Hero cream overlay is SVG (no CSS background) and skips hit-testing,
+          // so .hero reports black even though the top of the page is paper.
+          if (el.classList && el.classList.contains('hero')) {
+            nav.classList.add('nav--light');
+            return;
+          }
           var bg = window.getComputedStyle(el).backgroundColor;
           if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
             var m = bg.match(/\d+/g);
@@ -2210,6 +2238,7 @@
         }
       }
       window.addEventListener('scroll', updateNavTheme, { passive: true });
+      if (typeof lenis !== 'undefined') lenis.on('scroll', updateNavTheme);
       updateNavTheme();
     })();
   </script>

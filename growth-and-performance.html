@@ -233,13 +233,13 @@
     .svc-hero-status .dot {
       display: inline-block;
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--page);
-      box-shadow: 0 0 0 0 rgba(var(--page-rgb), 0.6);
+      background: var(--blue);
+      box-shadow: 0 0 0 0 rgba(44,96,239,0.6);
       animation: dotPulse 1.8s ease-in-out infinite;
     }
     @keyframes dotPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(var(--page-rgb), 0.55); transform: scale(0.9); }
-      50%      { box-shadow: 0 0 0 6px rgba(var(--page-rgb), 0);    transform: scale(1.05); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(44,96,239,0.55); transform: scale(0.9); }
+      50%      { box-shadow: 0 0 0 6px rgba(44,96,239,0);    transform: scale(1.05); }
     }
 
     .svc-hero-title-wrap {
@@ -251,8 +251,8 @@
       color: rgba(11,11,11,0.6);
       display: inline-flex; align-items: center; gap: 12px;
     }
-    .svc-hero-eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: var(--page); }
-    .svc-hero-eyebrow .accent { color: var(--page); }
+    .svc-hero-eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: var(--blue); }
+    .svc-hero-eyebrow .accent { color: var(--blue); }
     .svc-hero-title {
       font-size: clamp(64px, 14vw, 240px);
       font-weight: 900; line-height: 0.86; letter-spacing: -0.03em;
@@ -281,7 +281,7 @@
       display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
       padding-bottom: 32px; color: #0b0b0b; transition: color 0.2s;
     }
-    .svc-scroll-cue:hover { color: var(--page); }
+    .svc-scroll-cue:hover { color: var(--yellow); }
     .svc-scroll-cue::after {
       content: ''; position: absolute;
       left: 50%; bottom: 0; width: 1px; height: 18px;
@@ -349,15 +349,15 @@
       transition: padding 0.3s; cursor: pointer;
     }
     .svc-row:hover { padding-left: 16px; padding-right: 0; }
-    .svc-row:hover .svc-name { color: var(--page); }
-    .svc-row:hover .arrow { color: var(--page); transform: translateX(6px); }
+    .svc-row:hover .svc-name { color: var(--yellow); }
+    .svc-row:hover .arrow { color: var(--yellow); transform: translateX(6px); }
     .svc-row .cap-star {
       width: 22px; height: 22px;
       color: var(--ink-50);
       align-self: flex-start; margin-top: 6px;
       transition: color 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .svc-row:hover .cap-star { color: var(--page); transform: rotate(90deg); }
+    .svc-row:hover .cap-star { color: var(--yellow); transform: rotate(90deg); }
     .svc-row .svc-name {
       font-size: clamp(28px, 3.6vw, 48px);
       font-weight: 800; line-height: 1; letter-spacing: -0.03em;
@@ -911,8 +911,7 @@
   <!-- HERO -->
   <section class="svc-hero">
     <div class="svc-hero-status">
-      <span class="left"><span class="dot"></span><a href="capabilities.html">Capabilities</a> · Pillar 03 of 03</span>
-      <span>Growth &amp; Performance</span>
+      <span class="left"><span class="dot"></span><a href="capabilities.html">Capabilities</a></span>
     </div>
 
     <div class="svc-hero-title-wrap">
@@ -978,7 +977,7 @@
 
       <div class="svc-rows">
 
-        <a href="#" class="svc-row">
+        <a href="seo.html" class="svc-row">
           <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
           <span class="svc-name">SEO</span>
           <span class="svc-meta">
@@ -988,7 +987,7 @@
           <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
         </a>
 
-        <a href="#" class="svc-row">
+        <a href="analytics.html" class="svc-row">
           <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
           <span class="svc-name">Analytics</span>
           <span class="svc-meta">
@@ -998,7 +997,7 @@
           <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
         </a>
 
-        <a href="#" class="svc-row">
+        <a href="cro.html" class="svc-row">
           <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
           <span class="svc-name">CRO</span>
           <span class="svc-meta">
@@ -1008,7 +1007,7 @@
           <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
         </a>
 
-        <a href="#" class="svc-row">
+        <a href="funnel-optimization.html" class="svc-row">
           <svg class="cap-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
           <span class="svc-name">Funnel Optimization</span>
           <span class="svc-meta">
@@ -1092,7 +1091,6 @@
           Up next<br>
           <span class="ital hl hl-secondary" data-highlight>The other two pillars.</span>
         </h2>
-        <span class="mono reveal reveal-d1">02 / 03</span>
       </div>
 
       <div class="upnext-grid">
@@ -1207,7 +1205,6 @@
           <span>©2026 FunnelHaus Studio</span>
         </div>
         <div class="meta-right">
-          <span>Built with AI</span>
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
         </div>
       </div>

@@ -364,6 +364,7 @@
     /* ─── CONTACT FORM SECTION ──────────────────────────────── */
     .contact-form-section {
       padding: 140px 32px;
+      background: #0f0f0f;
       border-bottom: 1px solid var(--line);
     }
     .contact-form-inner {
@@ -393,7 +394,15 @@
       border-top: 1px solid var(--line);
       margin-bottom: 0;
     }
+    /* contact-item flattens into the .contact-options grid so each button's panel
+       can be explicitly placed below both columns on desktop, while on mobile
+       (where grid-row/column resets to auto) it falls into document order right
+       after its own button, producing an accordion list instead of a tab strip. */
+    .contact-item { display: contents; }
+    .contact-item:first-child .contact-option { grid-column: 1; }
+    .contact-item:last-child .contact-option { grid-column: 2; }
     .contact-option {
+      grid-row: 1;
       background: transparent;
       border: 0;
       border-right: 1px solid var(--line);
@@ -408,7 +417,7 @@
       color: var(--ink);
       transition: background-color 0.3s, padding 0.3s, color 0.3s;
     }
-    .contact-option:last-child { border-right: none; }
+    .contact-item:last-child .contact-option { border-right: none; }
     .contact-option:hover { background-color: rgba(239,234,226,0.03); }
 
     /* Active toggle = solid blue, white text — visually connects to the blue panel below */
@@ -455,7 +464,7 @@
     .contact-option.is-active .contact-option-desc { color: rgba(255,255,255,0.75); }
 
     /* Path panels — active panel is the blue body of the tab unit */
-    .contact-panel { display: none; }
+    .contact-panel { display: none; grid-column: 1 / -1; grid-row: 2; }
     .contact-panel.is-active {
       display: block;
       background: var(--blue);
@@ -830,8 +839,15 @@
       .step:last-child { border-bottom: none; }
       .form-grid { grid-template-columns: 1fr; gap: 32px; }
       .contact-options { grid-template-columns: 1fr; }
-      .contact-option { border-right: none; border-bottom: 1px solid var(--line); }
-      .contact-option:last-child { border-bottom: none; }
+      .contact-item:first-child .contact-option,
+      .contact-item:last-child .contact-option {
+        grid-column: 1;
+        grid-row: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .contact-panel { grid-column: 1; grid-row: auto; }
+      .contact-item:last-child .contact-option { border-bottom: none; }
     }
     @media (max-width: 768px) {
       .nav { padding: 18px 20px; }
@@ -1180,103 +1196,106 @@
 
       <!-- Path toggle -->
       <div class="contact-options" role="tablist" aria-label="Contact path">
-        <button class="contact-option is-active" data-target="work" role="tab" aria-selected="true" aria-controls="panel-work" type="button">
-          <span class="contact-option-num">01</span>
-          <span class="contact-option-name">Work with us</span>
-          <svg class="contact-option-arrow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
-          <span class="contact-option-desc">Direct path. Share the basics — we'll respond in a day.</span>
-        </button>
-        <button class="contact-option" data-target="quiz" role="tab" aria-selected="false" aria-controls="panel-quiz" type="button">
-          <span class="contact-option-num">02</span>
-          <span class="contact-option-name">Not sure where to start</span>
-          <svg class="contact-option-arrow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
-          <span class="contact-option-desc">Take the fit quiz — five questions, two minutes.</span>
-        </button>
-      </div>
+        <div class="contact-item">
+          <button class="contact-option is-active" data-target="work" role="tab" aria-selected="true" aria-controls="panel-work" type="button">
+            <span class="contact-option-name">Work with us</span>
+            <svg class="contact-option-arrow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+            <span class="contact-option-desc">Direct path. Share the basics — we'll respond in a day.</span>
+          </button>
 
-      <!-- Path 1: Work with us form -->
-      <div class="contact-panel is-active" id="panel-work" data-panel="work" role="tabpanel">
-        <form class="contact-form" id="workWithUsForm" novalidate>
-          <div class="form-grid">
-            <div class="form-row">
-              <label for="company">Company name</label>
-              <input type="text" id="company" name="company" required autocomplete="organization" />
-            </div>
-            <div class="form-row">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required autocomplete="email" />
-            </div>
-            <div class="form-row">
-              <label for="service">Service type</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Choose a service</option>
-                <option value="design-build">Design &amp; Build</option>
-                <option value="creative-content">Creative &amp; Content</option>
-                <option value="growth-performance">Growth &amp; Performance</option>
-                <option value="multiple">Multiple / Mixed</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label for="budget">Budget range</label>
-              <select id="budget" name="budget" required>
-                <option value="" disabled selected>Select a range</option>
-                <option value="<5k">Less than $5k</option>
-                <option value="5-7k">$5k – $7k</option>
-                <option value="7-10k">$7k – $10k</option>
-                <option value="10-15k">$10k – $15k</option>
-                <option value="15-20k">$15k – $20k</option>
-                <option value="20k+">More than $20k</option>
-              </select>
+          <!-- Path 1: Work with us form -->
+          <div class="contact-panel is-active" id="panel-work" data-panel="work" role="tabpanel">
+            <form class="contact-form" id="workWithUsForm" novalidate>
+              <div class="form-grid">
+                <div class="form-row">
+                  <label for="company">Company name</label>
+                  <input type="text" id="company" name="company" required autocomplete="organization" />
+                </div>
+                <div class="form-row">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required autocomplete="email" />
+                </div>
+                <div class="form-row">
+                  <label for="service">Service type</label>
+                  <select id="service" name="service" required>
+                    <option value="" disabled selected>Choose a service</option>
+                    <option value="design-build">Design &amp; Build</option>
+                    <option value="creative-content">Creative &amp; Content</option>
+                    <option value="growth-performance">Growth &amp; Performance</option>
+                    <option value="multiple">Multiple / Mixed</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <label for="budget">Budget range</label>
+                  <select id="budget" name="budget" required>
+                    <option value="" disabled selected>Select a range</option>
+                    <option value="<5k">Less than $5k</option>
+                    <option value="5-7k">$5k – $7k</option>
+                    <option value="7-10k">$7k – $10k</option>
+                    <option value="10-15k">$10k – $15k</option>
+                    <option value="15-20k">$15k – $20k</option>
+                    <option value="20k+">More than $20k</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-error" id="formError" role="alert"></div>
+
+              <button type="submit" class="contact-submit" id="formSubmit">
+                <span class="contact-submit-label">Send brief</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+              </button>
+              <p class="form-meta">
+                We respond inside one business day, never share your data, and won't add you to any list.
+              </p>
+            </form>
+
+            <!-- Success state — replaces form on successful submission -->
+            <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+              <h3 class="form-success-title">
+                Thanks — we'll be in touch.
+                <span class="ital">Inside one business day.</span>
+              </h3>
+              <p class="form-success-desc">
+                Your brief just landed in our inbox. We read everything carefully and reply when there's a fit. If you don't hear back within 24 hours, give us a nudge at <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>.
+              </p>
             </div>
           </div>
-
-          <div class="form-error" id="formError" role="alert"></div>
-
-          <button type="submit" class="contact-submit" id="formSubmit">
-            <span class="contact-submit-label">Send brief</span>
-            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-          </button>
-          <p class="form-meta">
-            We respond inside one business day, never share your data, and won't add you to any list.
-          </p>
-        </form>
-
-        <!-- Success state — replaces form on successful submission -->
-        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-          <h3 class="form-success-title">
-            Thanks — we'll be in touch.
-            <span class="ital">Inside one business day.</span>
-          </h3>
-          <p class="form-success-desc">
-            Your brief just landed in our inbox. We read everything carefully and reply when there's a fit. If you don't hear back within 24 hours, give us a nudge at <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>.
-          </p>
         </div>
-      </div>
 
-      <!-- Path 2: Not sure where to start -->
-      <div class="contact-panel" id="panel-quiz" data-panel="quiz" role="tabpanel">
-        <div class="quiz-card">
-          <span class="quiz-eyebrow">FunnelHaus fit quiz</span>
-          <h3 class="quiz-title">
-            Five questions.
-            <span class="ital">Two minutes.</span>
-          </h3>
-          <p class="quiz-desc">
-            Tell us where the funnel is breaking down today, and we'll suggest
-            the right pillar to start with — Design &amp; Build, Creative &amp;
-            Content, or Growth &amp; Performance. No spam, no follow-up sales
-            sequence.
-          </p>
-          <a href="find-your-fit.html" class="quiz-cta">
-            <span>Start the quiz</span>
-            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-          </a>
-          <p class="quiz-meta">
-            Or send us an email at
-            <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
-            and we'll figure out the right place to start together.
-          </p>
+        <div class="contact-item">
+          <button class="contact-option" data-target="quiz" role="tab" aria-selected="false" aria-controls="panel-quiz" type="button">
+            <span class="contact-option-name">Not sure where to start</span>
+            <svg class="contact-option-arrow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
+            <span class="contact-option-desc">Take the fit quiz — five questions, two minutes.</span>
+          </button>
+
+          <!-- Path 2: Not sure where to start -->
+          <div class="contact-panel" id="panel-quiz" data-panel="quiz" role="tabpanel">
+            <div class="quiz-card">
+              <span class="quiz-eyebrow">FunnelHaus fit quiz</span>
+              <h3 class="quiz-title">
+                Five questions.
+                <span class="ital">Two minutes.</span>
+              </h3>
+              <p class="quiz-desc">
+                Tell us where the funnel is breaking down today, and we'll suggest
+                the right pillar to start with — Design &amp; Build, Creative &amp;
+                Content, or Growth &amp; Performance. No spam, no follow-up sales
+                sequence.
+              </p>
+              <a href="find-your-fit.html" class="quiz-cta">
+                <span>Start the quiz</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+              </a>
+              <p class="quiz-meta">
+                Or send us an email at
+                <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
+                and we'll figure out the right place to start together.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1335,7 +1354,6 @@
           <span>©2026 FunnelHaus Studio</span>
         </div>
         <div class="meta-right">
-          <span>Built with AI</span>
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
         </div>
       </div>
@@ -1521,13 +1539,14 @@
       options.forEach(opt => {
         opt.addEventListener('click', () => {
           const target = opt.dataset.target;
+          const wasActive = opt.classList.contains('is-active');
           options.forEach(o => {
-            const isActive = o === opt;
+            const isActive = !wasActive && o === opt;
             o.classList.toggle('is-active', isActive);
             o.setAttribute('aria-selected', isActive ? 'true' : 'false');
           });
           panels.forEach(p => {
-            p.classList.toggle('is-active', p.dataset.panel === target);
+            p.classList.toggle('is-active', !wasActive && p.dataset.panel === target);
           });
         });
       });
