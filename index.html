@@ -264,11 +264,11 @@
       height: 100vh;
       background: #000;
       isolation: isolate;
-      --ink: #0f0f0f;
-      --ink-50: rgba(15,15,15,0.5);
-      --ink-30: rgba(15,15,15,0.3);
-      --ink-15: rgba(15,15,15,0.15);
-      --line: rgba(15,15,15,0.12);
+      --ink: #ffffff;
+      --ink-50: rgba(255,255,255,0.55);
+      --ink-30: rgba(255,255,255,0.35);
+      --ink-15: rgba(255,255,255,0.18);
+      --line: rgba(255,255,255,0.16);
       overflow: hidden;
     }
 
@@ -293,7 +293,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 0 10vw;
-      background: #FFFFFA;
+      background: #070508;
       transform: translateY(100%);
       will-change: transform;
       pointer-events: none;
@@ -309,14 +309,14 @@
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.04em;
-      color: #0f0f0f;
+      color: #ffffff;
       opacity: 0;
       transform: translateX(-36px);
       transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
                   transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
     .hero-reveal-line-2 {
-      color: #2C60EF;
+      color: #FDC942;
       transition-delay: 0.5s;
     }
     .hero-reveal--entered .hero-reveal-line {
@@ -503,10 +503,10 @@
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
     @keyframes scrollLineColor {
-      0%      { background: #0f0f0f; }
+      0%      { background: #2C60EF; }
       33.333% { background: #DD120E; }
       66.666% { background: #FDC942; }
-      100%    { background: #0f0f0f; }
+      100%    { background: #2C60EF; }
     }
 
     /* Discipline marquee — subtle perpetual scroll across very bottom */
@@ -514,7 +514,7 @@
       position: absolute;
       left: 0; right: 0; bottom: 0;
       overflow: hidden;
-      background: #FFFFFA;
+      background: #070508;
       z-index: 2;
       padding: 14px 0;
       pointer-events: auto;
@@ -529,7 +529,7 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #0b0b0b;
+      color: #ffffff;
     }
     .hero-marquee-track a {
       color: inherit;
@@ -541,7 +541,7 @@
     .hero-marquee-track a::before {
       content: '◆';
       margin-right: 56px;
-      color: #0b0b0b;
+      color: #ffffff;
       opacity: 0.55;
     }
     @keyframes marqueeSlide {
@@ -1513,7 +1513,7 @@
       <source src="assets/videos/hero.mp4" type="video/mp4">
     </video>
 
-    <!-- Cream overlay: SVG mask reveals video only through the wordmark -->
+    <!-- Black overlay: SVG mask reveals video only through the wordmark -->
     <div class="vt-mask">
       <!-- Title wrap: wordmark is an SVG scaled in vector space so the mask stays sharp -->
       <div class="hero-title-wrap">
@@ -1538,7 +1538,7 @@
                 </g>
               </mask>
             </defs>
-            <rect class="hero-paper" width="100%" height="100%" fill="#FFFFFA" mask="url(#hero-word-mask)"/>
+            <rect class="hero-paper" width="100%" height="100%" fill="#070508" mask="url(#hero-word-mask)"/>
           </svg>
         </h1>
       </div>
@@ -1848,7 +1848,6 @@
           <a href="about.html">About</a>
           <a href="careers.html">Careers</a>
           <a href="#statement">Approach</a>
-          <a href="#index">Clients</a>
         </div>
 
         <div class="footer-col">
@@ -2220,10 +2219,8 @@
         for (var i = 0; i < els.length; i++) {
           var el = els[i];
           if (el === nav || nav.contains(el)) continue;
-          // Hero cream overlay is SVG (no CSS background) and skips hit-testing,
-          // so .hero reports black even though the top of the page is paper.
           if (el.classList && el.classList.contains('hero')) {
-            nav.classList.add('nav--light');
+            nav.classList.remove('nav--light');
             return;
           }
           var bg = window.getComputedStyle(el).backgroundColor;

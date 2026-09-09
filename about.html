@@ -191,23 +191,22 @@
     .nav--light .nav-links a:hover { color: rgba(0,0,0,0.6); }
     .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
     .nav--light .nav-hamburger { color: #0f0f0f; }
-    /* ─── HERO (dark) ────────────────────────────────────────── */
+    /* ─── HERO ───────────────────────────────────────────────── */
     .about-hero {
       position: relative;
       min-height: 100vh;
-      padding: 120px 32px 32px;
-      background: #FFFFFA;
-      --ink: #0f0f0f;
-      --ink-50: rgba(15,15,15,0.5);
-      --ink-30: rgba(15,15,15,0.3);
-      --ink-15: rgba(15,15,15,0.15);
-      --line: rgba(15,15,15,0.12);
+      padding: 120px 32px 0;
+      background: #070508;
+      --ink: #ffffff;
+      --ink-50: rgba(255,255,255,0.55);
+      --ink-30: rgba(255,255,255,0.35);
+      --ink-15: rgba(255,255,255,0.18);
+      --line: rgba(255,255,255,0.16);
       color: var(--ink);
       display: grid;
       grid-template-rows: 1fr auto;
       gap: 32px;
       overflow: hidden;
-      border-bottom: 1px solid var(--line);
     }
     .about-hero-title-wrap {
       display: flex;
@@ -245,6 +244,10 @@
       display: block;
       font-style: italic;
       font-weight: 400;
+      font-size: clamp(28px, 3.6vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-top: 0.2em;
       color: var(--ink-50);
     }
     .about-hero-lede {
@@ -259,32 +262,41 @@
     .about-hero-foot {
       display: flex;
       justify-content: center;
-      align-items: end;
-      border-top: 1px solid var(--line);
-      padding-top: 22px;
-      max-width: 1480px;
-      margin: 0 auto;
-      width: 100%;
+      align-items: stretch;
+      border-top: none;
+      padding: 0;
+      max-width: none;
+      width: calc(100% + 64px);
+      margin-left: -32px;
+      background: #070508;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-50);
     }
     .about-scroll-cue {
       position: relative;
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      padding-bottom: 32px;
-      color: var(--ink);
-      transition: color 0.2s;
+      flex: 1;
+      align-self: stretch;
+      width: 100%;
+      min-height: 72px;
+      padding: 22px 32px 48px;
+      color: #fff;
+      background: #070508;
+      transition: background 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .about-scroll-cue:hover { color: var(--blue); }
+    @media (hover: hover) {
+      .about-hero-foot:hover .about-scroll-cue,
+      .about-scroll-cue:hover { background: var(--blue); color: #fff; }
+    }
     .about-scroll-cue::after {
       content: '';
       position: absolute;
-      left: 50%; bottom: 0;
+      left: 50%; bottom: 20px;
       width: 1px; height: 18px;
       background: var(--ink);
       transform-origin: top;
@@ -342,7 +354,6 @@
     /* ─── PRINCIPLES (4-up grid) ────────────────────────────── */
     .principles {
       padding: 120px 32px;
-      border-bottom: 1px solid var(--line);
     }
     .principles-inner { max-width: 1280px; margin: 0 auto; }
     .principles-head {
@@ -571,13 +582,43 @@
       .studio-fact:nth-child(1), .studio-fact:nth-child(2) { border-bottom: 1px solid var(--line); }
       .cta-inner { grid-template-columns: 1fr; gap: 32px; }
     }
+    @media (min-width: 769px) {
+      .about-hero {
+        height: 100svh;
+        max-height: 100svh;
+        min-height: 100svh;
+        padding: 88px 32px 0;
+        gap: clamp(12px, 2vh, 24px);
+      }
+      .about-hero-title-wrap {
+        gap: clamp(12px, 2.4vh, 28px);
+        min-height: 0;
+      }
+      .about-hero-title {
+        font-size: clamp(48px, min(11vw, 15vh), 150px);
+      }
+      .about-hero-lede {
+        font-size: clamp(16px, min(1.5vw, 2.1vh), 22px);
+      }
+      .about-hero-foot { padding: 0; }
+      .about-scroll-cue { padding: 16px 32px 48px; }
+    }
+
     @media (max-width: 768px) {
       .nav { padding: 18px 20px; }
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 11px; }
       .nav-links a::before { margin-right: 10px; }
-      .about-hero { padding: 100px 20px 28px; gap: 18px; }
+      .about-hero { padding: 100px 20px 0; gap: 18px; }
+      .about-hero-foot {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        padding: 0;
+      }
+      .about-scroll-cue { padding: 18px 20px 40px; }
+      .about-hero { height: auto; max-height: none; min-height: 0; }
       .about-hero-title { font-size: clamp(40px, 14vw, 80px); }
+      .about-hero-title .ital { font-size: clamp(22px, 5.5vw, 32px); }
       .about-hero-lede { font-size: clamp(16px, 4.4vw, 20px); }
       .statement { padding: 80px 20px; }
       .principles { padding: 80px 20px; }
@@ -1087,7 +1128,6 @@
           <a href="about.html">About</a>
           <a href="careers.html">Careers</a>
           <a href="index.html#statement">Approach</a>
-          <a href="index.html#index">Clients</a>
         </div>
 
         <div class="footer-col">
