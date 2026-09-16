@@ -24,6 +24,8 @@
 
   <!-- Lenis smooth scroll -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <style>
     /* ─── NIELA FONT ────────────────────────────────────────── */
@@ -253,23 +255,149 @@
       .nav-dropdown { display: none !important; }
     }
 
-    /* ─── SECTION 1: HERO ───────────────────────────────────── */
-    .hero-scroll-track {
-      position: relative;
-      height: 400vh;
-    }
+    /* ─── SECTION 1: HERO (island → city) ───────────────────── */
     .hero {
+      position: relative;
+      height: 300vh;
+      background: #070508;
+      --city-scale: 1;
+      --city-x: 0%;
+      --city-y: 0%;
+      --city-origin-x: 50%;
+      --city-origin-y: 38%;
+      --island-scale: 1;
+      --island-x: 0%;
+      --island-y: 0%;
+      --island-origin-x: 50%;
+      --island-origin-y: 40%;
+    }
+    .hero__sticky {
       position: sticky;
       top: 0;
       height: 100vh;
-      background: #000;
-      isolation: isolate;
-      --ink: #ffffff;
-      --ink-50: rgba(255,255,255,0.55);
-      --ink-30: rgba(255,255,255,0.35);
-      --ink-15: rgba(255,255,255,0.18);
-      --line: rgba(255,255,255,0.16);
       overflow: hidden;
+      background: #070508;
+    }
+    .hero__media { position: absolute; inset: 0; }
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 45%;
+      pointer-events: none;
+    }
+    .hero__video--island {
+      z-index: 1;
+      transform-origin: var(--island-origin-x) var(--island-origin-y);
+      transform: translate(var(--island-x), var(--island-y)) scale(var(--island-scale));
+    }
+    .hero__video--city {
+      z-index: 2;
+      opacity: 0;
+      transform-origin: var(--city-origin-x) var(--city-origin-y);
+      transform: translate(var(--city-x), var(--city-y)) scale(var(--city-scale));
+      will-change: opacity;
+    }
+    .hero__scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(ellipse 70% 32% at 50% 78%, rgba(7, 5, 8, 0.4) 0%, transparent 70%);
+    }
+    .hero__copy {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      text-align: center;
+    }
+    .hero__line {
+      position: absolute;
+      left: 8vw;
+      right: 8vw;
+      margin: 0;
+      opacity: 0;
+      color: #fff;
+      font-weight: 700;
+      font-size: clamp(28px, 4.6vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+    .hero__line--1 {
+      top: max(108px, 12%);
+      opacity: 1;
+      color: #ffffff;
+      font-size: clamp(40px, 6.4vw, 92px);
+      font-weight: 800;
+      letter-spacing: -0.0425em;
+      -webkit-text-stroke: 1px rgba(211, 211, 211, 0.05);
+      paint-order: stroke fill;
+    }
+    .hero__line--2 {
+      top: auto;
+      bottom: 12%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.32em;
+      font-weight: 400;
+      font-size: clamp(48px, 7.2vw, 108px);
+    }
+    .hero__h1 {
+      margin: 0;
+      font-size: inherit;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    .hero__t2 {
+      margin: 0;
+      font-size: clamp(26px, 3.4vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.88);
+    }
+    .hero__scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      z-index: 4;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      pointer-events: none;
+    }
+    .hero__scroll-icon {
+      width: 22px;
+      height: 22px;
+      animation: hero-scroll-nudge 1.8s ease-in-out infinite;
+    }
+    .hero__scroll-icon path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes hero-scroll-nudge {
+      0%, 100% { transform: translateY(0); opacity: 0.55; }
+      50% { transform: translateY(5px); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero { height: 100vh; }
+      .hero__sticky { position: relative; }
+      .hero__video--city { display: none; }
+      .hero__line--1 { opacity: 1; }
+      .hero__line--2 { opacity: 0.7; }
+      .hero__scroll-icon { animation: none; opacity: 0.55; }
     }
 
     /* Full-hero background video — never scaled */
@@ -571,12 +699,12 @@
     }
 
     @media (min-width: 1024px) {
-      .hero { padding-bottom: 76px; }
+      .hero { padding-bottom: 0; }
       .hero-marquee { display: block; }
     }
 
     @media (max-width: 768px) {
-      .hero { padding: 80px 20px 24px; gap: 18px; }
+      .hero { padding: 0; gap: 0; }
       .hero-tm { top: 8%; right: 16px; }
       .hero-eyebrow, .hero-sub { padding: 0; flex-direction: column; align-items: flex-start; gap: 12px; }
       .hero-sub-tag { text-align: left; }
@@ -591,6 +719,8 @@
       padding: 140px 32px;
       border-bottom: 1px solid var(--line);
       position: relative;
+      z-index: 2;
+      background: var(--bg);
     }
     .statement-inner {
       max-width: 1280px;
@@ -1218,7 +1348,7 @@
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 11px; }
       .nav-links a::before { margin-right: 10px; }
-      .hero { padding: 100px 20px 40px; }
+      .hero { padding: 0; }
       .hero-meta-top { flex-direction: column; gap: 16px; }
       .hero-meta-top .meta-block + .meta-block { text-align: left; }
       .hero-meta-bottom { grid-template-columns: 1fr; gap: 20px; }
@@ -1527,78 +1657,45 @@
   </div>
 
   <!-- HERO -->
-  <div class="hero-scroll-track">
-  <section class="hero">
-    <!-- Background video: full-hero, never scaled -->
-    <video class="hero-bg-video" autoplay muted loop playsinline>
-      <source src="assets/videos/hero.mp4" type="video/mp4">
-    </video>
-
-    <!-- Black overlay: SVG mask reveals video only through the wordmark -->
-    <div class="vt-mask">
-      <!-- Title wrap: wordmark is an SVG scaled in vector space so the mask stays sharp -->
-      <div class="hero-title-wrap">
-        <h1 class="hero-title" aria-label="FunnelHaus">
-          <svg class="hero-title-svg" aria-hidden="true" focusable="false">
-            <defs>
-              <mask id="hero-word-mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
-                <rect class="hero-mask-fill" width="100%" height="100%" fill="#fff"/>
-                <g class="hero-wordmark" fill="#000">
-                  <g transform="translate(-2806 356.5)">
-                    <path class="ltr" d="M553 -549H220V-448H522V-268H220V0H30V-729H553Z"/>
-                    <path class="ltr" d="M1142 0H979L963 -67Q939 -29 902 -9Q865 11 806 11Q703 11 645.5 -42Q588 -95 588 -211V-555H778V-275Q778 -231 782.5 -205Q787 -179 805.5 -160.5Q824 -142 865 -142Q917 -142 934.5 -178Q952 -214 952 -275V-555H1142Z"/>
-                    <path class="ltr" d="M1177 -555H1340L1356 -488Q1380 -526 1417 -546Q1454 -566 1513 -566Q1616 -566 1673.5 -513Q1731 -460 1731 -344V0H1541V-280Q1541 -324 1536.5 -350Q1532 -376 1513.5 -394.5Q1495 -413 1454 -413Q1402 -413 1384.5 -377Q1367 -341 1367 -280V0H1177Z"/>
-                    <path class="ltr" d="M1766 -555H1929L1945 -488Q1969 -526 2006 -546Q2043 -566 2102 -566Q2205 -566 2262.5 -513Q2320 -460 2320 -344V0H2130V-280Q2130 -324 2125.5 -350Q2121 -376 2102.5 -394.5Q2084 -413 2043 -413Q1991 -413 1973.5 -377Q1956 -341 1956 -280V0H1766Z"/>
-                    <path class="ltr" d="M2633 14Q2550 14 2487 -22Q2424 -58 2389.5 -123Q2355 -188 2355 -273V-294Q2355 -374 2390 -437Q2425 -500 2488.5 -535.5Q2552 -571 2637 -571Q2718 -571 2781.5 -536Q2845 -501 2880.5 -438Q2916 -375 2916 -294V-252H2546Q2550 -204 2572 -176.5Q2594 -149 2635 -149Q2665 -149 2686 -165.5Q2707 -182 2713 -206H2909Q2894 -105 2819 -45.5Q2744 14 2633 14ZM2710 -363Q2685 -408 2638 -408Q2585 -408 2561 -363Z"/>
-                    <path class="ltr" d="M2951 -729H3141V0H2951Z"/>
-                    <path class="ltr" d="M3176 -729H3366V-448H3636V-729H3826V0H3636V-268H3366V0H3176Z"/>
-                    <path class="ltr" d="M3861 -162Q3861 -235 3909 -284.5Q3957 -334 4080 -334H4228V-359Q4228 -392 4207.5 -406Q4187 -420 4158 -420Q4135 -420 4115.5 -409Q4096 -398 4093 -371H3890Q3901 -467 3975.5 -520Q4050 -573 4161 -573Q4284 -573 4351.5 -520Q4419 -467 4419 -363V0H4237L4220 -64Q4195 -32 4178 -17.5Q4161 -3 4131 5Q4101 13 4046 13Q3991 13 3949 -11.5Q3907 -36 3884 -76Q3861 -116 3861 -162ZM4229 -224H4173Q4123 -224 4098 -218Q4073 -212 4065 -201.5Q4057 -191 4057 -173Q4057 -154 4078.5 -138Q4100 -122 4145 -122Q4181 -122 4199 -133.5Q4217 -145 4229 -166Z"/>
-                    <path class="ltr" d="M5008 0H4845L4829 -67Q4805 -29 4768 -9Q4731 11 4672 11Q4569 11 4511.5 -42Q4454 -95 4454 -211V-555H4644V-275Q4644 -231 4648.5 -205Q4653 -179 4671.5 -160.5Q4690 -142 4731 -142Q4783 -142 4800.5 -178Q4818 -214 4818 -275V-555H5008Z"/>
-                    <path class="ltr" d="M5043 -181H5235Q5244 -152 5268.5 -140.5Q5293 -129 5317 -129Q5356 -129 5374 -136Q5392 -143 5392 -169Q5392 -184 5383.5 -191.5Q5375 -199 5357 -203Q5339 -207 5294 -213L5246 -219Q5157 -231 5107.5 -273.5Q5058 -316 5058 -387Q5058 -494 5129 -531.5Q5200 -569 5325 -569Q5428 -569 5490.5 -518Q5553 -467 5563 -381H5370Q5367 -388 5362 -397.5Q5357 -407 5346 -413.5Q5335 -420 5313 -419Q5248 -419 5248 -389Q5248 -360 5325 -349Q5405 -338 5459.5 -319Q5514 -300 5548 -261Q5582 -222 5582 -156Q5582 -105 5549 -66Q5516 -27 5457.5 -5.5Q5399 16 5325 16Q5175 16 5109 -40Q5043 -96 5043 -181Z"/>
-                  </g>
-                </g>
-              </mask>
-            </defs>
-            <rect class="hero-paper" width="100%" height="100%" fill="#070508" mask="url(#hero-word-mask)"/>
-          </svg>
-        </h1>
+  <section class="hero" id="hero">
+    <div class="hero__sticky">
+      <div class="hero__media">
+        <video
+          class="hero__video hero__video--island"
+          src="assets/videos/herovideo1.mp4"
+          poster="assets/videos/herovideo1-poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <video
+          class="hero__video hero__video--city"
+          src="assets/videos/herovideo2.mp4"
+          poster="assets/videos/herovideo2-poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
       </div>
-    </div>
-
-    <!-- Bottom row -->
-    <div class="hero-foot">
-      <div class="foot-col">
-        <p>Design &amp; growth studio. Vancouver, BC.</p>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__copy">
+        <p class="hero__line hero__line--1">Imagine if finding your business was this hard</p>
+        <div class="hero__line hero__line--2">
+          <h1 class="hero__h1">FunnelHaus</h1>
+          <p class="hero__t2">Building digital systems for your growing business</p>
+        </div>
       </div>
-      <div class="foot-col foot-right">
-        <p>Scroll to explore.</p>
-      </div>
-    </div>
-
-    <!-- Subtle marquee strip -->
-    <div class="hero-marquee">
-      <div class="hero-marquee-track">
-        <a href="design-and-build.html">Design &amp; Build</a>
-        <a href="creative-and-content.html">Creative &amp; Content</a>
-        <a href="growth-and-performance.html">Growth &amp; Performance</a>
-        <a href="contact.html">Work with Us</a>
-        <a href="design-and-build.html">Design &amp; Build</a>
-        <a href="creative-and-content.html">Creative &amp; Content</a>
-        <a href="growth-and-performance.html">Growth &amp; Performance</a>
-        <a href="contact.html">Work with Us</a>
-      </div>
-    </div>
-
-    <!-- Secondary reveal panel — slides up over the expanded video text -->
-    <div class="hero-reveal" aria-hidden="true">
-      <div class="hero-reveal-inner">
-        <p class="hero-reveal-line hero-reveal-line-1">An independent design &amp; growth studio in Vancouver.</p>
-        <img src="assets/logos/funnelhaus-logo-blue.svg" alt="" class="hero-reveal-mark" />
-        <p class="hero-reveal-line hero-reveal-line-2">For brands that want to grow,<br>not just look good.</p>
+      <div class="hero__scroll" aria-hidden="true">
+        <svg class="hero__scroll-icon" viewBox="0 0 24 24">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
       </div>
     </div>
   </section>
-  </div><!-- /hero-scroll-track -->
 
   <!-- STATEMENT -->
   <section class="statement" id="statement">
@@ -1911,6 +2008,10 @@
     });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+    }
 
     // ── Word splitter (preserves inline tags like <em>, <span>)
     function splitWords(root, baseDelay = 0) {
@@ -2085,86 +2186,76 @@
       });
     })();
 
-    // ── Hero: two-phase scroll sequence
-    // Phase 1 (0–55%): FunnelHaus text grows 1× → 8×, video reveals through letters
-    // Phase 2 (55–100%): white panel slides up carrying the studio tagline
+    // ── Hero: island → city scroll dissolve
     (function () {
-      const track = document.querySelector('.hero-scroll-track');
-      const svg = document.querySelector('.hero-title-svg');
-      const wordmark = document.querySelector('.hero-wordmark');
-      const paper = document.querySelector('.hero-paper');
-      const maskFill = document.querySelector('.hero-mask-fill');
-      const foot = document.querySelector('.hero-foot');
-      const marquee = document.querySelector('.hero-marquee');
-      const reveal = document.querySelector('.hero-reveal');
-      const line1 = document.querySelector('.hero-reveal-line-1');
-      const line2 = document.querySelector('.hero-reveal-line-2');
-      if (!track || !svg || !wordmark || !paper || !maskFill) return;
+      var P = {
+        cueOutEnd:     0.12,
+        line1HoldEnd:  0.38,
+        line1OutEnd:   0.50,
+        cityInStart:   0.44,
+        cityInEnd:     0.58,
+        line2InStart:  0.54,
+        line2InEnd:    0.68
+      };
 
-      // Niela Black UPM = 1000. Scale the vector wordmark inside a viewport-sized
-      // SVG mask so the letters stay sharp as they grow.
-      const UPM = 1000;
-      const WORD_UNITS = 5612; // FunnelHaus width at +0.05em tracking
+      var island = document.querySelector('.hero__video--island');
+      var city   = document.querySelector('.hero__video--city');
+      var line1  = document.querySelector('.hero__line--1');
+      var line2  = document.querySelector('.hero__line--2');
+      var cue    = document.querySelector('.hero__scroll');
+      var hero   = document.querySelector('#hero');
+      if (!hero || !island || !city) return;
 
-      function baseFontSize() {
-        const vw = window.innerWidth;
-        let size = vw <= 768
-          ? Math.min(72, Math.max(36, vw * 0.13))
-          : Math.min(270, Math.max(52, vw * 0.16));
-        const maxSize = (vw * 0.92) * UPM / WORD_UNITS;
-        return Math.min(size, maxSize);
+      function playSafe(video) {
+        if (!video) return;
+        var attempt = video.play();
+        if (attempt && attempt.catch) attempt.catch(function () {});
       }
 
-      let ticking = false;
+      function startPlayback() {
+        playSafe(island);
+        playSafe(city);
+      }
 
-      function update() {
-        const trackTop = track.getBoundingClientRect().top;
-        const scrolled = -trackTop;
-        const totalScrollable = Math.max(1, track.offsetHeight - window.innerHeight);
-        const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+      startPlayback();
+      document.addEventListener('pointerdown', startPlayback, { once: true });
+      document.addEventListener('touchstart', startPlayback, { once: true, passive: true });
 
-        // ── Phase 1: zoom (0 → 55%)
-        const p1 = Math.min(1, progress / 0.55);
-        const e1 = 1 - Math.pow(1 - p1, 2.4);
-        const scale = (baseFontSize() / UPM) * (1 + e1 * 7);
-        const w = svg.clientWidth || window.innerWidth;
-        const h = svg.clientHeight || window.innerHeight;
-        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-        paper.setAttribute('width', w);
-        paper.setAttribute('height', h);
-        maskFill.setAttribute('width', w);
-        maskFill.setAttribute('height', h);
-        wordmark.setAttribute('transform', `translate(${w / 2} ${h / 2}) scale(${scale.toFixed(5)})`);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        island.removeAttribute('autoplay');
+        city.removeAttribute('autoplay');
+        island.pause();
+        city.pause();
+        return;
+      }
 
-        // Fade hero-foot + marquee
-        const fadeOut = Math.max(0, 1 - progress * 8);
-        if (foot) foot.style.opacity = fadeOut;
-        if (marquee) marquee.style.opacity = fadeOut;
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
 
-        // ── Phase 2: reveal panel slides up (55% → 100%)
-        if (reveal) {
-          const p2 = Math.max(0, (progress - 0.55) / 0.45);
-          const e2 = 1 - Math.pow(1 - p2, 2.6);
-          reveal.style.transform = `translateY(${((1 - e2) * 100).toFixed(2)}%)`;
-
-          // Once panel is ~60% in, trigger CSS transitions (line2 auto-delays 500ms via CSS)
-          reveal.classList.toggle('hero-reveal--entered', p2 >= 0.6);
+      var tl = gsap.timeline({
+        defaults: { ease: 'none' },
+        scrollTrigger: {
+          trigger: hero,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true
         }
+      });
 
-        ticking = false;
-      }
+      gsap.set(line1, { opacity: 1 });
+      tl.to(cue, { opacity: 0, duration: P.cueOutEnd }, 0)
+        .to(line1, { opacity: 0, duration: P.line1OutEnd - P.line1HoldEnd, ease: 'power1.inOut' }, P.line1HoldEnd)
+        .fromTo(city, { opacity: 0 }, { opacity: 1, duration: P.cityInEnd - P.cityInStart, ease: 'power1.inOut' }, P.cityInStart)
+        .fromTo(line2, { opacity: 0 }, { opacity: 1, duration: P.line2InEnd - P.line2InStart, ease: 'power1.inOut' }, P.line2InStart)
+        .to({}, { duration: 1 - P.line2InEnd }, P.line2InEnd);
 
-      function onScroll() {
-        if (!ticking) {
-          requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      if (typeof lenis !== 'undefined') lenis.on('scroll', onScroll);
-      update();
+      ScrollTrigger.create({
+        trigger: hero,
+        start: 'top bottom',
+        end: 'bottom top',
+        onEnter: startPlayback,
+        onEnterBack: startPlayback
+      });
     })();
   
     // ── Mobile hamburger menu
