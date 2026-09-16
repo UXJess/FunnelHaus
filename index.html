@@ -258,7 +258,7 @@
     /* ─── SECTION 1: HERO (island → city) ───────────────────── */
     .hero {
       position: relative;
-      height: 300vh;
+      height: 480vh;
       background: #070508;
       --city-scale: 1;
       --city-x: 0%;
@@ -2189,13 +2189,13 @@
     // ── Hero: island → city scroll dissolve
     (function () {
       var P = {
-        cueOutEnd:     0.12,
-        line1HoldEnd:  0.38,
-        line1OutEnd:   0.50,
-        cityInStart:   0.44,
-        cityInEnd:     0.58,
-        line2InStart:  0.54,
-        line2InEnd:    0.68
+        cueOutEnd:     0.08,
+        line1HoldEnd:  0.22,
+        line1OutEnd:   0.48,
+        cityInStart:   0.28,
+        cityInEnd:     0.62,
+        line2InStart:  0.52,
+        line2InEnd:    0.78
       };
 
       var island = document.querySelector('.hero__video--island');
@@ -2238,15 +2238,15 @@
           trigger: hero,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: true
+          scrub: 1.25
         }
       });
 
       gsap.set(line1, { opacity: 1 });
       tl.to(cue, { opacity: 0, duration: P.cueOutEnd }, 0)
-        .to(line1, { opacity: 0, duration: P.line1OutEnd - P.line1HoldEnd, ease: 'power1.inOut' }, P.line1HoldEnd)
-        .fromTo(city, { opacity: 0 }, { opacity: 1, duration: P.cityInEnd - P.cityInStart, ease: 'power1.inOut' }, P.cityInStart)
-        .fromTo(line2, { opacity: 0 }, { opacity: 1, duration: P.line2InEnd - P.line2InStart, ease: 'power1.inOut' }, P.line2InStart)
+        .to(line1, { opacity: 0, duration: P.line1OutEnd - P.line1HoldEnd, ease: 'power2.inOut' }, P.line1HoldEnd)
+        .fromTo(city, { opacity: 0 }, { opacity: 1, duration: P.cityInEnd - P.cityInStart, ease: 'power2.inOut' }, P.cityInStart)
+        .fromTo(line2, { opacity: 0 }, { opacity: 1, duration: P.line2InEnd - P.line2InStart, ease: 'power2.inOut' }, P.line2InStart)
         .to({}, { duration: 1 - P.line2InEnd }, P.line2InEnd);
 
       ScrollTrigger.create({
