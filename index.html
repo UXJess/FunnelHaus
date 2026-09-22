@@ -481,8 +481,8 @@
       50% { transform: translateY(-2px); }
     }
     @media (max-width: 768px) {
-      .hero__bar { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); padding: 0 20px; }
-      .hero__line--2 { bottom: 150px; }
+      .hero__bar { bottom: calc(112px + env(safe-area-inset-bottom, 0px)); padding: 0 20px; }
+      .hero__line--2 { bottom: 180px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero { height: 100vh; }
@@ -1656,13 +1656,12 @@
 
     @media (max-width: 768px) {
       /* ── Bottom nav bar — transparent, icon only ── */
-      body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+      body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
       .nav {
         top: auto;
-        bottom: 0;
-        height: calc(60px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        height: 60px;
         padding: 0 30px;
-        padding-bottom: env(safe-area-inset-bottom, 0px);
       }
       .nav .nav-logo .wordmark { display: none; }
       .nav-hamburger { display: block; }
