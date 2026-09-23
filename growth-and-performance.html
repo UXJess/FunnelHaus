@@ -19,11 +19,27 @@
   <meta name="twitter:card" content="summary" />
   <meta name="theme-color" content="#FDC942" />
 
-  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+  <!-- Google Consent Mode v2 defaults — must stay above any Google tag -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+
+  <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
+  <link rel="stylesheet" href="assets/css/consent.css" />
+  <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="assets/js/vendor/lenis-1.0.42.min.js"></script>
 
   <style>
     /* ─── NIELA FONT ────────────────────────────────────────── */
@@ -1237,6 +1253,13 @@
           <a href="contact.html">Contact</a>
           <a href="contact.html#form">Start a Project</a>
         </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Legal</span>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <button type="button" class="footer-cookie-btn" data-fhc-open>Cookie Settings</button>
+        </div>
       </div>
 
       <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
@@ -1249,7 +1272,7 @@
           <span>Vancouver, BC</span>
         </div>
         <div class="meta-center">
-          <span>©2026 FunnelHaus Studio</span>
+          <span>© <span class="fh-year">2026</span> Funnelhaus Digital Incorporated. All rights reserved.</span>
         </div>
         <div class="meta-right">
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
@@ -1487,6 +1510,8 @@
       var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       var name = months[new Date().getMonth()];
       document.querySelectorAll('.sprint-month').forEach(function(el){ el.textContent = name; });
+      var year = String(new Date().getFullYear());
+      document.querySelectorAll('.fh-year').forEach(function(el){ el.textContent = year; });
     })();
   </script>
 

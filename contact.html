@@ -19,11 +19,27 @@
   <meta name="twitter:card" content="summary" />
   <meta name="theme-color" content="#070508" />
 
-  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+  <!-- Google Consent Mode v2 defaults — must stay above any Google tag -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+
+  <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
+  <link rel="stylesheet" href="assets/css/consent.css" />
+  <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="assets/js/vendor/lenis-1.0.42.min.js"></script>
 
   <style>
     /* ─── NIELA FONT ────────────────────────────────────────── */
@@ -444,7 +460,7 @@
       color: var(--ink-50);
       align-self: center;
     }
-    .contact-option.is-active .contact-option-num { color: rgba(255,255,255,0.7); }
+    .contact-option.is-active .contact-option-num { color: rgba(255,255,255,0.9); }
     .contact-option-name {
       grid-row: 1; grid-column: 2;
       font-size: clamp(18px, 1.6vw, 22px);
@@ -473,7 +489,7 @@
       line-height: 1.5;
       color: var(--ink-50);
     }
-    .contact-option.is-active .contact-option-desc { color: rgba(255,255,255,0.75); }
+    .contact-option.is-active .contact-option-desc { color: rgba(255,255,255,0.9); }
 
     /* Path panels — active panel is the blue body of the tab unit */
     .contact-panel { display: none; grid-column: 1 / -1; grid-row: 2; }
@@ -728,7 +744,7 @@
     .quiz-meta a:hover { border-color: var(--ink); }
 
     /* ─── BLUE PANEL OVERRIDES — form & quiz styled for on-blue context ─── */
-    .contact-panel.is-active .form-row label { color: rgba(255,255,255,0.75); }
+    .contact-panel.is-active .form-row label { color: rgba(255,255,255,0.9); }
     .contact-panel.is-active .form-row input,
     .contact-panel.is-active .form-row select {
       color: #ffffff;
@@ -758,14 +774,60 @@
       border-color: rgba(255,255,255,0.92);
     }
 
-    .contact-panel.is-active .form-meta { color: rgba(255,255,255,0.75); }
+    .contact-panel.is-active .form-meta { color: rgba(255,255,255,0.9); }
+
+    /* Marketing opt-in, privacy notice, honeypot */
+    .form-optin {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 32px;
+      max-width: 56ch;
+    }
+    .form-optin input {
+      flex: 0 0 auto;
+      width: 20px; height: 20px;
+      margin: 1px 0 0;
+      accent-color: #ffffff;
+      cursor: pointer;
+    }
+    .form-optin label {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .form-optin input:focus-visible,
+    .form-legal a:focus-visible,
+    .contact-submit:focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 3px;
+    }
+    .form-legal {
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #ffffff;
+      max-width: 56ch;
+    }
+    .form-legal a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .form-legal + .form-meta { margin-top: 8px; }
+    .form-hp {
+      position: absolute !important;
+      left: -10000px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+    }
 
     /* Quiz card on blue — translucent white tint, white-tinted borders */
     .contact-panel.is-active .quiz-card {
       background: rgba(255,255,255,0.05);
       border-color: rgba(255,255,255,0.25);
     }
-    .contact-panel.is-active .quiz-eyebrow { color: rgba(255,255,255,0.7); }
+    .contact-panel.is-active .quiz-eyebrow { color: rgba(255,255,255,0.9); }
     .contact-panel.is-active .quiz-eyebrow::before { background: #ffffff; }
     .contact-panel.is-active .quiz-title { color: #ffffff; }
     .contact-panel.is-active .quiz-title .ital { color: rgba(255,255,255,0.65); }
@@ -779,7 +841,7 @@
       background: rgba(255,255,255,0.92);
       border-color: rgba(255,255,255,0.92);
     }
-    .contact-panel.is-active .quiz-meta { color: rgba(255,255,255,0.7); }
+    .contact-panel.is-active .quiz-meta { color: rgba(255,255,255,0.9); }
     .contact-panel.is-active .quiz-meta a {
       color: #ffffff;
       border-bottom-color: rgba(255,255,255,0.4);
@@ -1282,14 +1344,31 @@
                 </div>
               </div>
 
+              <!-- Honeypot — hidden from people, filled in by bots -->
+              <div class="form-hp" aria-hidden="true">
+                <label for="website">Leave this field empty</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <!-- Rendered by the form script only when HS_SEND_MARKETING_OPT_IN is true -->
+              <template id="marketingOptInTemplate">
+                <div class="form-optin">
+                  <input type="checkbox" id="marketingOptIn" name="marketing_opt_in" value="true" />
+                  <label for="marketingOptIn">Send me occasional updates and insights from FunnelHaus. You can unsubscribe anytime.</label>
+                </div>
+              </template>
+
               <div class="form-error" id="formError" role="alert"></div>
 
               <button type="submit" class="contact-submit" id="formSubmit">
                 <span class="contact-submit-label">Send brief</span>
                 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
               </button>
+              <p class="form-legal" id="formLegal">
+                By submitting this form, you agree to our <a href="privacy.html">Privacy Policy</a>.
+              </p>
               <p class="form-meta">
-                We respond inside one business day, never share your data, and won't add you to any list.
+                We respond inside one business day, never share your data, and won't add you to any list unless you opt in.
               </p>
             </form>
 
@@ -1380,6 +1459,13 @@
           <a href="contact.html">Contact</a>
           <a href="#form">Work with us</a>
         </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Legal</span>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <button type="button" class="footer-cookie-btn" data-fhc-open>Cookie Settings</button>
+        </div>
       </div>
 
       <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
@@ -1392,7 +1478,7 @@
           <span>Vancouver, BC</span>
         </div>
         <div class="meta-center">
-          <span>©2026 FunnelHaus Studio</span>
+          <span>© <span class="fh-year">2026</span> Funnelhaus Digital Incorporated. All rights reserved.</span>
         </div>
         <div class="meta-right">
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
@@ -1613,6 +1699,10 @@
       const HS_PORTAL_ID = '343245815';
       const HS_FORM_ID = '518f64e3-7707-421f-9863-4b439d9315b7';
       const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`;
+      // HubSpot rejects the whole submission if a field isn't on the form, so
+      // only turn this on after adding a "marketing_opt_in" property to the
+      // "Work with us" form in HubSpot.
+      const HS_SEND_MARKETING_OPT_IN = false;
 
       const form = document.getElementById('workWithUsForm');
       if (!form) return;
@@ -1621,6 +1711,22 @@
       const errorEl = document.getElementById('formError');
       const successEl = document.getElementById('formSuccess');
       if (!submitBtn || !submitLabel || !errorEl || !successEl) return;
+
+      const optInInput = HS_SEND_MARKETING_OPT_IN ? mountMarketingOptIn() : null;
+
+      function mountMarketingOptIn() {
+        const tpl = document.getElementById('marketingOptInTemplate');
+        if (!tpl) return null;
+        errorEl.before(tpl.content.cloneNode(true));
+        return document.getElementById('marketingOptIn');
+      }
+
+      // Everything HubSpot-specific about the opt-in lives here. To move to
+      // legalConsentOptions, replace the body with payload.legalConsentOptions
+      // built from these same arguments.
+      function applyMarketingOptIn(payload, { optedIn, optInText, processingText }) {
+        payload.fields.push({ objectTypeId: '0-1', name: 'marketing_opt_in', value: optedIn ? 'true' : 'false' });
+      }
 
       function getCookie(name) {
         const m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]+)'));
@@ -1663,6 +1769,13 @@
         setLoading(true);
 
         const data = new FormData(form);
+
+        if ((data.get('website') || '').trim()) {
+          form.style.display = 'none';
+          successEl.classList.add('is-shown');
+          return;
+        }
+
         const fields = [
           { objectTypeId: '0-1', name: 'company',      value: (data.get('company') || '').trim() },
           { objectTypeId: '0-1', name: 'email',         value: (data.get('email')   || '').trim() },
@@ -1674,10 +1787,19 @@
           pageUri: window.location.href,
           pageName: document.title
         };
-        const hutk = getCookie('hubspotutk');
+        const hasMarketingConsent = !!(window.fhConsent && window.fhConsent.has('marketing'));
+        const hutk = hasMarketingConsent ? getCookie('hubspotutk') : null;
         if (hutk) context.hutk = hutk;
 
         const payload = { fields, context };
+
+        if (optInInput) {
+          applyMarketingOptIn(payload, {
+            optedIn: optInInput.checked,
+            optInText: optInInput.labels[0].textContent.trim(),
+            processingText: (document.getElementById('formLegal')?.textContent || '').replace(/\s+/g, ' ').trim()
+          });
+        }
 
         try {
           const res = await fetch(HS_ENDPOINT, {
@@ -1777,6 +1899,8 @@
       var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       var name = months[new Date().getMonth()];
       document.querySelectorAll('.sprint-month').forEach(function(el){ el.textContent = name; });
+      var year = String(new Date().getFullYear());
+      document.querySelectorAll('.fh-year').forEach(function(el){ el.textContent = year; });
     })();
   </script>
 

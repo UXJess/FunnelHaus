@@ -19,11 +19,27 @@
   <meta name="twitter:card" content="summary" />
   <meta name="theme-color" content="#FDC942" />
 
-  <!-- HubSpot tracking — Portal 343245815 (NA3) -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na3.hs-scripts.com/343245815.js"></script>
+  <!-- Google Consent Mode v2 defaults — must stay above any Google tag -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+
+  <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
+  <link rel="stylesheet" href="assets/css/consent.css" />
+  <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="assets/js/vendor/lenis-1.0.42.min.js"></script>
 
   <style>
     /* ─── NIELA FONT ────────────────────────────────────────── */
@@ -717,19 +733,13 @@
       overflow: hidden;
       background: #ffffff;
     }
-    .featured-mock-frame iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 200%;
-      height: 200%;
-      border: 0;
-      transform: scale(0.5);
-      transform-origin: top left;
-      pointer-events: none;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+    .featured-mock-link { position: absolute; inset: 0; display: block; }
+    .featured-mock-link img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top left;
+      display: block; max-width: none;
     }
-    .featured-mock-frame iframe::-webkit-scrollbar { display: none; }
+    .featured-mock-link:focus-visible { outline: 2px solid var(--yellow); outline-offset: -4px; }
 
     .featured-cta { display: flex; justify-content: center; padding: 16px 0 8px; }
     .featured-cta-link {
@@ -1495,7 +1505,9 @@
             <span class="url">rockymountainsolutions.ca</span>
           </div>
           <div class="featured-mock-frame">
-            <iframe src="https://rockymountainsolutions.ca" title="Rocky Mountain Solutions" loading="lazy" scrolling="no"></iframe>
+            <a class="featured-mock-link" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener" aria-label="Rocky Mountain Solutions website (opens in a new tab)">
+              <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage: Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" loading="lazy" decoding="async" />
+            </a>
           </div>
         </div>
       </div>
@@ -1616,6 +1628,13 @@
           <a href="contact.html">Contact</a>
           <a href="contact.html#form">Start a Project</a>
         </div>
+
+        <div class="footer-col">
+          <span class="footer-label">Legal</span>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <button type="button" class="footer-cookie-btn" data-fhc-open>Cookie Settings</button>
+        </div>
       </div>
 
       <svg class="footer-mark-big" aria-hidden="true" viewBox="0 0 1900 240" preserveAspectRatio="xMidYMid meet" overflow="visible">
@@ -1628,7 +1647,7 @@
           <span>Vancouver, BC</span>
         </div>
         <div class="meta-center">
-          <span>©2026 FunnelHaus Studio</span>
+          <span>© <span class="fh-year">2026</span> Funnelhaus Digital Incorporated. All rights reserved.</span>
         </div>
         <div class="meta-right">
           <a href="#" id="back-top"><svg class="arrow arrow-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3"/><path d="M3 8L8 3L13 8"/></svg> Back to top</a>
@@ -1874,6 +1893,8 @@
       var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       var name = months[new Date().getMonth()];
       document.querySelectorAll('.sprint-month').forEach(function(el){ el.textContent = name; });
+      var year = String(new Date().getFullYear());
+      document.querySelectorAll('.fh-year').forEach(function(el){ el.textContent = year; });
     })();
   </script>
 

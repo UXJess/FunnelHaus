@@ -1,0 +1,303 @@
+/* ─── CONSENT MANAGER + FOOTER LEGAL ─────────────────────────
+   Shared across every page. Pairs with /assets/js/consent.js. */
+
+.fhc-banner,
+.fhc-dialog {
+  --fhc-bg: #070508;
+  --fhc-ink: #ffffff;
+  --fhc-ink-70: rgba(255,255,255,0.78);
+  --fhc-line: rgba(255,255,255,0.18);
+  --fhc-blue: #2C60EF;
+  --fhc-blue-hover: #1f4dd6;
+  --fhc-focus: #FDC942;
+  font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--fhc-ink);
+  -webkit-font-smoothing: antialiased;
+}
+.fhc-banner[hidden],
+.fhc-dialog[hidden],
+.fhc-backdrop[hidden] { display: none !important; }
+
+/* ── Banner ── */
+.fhc-banner {
+  position: fixed;
+  left: 16px; right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--fhc-bg);
+  border: 1px solid var(--fhc-line);
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  animation: fhc-rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.fhc-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 20px;
+}
+.fhc-banner-text {
+  flex: 1 1 auto;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fhc-ink-70);
+}
+.fhc-banner-text a,
+.fhc-dialog-desc a {
+  color: var(--fhc-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.fhc-banner-text a:hover,
+.fhc-dialog-desc a:hover { color: var(--fhc-focus); }
+.fhc-banner-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ── */
+.fhc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+/* Accept and Reject share this class so they carry equal weight. */
+.fhc-btn-choice {
+  background: var(--fhc-blue);
+  border-color: var(--fhc-blue);
+  color: #ffffff;
+}
+.fhc-btn-choice:hover { background: var(--fhc-blue-hover); border-color: var(--fhc-blue-hover); }
+.fhc-btn-ghost {
+  background: transparent;
+  border-color: rgba(255,255,255,0.45);
+  color: var(--fhc-ink);
+}
+.fhc-btn-ghost:hover { border-color: #ffffff; }
+
+.fhc-btn:focus-visible,
+.fhc-close:focus-visible,
+.fhc-banner a:focus-visible,
+.fhc-dialog a:focus-visible,
+.fhc-switch input:focus-visible + .fhc-switch-track,
+.footer-cookie-btn:focus-visible,
+.legal-cookie-btn:focus-visible {
+  outline: 2px solid var(--fhc-focus, #FDC942);
+  outline-offset: 3px;
+}
+
+/* ── Dialog ── */
+.fhc-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: rgba(0,0,0,0.6);
+  animation: fhc-fade 0.25s ease-out;
+}
+.fhc-dialog {
+  position: fixed;
+  z-index: 1002;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--fhc-bg);
+  border: 1px solid var(--fhc-line);
+  border-radius: 6px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  padding: 28px;
+  animation: fhc-fade 0.25s ease-out;
+}
+.fhc-dialog:focus { outline: none; }
+.fhc-dialog-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.fhc-dialog-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.fhc-close {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid var(--fhc-line);
+  border-radius: 4px;
+  color: var(--fhc-ink);
+  cursor: pointer;
+}
+.fhc-close:hover { border-color: #ffffff; }
+.fhc-close svg { width: 16px; height: 16px; }
+.fhc-dialog-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fhc-ink-70);
+  margin-bottom: 20px;
+}
+.fhc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid var(--fhc-line);
+}
+.fhc-row-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.fhc-row-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--fhc-ink-70);
+}
+
+/* Toggle switch — a real checkbox, visually restyled */
+.fhc-switch {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+.fhc-switch input {
+  position: absolute;
+  top: 0; right: 0;
+  width: 48px; height: 28px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.fhc-switch input:disabled { cursor: not-allowed; }
+.fhc-switch-track {
+  position: relative;
+  display: block;
+  width: 48px; height: 28px;
+  border-radius: 14px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.6);
+  transition: background 0.2s, border-color 0.2s;
+}
+.fhc-switch-track::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.fhc-switch input:checked + .fhc-switch-track {
+  background: var(--fhc-blue);
+  border-color: var(--fhc-blue);
+}
+.fhc-switch input:checked + .fhc-switch-track::after { transform: translateX(20px); }
+.fhc-switch input:disabled + .fhc-switch-track { opacity: 0.6; }
+.fhc-switch-note {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fhc-ink-70);
+}
+.fhc-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid var(--fhc-line);
+}
+
+html.fhc-dialog-open { overflow: hidden; }
+
+@keyframes fhc-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fhc-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 860px) {
+  .fhc-banner-inner { flex-direction: column; align-items: stretch; gap: 14px; }
+  .fhc-banner-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .fhc-banner-actions .fhc-btn-ghost { grid-column: 1 / -1; }
+}
+@media (max-width: 768px) {
+  /* Sits above the fixed bottom nav bar */
+  .fhc-banner {
+    left: 8px; right: 8px;
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+  .fhc-banner-inner { padding: 14px; gap: 12px; }
+  .fhc-banner-text { font-size: 13px; }
+  .fhc-btn { padding: 10px 12px; }
+  .fhc-dialog { padding: 20px; }
+  .fhc-dialog-title { font-size: 22px; }
+  .fhc-dialog-actions .fhc-btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fhc-banner, .fhc-dialog, .fhc-backdrop { animation: none; }
+  .fhc-btn, .fhc-switch-track, .fhc-switch-track::after { transition: none; }
+}
+
+/* ─── FOOTER: Legal group ────────────────────────────────── */
+.site-footer .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; }
+.footer-cookie-btn {
+  display: inline-block;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 14px;
+  color: var(--footer-ink, #ffffff);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.footer-cookie-btn:hover { color: var(--yellow, #FDC942); transform: translateX(4px); }
+@media (min-width: 769px) and (max-width: 1180px) {
+  .site-footer .footer-meta { grid-template-columns: 1fr auto; }
+  .site-footer .footer-meta .meta-center { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 1024px) {
+  .site-footer .footer-top { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .site-footer .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 768px) {
+  .site-footer .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-cookie-btn, .footer-cookie-btn:hover { transition: none; transform: none; }
+}
