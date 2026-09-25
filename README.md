@@ -53,9 +53,8 @@ Other scripts can check consent with `window.fhConsent.has('analytics')` or
 occasional updates" checkbox lives in a `<template>` and is only rendered (and
 sent) when `HS_SEND_MARKETING_OPT_IN` is `true` in the form script.
 
-How the opt-in reaches HubSpot is isolated in `applyMarketingOptIn()`. It
-currently sends a `marketing_opt_in` contact property, which must exist on the
-HubSpot "Work with us" form first — HubSpot rejects the whole submission if it
-doesn't. To switch to `legalConsentOptions`, replace that function's body; it
-already receives the checkbox state, the checkbox label text and the privacy
-notice text that HubSpot's consent object needs.
+How the opt-in reaches HubSpot is isolated in `applyMarketingOptIn()`. It sends
+a `legalConsentOptions` block with the privacy notice text and, only when the box
+is ticked, a subscription to "Marketing Information"
+(`HS_MARKETING_SUBSCRIPTION_ID`) with the checkbox label as the consent text. An
+unticked box sends no subscription, so it never unsubscribes an existing contact.

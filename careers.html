@@ -1286,6 +1286,22 @@
       lenis.scrollTo(0, { duration: 1.5 });
     });
 
+    document.querySelectorAll('a[class*="scroll-cue"]').forEach((cue) => {
+      cue.addEventListener('click', (e) => {
+        const href = cue.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(target, { duration: 1.35 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+
     // ── Capabilities dropdown
     (function () {
       const trigger = document.querySelector('.nav-links li.has-dropdown > a');

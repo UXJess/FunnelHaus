@@ -261,13 +261,6 @@
       display: flex; flex-direction: column; justify-content: center; gap: 32px;
       max-width: 1480px; margin: 0 auto; width: 100%;
     }
-    .svc-hero-eyebrow {
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink-50);
-      display: inline-flex; align-items: center; gap: 12px;
-    }
-    .svc-hero-eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: var(--blue); }
-    .svc-hero-eyebrow .accent { color: var(--blue); }
     .svc-hero-title {
       font-size: clamp(64px, 14vw, 240px);
       font-weight: 900; line-height: 0.86; letter-spacing: -0.03em;
@@ -980,7 +973,6 @@
     </div>
 
     <div class="svc-hero-title-wrap">
-      <span class="svc-hero-eyebrow"><span class="accent">Growth &amp; Performance</span></span>
       <h1 class="svc-hero-title">
         CRO.
       </h1>
@@ -1282,6 +1274,22 @@
       e.preventDefault();
       lenis.scrollTo(0, { duration: 1.5 });
     });
+
+    document.querySelectorAll('a[class*="scroll-cue"]').forEach((cue) => {
+      cue.addEventListener('click', (e) => {
+        const href = cue.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(target, { duration: 1.35 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
 
     // ── Capabilities dropdown
     (function () {

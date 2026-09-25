@@ -320,23 +320,6 @@
       margin: 0 auto;
       width: 100%;
     }
-    .svc-hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .svc-hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: var(--blue);
-    }
-    .svc-hero-eyebrow .accent { color: var(--blue); }
 
     .svc-hero-title {
       font-size: clamp(64px, 14vw, 240px);
@@ -1343,7 +1326,6 @@
     </div>
 
     <div class="svc-hero-title-wrap">
-      <span class="svc-hero-eyebrow"><span class="accent">Design &amp; Build</span></span>
       <h1 class="svc-hero-title">
         Conversion<br>
         <span class="ital">Architecture.</span>
@@ -1655,6 +1637,22 @@
       e.preventDefault();
       lenis.scrollTo(0, { duration: 1.5 });
     });
+
+    document.querySelectorAll('a[class*="scroll-cue"]').forEach((cue) => {
+      cue.addEventListener('click', (e) => {
+        const href = cue.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(target, { duration: 1.35 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
 
     // ── Capabilities dropdown
     (function () {

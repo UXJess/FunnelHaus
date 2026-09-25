@@ -288,29 +288,6 @@
       overflow: hidden;
     }
 
-    .cap-hero-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-    }
-    .cap-hero-status .left { display: inline-flex; align-items: center; gap: 8px; }
-    .cap-hero-status .dot {
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--blue);
-      box-shadow: 0 0 0 0 rgba(44,96,239,0.6);
-      animation: dotPulse 1.8s ease-in-out infinite;
-    }
-    @keyframes dotPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(44,96,239,0.55); transform: scale(0.9); }
-      50%      { box-shadow: 0 0 0 6px rgba(44,96,239,0);    transform: scale(1.05); }
-    }
-
     .cap-hero-title-wrap {
       display: flex;
       flex-direction: column;
@@ -320,24 +297,8 @@
       margin: 0 auto;
       width: 100%;
     }
-    .cap-hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cap-hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: var(--ink-30);
-    }
     .cap-hero-title {
-      font-size: clamp(64px, 13vw, 220px);
+      font-size: clamp(44px, 7.2vw, 84px);
       font-weight: 900;
       line-height: 0.86;
       letter-spacing: -0.03em;
@@ -347,7 +308,7 @@
       display: block;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(28px, 3.6vw, 48px);
+      font-size: clamp(20px, 2.4vw, 32px);
       line-height: 1.15;
       letter-spacing: -0.02em;
       margin-top: 0.2em;
@@ -541,25 +502,6 @@
       align-items: start;
     }
 
-    .pillar-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-      margin-bottom: 24px;
-    }
-    .pillar-tag .num { font-weight: 600; color: var(--ink); }
-    .pillar-tag::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: var(--ink-30);
-    }
-
     .pillar-name {
       font-size: clamp(48px, 7.6vw, 132px);
       font-weight: 900;
@@ -646,8 +588,6 @@
       transition: border-color 0.2s, color 0.2s, gap 0.2s;
     }
     .pillar-cta:hover { border-color: var(--ink); gap: 16px; }
-
-    .pillar .pillar-tag .accent { color: var(--yellow); }
 
     /* ─── APPROACH (partnership) ────────────────────────────── */
     .approach {
@@ -868,7 +808,7 @@
         min-height: 0;
       }
       .cap-hero-title {
-        font-size: clamp(48px, min(11vw, 15vh), 150px);
+        font-size: clamp(44px, 7.2vw, 84px);
       }
       .cap-hero-lede {
         font-size: clamp(16px, min(1.5vw, 2.1vh), 22px);
@@ -884,8 +824,8 @@
       .nav-links a::before { margin-right: 10px; }
       .cap-hero { padding: 100px 20px 0; gap: 18px; }
       .cap-hero { height: auto; max-height: none; min-height: 0; }
-      .cap-hero-title { font-size: clamp(40px, 14vw, 80px); }
-      .cap-hero-title .ital { font-size: clamp(22px, 5.5vw, 32px); }
+      .cap-hero-title { font-size: clamp(40px, 12vw, 64px); }
+      .cap-hero-title .ital { font-size: clamp(18px, 4.4vw, 24px); }
       .cap-hero-lede { font-size: clamp(16px, 4.4vw, 20px); }
       .cap-hero-foot {
         width: calc(100% + 40px);
@@ -1181,7 +1121,6 @@
   <!-- HERO -->
   <section class="cap-hero">
     <div class="cap-hero-title-wrap">
-      <span class="cap-hero-eyebrow">Systems for growth</span>
       <h1 class="cap-hero-title">
         Capabilities<br>
         <span class="ital">Three pillars, one system.</span>
@@ -1296,9 +1235,6 @@
     <article class="pillar" data-pillar="01">
       <div class="pillar-inner">
         <div class="pillar-left">
-          <div class="pillar-tag">
-            <span class="accent">Pillar one</span>
-          </div>
           <h2 class="pillar-name reveal">
             Design &amp; Build
             <span class="ital">Websites designed to scale.</span>
@@ -1351,9 +1287,6 @@
     <article class="pillar" data-pillar="02">
       <div class="pillar-inner">
         <div class="pillar-left">
-          <div class="pillar-tag">
-            <span class="accent">Pillar two</span>
-          </div>
           <h2 class="pillar-name reveal">
             Creative &amp; Content
             <span class="ital">Storytelling that moves people.</span>
@@ -1406,9 +1339,6 @@
     <article class="pillar" data-pillar="03">
       <div class="pillar-inner">
         <div class="pillar-left">
-          <div class="pillar-tag">
-            <span class="accent">Pillar three</span>
-          </div>
           <h2 class="pillar-name reveal">
             Growth &amp; Performance
             <span class="ital">Measured. Optimized. Scalable.</span>
@@ -1698,6 +1628,22 @@
       e.preventDefault();
       lenis.scrollTo(0, { duration: 1.5 });
     });
+
+    document.querySelectorAll('a[class*="scroll-cue"]').forEach((cue) => {
+      cue.addEventListener('click', (e) => {
+        const href = cue.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(target, { duration: 1.35 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
 
     // ── Capabilities dropdown
     (function () {

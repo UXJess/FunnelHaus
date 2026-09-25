@@ -205,10 +205,10 @@
     .nav--light .nav-links a:hover { color: rgba(0,0,0,0.6); }
     .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
     .nav--light .nav-hamburger { color: #0f0f0f; }
-    /* ─── HERO (dark) ────────────────────────────────────────── */
+    /* ─── HERO (form) ────────────────────────────────────────── */
     .contact-hero {
       position: relative;
-      min-height: 100vh;
+      min-height: 100svh;
       padding: 120px 32px 0;
       background: #070508;
       --ink: #ffffff;
@@ -220,7 +220,6 @@
       display: grid;
       grid-template-rows: 1fr auto;
       gap: 32px;
-      overflow: hidden;
     }
     .contact-hero-title-wrap {
       display: flex;
@@ -231,24 +230,8 @@
       margin: 0 auto;
       width: 100%;
     }
-    .contact-hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .contact-hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: var(--ink-30);
-    }
     .contact-hero-title {
-      font-size: clamp(64px, 13vw, 220px);
+      font-size: clamp(44px, 7.2vw, 84px);
       font-weight: 900;
       line-height: 0.86;
       letter-spacing: -0.03em;
@@ -258,77 +241,15 @@
       display: block;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(28px, 3.6vw, 48px);
+      font-size: clamp(20px, 2.4vw, 32px);
       line-height: 1.15;
       letter-spacing: -0.02em;
       margin-top: 0.2em;
       color: var(--ink-50);
     }
-    .contact-hero-lede {
-      max-width: 720px;
-      font-size: clamp(18px, 1.6vw, 26px);
-      line-height: 1.45;
-      color: var(--ink);
-      letter-spacing: -0.005em;
-    }
-    .contact-hero-lede .em { font-weight: 600; }
-
     .contact-hero-foot {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      border-top: none;
-      padding: 0;
-      max-width: none;
       width: calc(100% + 64px);
       margin-left: -32px;
-      background: #070508;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .contact-scroll-cue {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex: 1;
-      align-self: stretch;
-      width: 100%;
-      min-height: 72px;
-      padding: 22px 32px 48px;
-      color: #fff;
-      background: #070508;
-      transition: background 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-    }
-    @media (hover: hover) {
-      .contact-hero-foot:hover .contact-scroll-cue,
-      .contact-scroll-cue:hover { background: var(--blue); color: #fff; }
-    }
-    .contact-scroll-cue::after {
-      content: '';
-      position: absolute;
-      left: 50%; bottom: 20px;
-      width: 1px; height: 18px;
-      background: var(--ink);
-      transform-origin: top;
-      animation:
-        scrollLine 1.8s ease-in-out infinite,
-        scrollLineColor 5.4s step-end infinite;
-    }
-    @keyframes scrollLine {
-      0%   { transform: scaleY(0); transform-origin: top; }
-      45%  { transform: scaleY(1); transform-origin: top; }
-      55%  { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-    @keyframes scrollLineColor {
-      0%      { background: var(--blue); }
-      33.333% { background: var(--red); }
-      66.666% { background: var(--yellow); }
-      100%    { background: var(--blue); }
     }
 
     /* ─── WHAT HAPPENS NEXT (3-step) ────────────────────────── */
@@ -389,31 +310,6 @@
       max-width: 44ch;
     }
 
-    /* ─── CONTACT FORM SECTION ──────────────────────────────── */
-    .contact-form-section {
-      padding: 140px 32px;
-      background: #0f0f0f;
-      border-bottom: 1px solid var(--line);
-    }
-    .contact-form-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .contact-form-head {
-      margin-bottom: 64px;
-    }
-    .contact-form-head h2 {
-      font-size: clamp(44px, 7.2vw, 120px);
-      font-weight: 900;
-      line-height: 0.86;
-      letter-spacing: -0.05em;
-    }
-    .contact-form-head h2 .ital {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--ink-50);
-    }
-
     /* Path toggle */
     .contact-options {
       display: grid;
@@ -443,10 +339,18 @@
       grid-template-rows: auto auto;
       gap: 4px 16px;
       color: var(--ink);
-      transition: background-color 0.3s, padding 0.3s, color 0.3s;
+      transition: background-color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.3s, border-color 0.35s;
     }
     .contact-item:last-child .contact-option { border-right: none; }
-    .contact-option:hover { background-color: rgba(239,234,226,0.03); }
+    .contact-option:hover {
+      background-color: #2C60EF;
+      color: #ffffff;
+      border-color: transparent;
+      padding-left: 32px;
+    }
+    .contact-option:hover .contact-option-name,
+    .contact-option:hover .contact-option-arrow { color: #ffffff; }
+    .contact-option:hover .contact-option-desc { color: rgba(255,255,255,0.9); }
 
     /* Active toggle = solid blue, white text — visually connects to the blue panel below */
     .contact-option.is-active {
@@ -491,12 +395,17 @@
     }
     .contact-option.is-active .contact-option-desc { color: rgba(255,255,255,0.9); }
 
-    /* Path panels — active panel is the blue body of the tab unit */
+    /* Path panels — white body, dark type */
     .contact-panel { display: none; grid-column: 1 / -1; grid-row: 2; }
     .contact-panel.is-active {
       display: block;
-      background: var(--blue);
-      color: #ffffff;
+      background: #ffffff;
+      color: #070508;
+      --ink: #070508;
+      --ink-50: rgba(7, 5, 8, 0.55);
+      --ink-30: rgba(7, 5, 8, 0.35);
+      --ink-15: rgba(7, 5, 8, 0.16);
+      --line: rgba(7, 5, 8, 0.16);
       padding: 64px 48px;
     }
 
@@ -660,7 +569,8 @@
 
     /* Quiz card */
     .quiz-card {
-      max-width: 640px;
+      width: 100%;
+      max-width: none;
       padding: 48px;
       border: 1px solid var(--line);
       border-radius: 4px;
@@ -706,7 +616,7 @@
       max-width: 56ch;
     }
     .quiz-cta {
-      align-self: flex-start;
+      align-self: center;
       margin-top: 8px;
       display: inline-flex;
       align-items: center;
@@ -734,6 +644,7 @@
       font-size: 12px;
       color: var(--ink-50);
       line-height: 1.55;
+      text-align: center;
     }
     .quiz-meta a {
       color: var(--ink);
@@ -743,38 +654,13 @@
     }
     .quiz-meta a:hover { border-color: var(--ink); }
 
-    /* ─── BLUE PANEL OVERRIDES — form & quiz styled for on-blue context ─── */
-    .contact-panel.is-active .form-row label { color: rgba(255,255,255,0.9); }
-    .contact-panel.is-active .form-row input,
     .contact-panel.is-active .form-row select {
-      color: #ffffff;
-      border-bottom-color: rgba(255,255,255,0.3);
-    }
-    .contact-panel.is-active .form-row input:focus,
-    .contact-panel.is-active .form-row select:focus {
-      border-bottom-color: #ffffff;
-    }
-    .contact-panel.is-active .form-row input::placeholder { color: rgba(255,255,255,0.4); }
-    .contact-panel.is-active .form-row select {
-      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23ffffff' fill-opacity='0.7' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23070508' fill-opacity='0.55' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
     }
     .contact-panel.is-active .form-row select option {
-      background: var(--blue);
-      color: #ffffff;
-    }
-
-    /* Submit button on blue — invert to white bg, blue text */
-    .contact-panel.is-active .contact-submit {
       background: #ffffff;
-      color: var(--blue);
-      border-color: #ffffff;
+      color: #070508;
     }
-    .contact-panel.is-active .contact-submit:hover {
-      background: rgba(255,255,255,0.92);
-      border-color: rgba(255,255,255,0.92);
-    }
-
-    .contact-panel.is-active .form-meta { color: rgba(255,255,255,0.9); }
 
     /* Marketing opt-in, privacy notice, honeypot */
     .form-optin {
@@ -788,13 +674,13 @@
       flex: 0 0 auto;
       width: 20px; height: 20px;
       margin: 1px 0 0;
-      accent-color: #ffffff;
+      accent-color: var(--blue);
       cursor: pointer;
     }
     .form-optin label {
       font-size: 14px;
       line-height: 1.5;
-      color: #ffffff;
+      color: var(--ink);
       cursor: pointer;
     }
     .form-optin input:focus-visible,
@@ -807,7 +693,7 @@
       margin-top: 20px;
       font-size: 13px;
       line-height: 1.55;
-      color: #ffffff;
+      color: var(--ink);
       max-width: 56ch;
     }
     .form-legal a {
@@ -821,32 +707,6 @@
       width: 1px; height: 1px;
       overflow: hidden;
     }
-
-    /* Quiz card on blue — translucent white tint, white-tinted borders */
-    .contact-panel.is-active .quiz-card {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.25);
-    }
-    .contact-panel.is-active .quiz-eyebrow { color: rgba(255,255,255,0.9); }
-    .contact-panel.is-active .quiz-eyebrow::before { background: #ffffff; }
-    .contact-panel.is-active .quiz-title { color: #ffffff; }
-    .contact-panel.is-active .quiz-title .ital { color: rgba(255,255,255,0.65); }
-    .contact-panel.is-active .quiz-desc { color: rgba(255,255,255,0.9); }
-    .contact-panel.is-active .quiz-cta {
-      background: #ffffff;
-      color: var(--blue);
-      border-color: #ffffff;
-    }
-    .contact-panel.is-active .quiz-cta:hover {
-      background: rgba(255,255,255,0.92);
-      border-color: rgba(255,255,255,0.92);
-    }
-    .contact-panel.is-active .quiz-meta { color: rgba(255,255,255,0.9); }
-    .contact-panel.is-active .quiz-meta a {
-      color: #ffffff;
-      border-bottom-color: rgba(255,255,255,0.4);
-    }
-    .contact-panel.is-active .quiz-meta a:hover { border-bottom-color: #ffffff; }
 
     /* ─── FOOTER ────────────────────────────────────────────── */
     .site-footer {
@@ -925,8 +785,6 @@
     }
     @media (min-width: 769px) {
       .contact-hero {
-        height: 100svh;
-        max-height: 100svh;
         min-height: 100svh;
         padding: 88px 32px 0;
         gap: clamp(12px, 2vh, 24px);
@@ -936,15 +794,9 @@
         min-height: 0;
       }
       .contact-hero-title {
-        font-size: clamp(48px, min(11vw, 15vh), 150px);
+        font-size: clamp(44px, 7.2vw, 84px);
       }
-      .contact-hero-lede {
-        font-size: clamp(16px, min(1.5vw, 2.1vh), 22px);
-      }
-      .contact-hero-foot { padding: 0; }
-      .contact-scroll-cue { padding: 16px 32px 48px; }
     }
-
     @media (max-width: 768px) {
       .nav { padding: 18px 20px; }
       .nav-links { gap: 16px; }
@@ -954,15 +806,10 @@
       .contact-hero-foot {
         width: calc(100% + 40px);
         margin-left: -20px;
-        padding: 0;
       }
-      .contact-scroll-cue { padding: 18px 20px 40px; }
-      .contact-hero { height: auto; max-height: none; min-height: 0; }
-      .contact-hero-title { font-size: clamp(40px, 14vw, 80px); }
-      .contact-hero-title .ital { font-size: clamp(22px, 5.5vw, 32px); }
-      .contact-hero-lede { font-size: clamp(16px, 4.4vw, 20px); }
+      .contact-hero-title { font-size: clamp(40px, 12vw, 64px); }
+      .contact-hero-title .ital { font-size: clamp(18px, 4.4vw, 24px); }
       .process { padding: 80px 20px; }
-      .contact-form-section { padding: 80px 20px; }
       .quiz-card { padding: 32px 20px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
       .footer-brand { grid-column: 1 / -1; }
@@ -1238,77 +1085,26 @@
     <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
   </div>
 
-  <!-- HERO -->
-  <section class="contact-hero">
+  <!-- HERO / FORM -->
+  <section class="contact-hero" id="form">
     <div class="contact-hero-title-wrap">
-      <span class="contact-hero-eyebrow">Get in touch</span>
       <h1 class="contact-hero-title">
-        Contact<br>
-        <span class="ital">Let's talk.</span>
+        Start a conversation<br>
+        <span class="ital">Either way, we'll be in touch.</span>
       </h1>
-      <p class="contact-hero-lede">
-        We respond inside <span class="em">one business day</span>, take fewer
-        clients than we could, and never run sales sequences. The first call
-        is with the people who'll do the work.
-      </p>
     </div>
 
     <div class="contact-hero-foot">
-      <a href="#what-happens" class="contact-scroll-cue">What happens next</a>
-    </div>
-  </section>
-
-  <!-- WHAT HAPPENS NEXT -->
-  <section class="process" id="what-happens">
-    <div class="process-inner">
-      <div class="process-head">
-        <h2 class="reveal">
-          What happens next<br>
-          <span class="ital hl hl-secondary" data-highlight>After you reach out.</span>
-        </h2>
-      </div>
-
-      <div class="process-grid">
-        <div class="step reveal">
-          <span class="num">Step 01</span>
-          <span class="label">You send a brief.</span>
-          <span class="desc">Three lines or three pages — we read everything carefully. You'll hear back from us inside one business day, from a real person who'll be on the project.</span>
-        </div>
-        <div class="step reveal reveal-d1">
-          <span class="num">Step 02</span>
-          <span class="label">A real conversation.</span>
-          <span class="desc">A 30-minute call to understand what you're trying to build — not pitch services. By the end, both sides usually know whether there's a fit. If there isn't, we'll point you toward someone better suited.</span>
-        </div>
-        <div class="step reveal reveal-d2">
-          <span class="num">Step 03</span>
-          <span class="label">A real proposal.</span>
-          <span class="desc">A scope, a timeline, a price, and the metric we'd use to know it worked. Specific to your situation. No template padding, no kitchen-sink scope, no surprise line items.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT FORM -->
-  <section class="contact-form-section" id="form">
-    <div class="contact-form-inner">
-      <div class="contact-form-head">
-        <h2 class="reveal">
-          <span data-split-on-scroll>Start a conversation</span><br>
-          <span class="ital hl hl-secondary" data-highlight>Either way, we'll be in touch.</span>
-        </h2>
-      </div>
-
-      <!-- Path toggle -->
       <div class="contact-options" role="tablist" aria-label="Contact path">
         <div class="contact-item">
-          <button class="contact-option is-active" data-target="work" role="tab" aria-selected="true" aria-controls="panel-work" type="button">
+          <button class="contact-option" data-target="work" role="tab" aria-selected="false" aria-controls="panel-work" type="button">
             <span class="contact-option-name">Work with us</span>
             <svg class="contact-option-arrow" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C12 8 16 12 24 12 C16 12 12 16 12 24 C12 16 8 12 0 12 C8 12 12 8 12 0 Z"/></svg>
             <span class="contact-option-desc">Direct path. Share the basics — we'll respond in a day.</span>
           </button>
 
           <!-- Path 1: Work with us form -->
-          <div class="contact-panel is-active" id="panel-work" data-panel="work" role="tabpanel">
+          <div class="contact-panel" id="panel-work" data-panel="work" role="tabpanel">
             <form class="contact-form" id="workWithUsForm" novalidate>
               <div class="form-grid">
                 <div class="form-row">
@@ -1420,6 +1216,36 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <section class="process" id="what-happens">
+    <div class="process-inner">
+      <div class="process-head">
+        <h2 class="reveal">
+          What happens next<br>
+          <span class="ital hl hl-secondary" data-highlight>After you reach out.</span>
+        </h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="step reveal">
+          <span class="num">Step 01</span>
+          <span class="label">You send a brief.</span>
+          <span class="desc">Three lines or three pages — we read everything carefully. You'll hear back from us inside one business day, from a real person who'll be on the project.</span>
+        </div>
+        <div class="step reveal reveal-d1">
+          <span class="num">Step 02</span>
+          <span class="label">A real conversation.</span>
+          <span class="desc">A 30-minute call to understand what you're trying to build — not pitch services. By the end, both sides usually know whether there's a fit. If there isn't, we'll point you toward someone better suited.</span>
+        </div>
+        <div class="step reveal reveal-d2">
+          <span class="num">Step 03</span>
+          <span class="label">A real proposal.</span>
+          <span class="desc">A scope, a timeline, a price, and the metric we'd use to know it worked. Specific to your situation. No template padding, no kitchen-sink scope, no surprise line items.</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1661,7 +1487,21 @@
     (function () {
       const options = document.querySelectorAll('.contact-option');
       const panels = document.querySelectorAll('.contact-panel');
+      const hero = document.querySelector('.contact-hero');
       if (!options.length || !panels.length) return;
+
+      function scrollToEl(el, offset) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (typeof lenis !== 'undefined') {
+              lenis.scrollTo(el, { offset: offset, duration: 0.85 });
+            } else {
+              const y = window.scrollY + el.getBoundingClientRect().top + offset;
+              window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            }
+          });
+        });
+      }
 
       options.forEach(opt => {
         opt.addEventListener('click', () => {
@@ -1675,12 +1515,18 @@
           panels.forEach(p => {
             p.classList.toggle('is-active', !wasActive && p.dataset.panel === target);
           });
+          if (!wasActive) {
+            scrollToEl(opt, -96);
+          } else if (hero) {
+            scrollToEl(hero, 0);
+          }
         });
       });
     })();
 
     // ── Pre-fill service dropdown from URL param (?service=design-build, etc.)
-    // Used by the find-your-fit quiz's "Start a project" link.
+    // Used by the find-your-fit quiz's "Start a project" link, so the
+    // "Work with us" panel opens instead of starting closed.
     (function () {
       const params = new URLSearchParams(window.location.search);
       const service = params.get('service');
@@ -1688,7 +1534,9 @@
       const select = document.getElementById('service');
       if (!select) return;
       const valid = Array.from(select.options).some(o => o.value === service);
-      if (valid) select.value = service;
+      if (!valid) return;
+      select.value = service;
+      document.querySelector('.contact-option[data-target="work"]:not(.is-active)')?.click();
     })();
 
     // ── HubSpot Forms API submission
@@ -1699,10 +1547,9 @@
       const HS_PORTAL_ID = '343712461';
       const HS_FORM_ID = 'f3724542-495e-4980-8572-ff34842e27e2';
       const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`;
-      // HubSpot rejects the whole submission if a field isn't on the form, so
-      // only turn this on after adding a "marketing_opt_in" property to the
-      // "Work with us" form in HubSpot.
-      const HS_SEND_MARKETING_OPT_IN = false;
+      const HS_SEND_MARKETING_OPT_IN = true;
+      // HubSpot subscription type "Marketing Information"
+      const HS_MARKETING_SUBSCRIPTION_ID = 3707224695;
 
       const form = document.getElementById('workWithUsForm');
       if (!form) return;
@@ -1721,11 +1568,18 @@
         return document.getElementById('marketingOptIn');
       }
 
-      // Everything HubSpot-specific about the opt-in lives here. To move to
-      // legalConsentOptions, replace the body with payload.legalConsentOptions
-      // built from these same arguments.
+      // Only a ticked box subscribes; an unticked one must never unsubscribe
+      // someone who opted in earlier, so it sends no communication at all.
       function applyMarketingOptIn(payload, { optedIn, optInText, processingText }) {
-        payload.fields.push({ objectTypeId: '0-1', name: 'marketing_opt_in', value: optedIn ? 'true' : 'false' });
+        payload.legalConsentOptions = {
+          consent: {
+            consentToProcess: true,
+            text: processingText,
+            communications: optedIn
+              ? [{ value: true, subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_ID, text: optInText }]
+              : []
+          }
+        };
       }
 
       function getCookie(name) {
