@@ -251,6 +251,9 @@
       width: calc(100% + 64px);
       margin-left: -32px;
     }
+    .contact-hero.is-open {
+      grid-template-rows: auto auto;
+    }
 
     /* ─── WHAT HAPPENS NEXT (3-step) ────────────────────────── */
     .process {
@@ -403,6 +406,14 @@
       --ink-15: rgba(7, 5, 8, 0.16);
       --line: rgba(7, 5, 8, 0.16);
       padding: 64px 48px;
+      animation: contactPanelIn 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    @keyframes contactPanelIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .contact-panel.is-active { animation: none; }
     }
 
     /* Form */
@@ -1503,15 +1514,33 @@
       const hero = document.querySelector('.contact-hero');
       if (!options.length || !panels.length) return;
 
+      const titleWrap = hero?.querySelector('.contact-hero-title-wrap');
+
+      function lockTitleHeight() {
+        if (!titleWrap || titleWrap.dataset.locked === '1') return;
+        titleWrap.style.minHeight = titleWrap.getBoundingClientRect().height + 'px';
+        titleWrap.dataset.locked = '1';
+      }
+
+      function unlockTitleHeight() {
+        if (!titleWrap) return;
+        titleWrap.style.minHeight = '';
+        delete titleWrap.dataset.locked;
+      }
+
+      function tabScrollOffset() {
+        const nav = document.querySelector('.nav');
+        const navH = nav ? nav.getBoundingClientRect().height : 0;
+        return -(navH + 12);
+      }
+
       function scrollToEl(el, offset) {
-        const mobile = window.matchMedia('(max-width: 768px)').matches;
-        const off = mobile ? -16 : offset;
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             if (typeof lenis !== 'undefined') {
-              lenis.scrollTo(el, { offset: off, duration: 0.85 });
+              lenis.scrollTo(el, { offset: offset, duration: 1.35 });
             } else {
-              const y = window.scrollY + el.getBoundingClientRect().top + off;
+              const y = window.scrollY + el.getBoundingClientRect().top + offset;
               window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
             }
           });
@@ -1522,18 +1551,25 @@
         opt.addEventListener('click', () => {
           const target = opt.dataset.target;
           const wasActive = opt.classList.contains('is-active');
+          const panel = document.querySelector(`.contact-panel[data-panel="${target}"]`);
           options.forEach(o => {
             const isActive = !wasActive && o === opt;
             o.classList.toggle('is-active', isActive);
             o.setAttribute('aria-selected', isActive ? 'true' : 'false');
           });
-          panels.forEach(p => {
-            p.classList.toggle('is-active', !wasActive && p.dataset.panel === target);
-          });
           if (!wasActive) {
-            scrollToEl(opt, -96);
-          } else if (hero) {
-            scrollToEl(hero, 0);
+            lockTitleHeight();
+            hero?.classList.add('is-open');
+            panels.forEach(p => {
+              p.classList.toggle('is-active', p.dataset.panel === target);
+            });
+            const tabs = document.querySelector('.contact-options');
+            if (tabs) scrollToEl(tabs, tabScrollOffset());
+          } else {
+            panels.forEach(p => p.classList.remove('is-active'));
+            hero?.classList.remove('is-open');
+            unlockTitleHeight();
+            if (hero) scrollToEl(hero, 0);
           }
         });
       });
