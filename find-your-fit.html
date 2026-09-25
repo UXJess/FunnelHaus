@@ -277,10 +277,10 @@
     }
 
     /* Stagger entrance for result screen elements */
-    .screen.is-active .result-head       { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s backwards; }
+    .screen.is-active .result-title      { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s backwards; }
+    .screen.is-active .result-lede       { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s backwards; }
     .screen.is-active .result-card       { animation: cardIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s backwards; }
-    .screen.is-active .result-meta       { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s backwards; }
-    .screen.is-active .result-cta-row    { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s backwards; }
+    .screen.is-active .result-cta-row    { animation: itemUp 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s backwards; }
     @keyframes cardIn {
       from { opacity: 0; transform: translateY(24px) scale(0.985); }
       to   { opacity: 1; transform: translateY(0)    scale(1); }
@@ -525,37 +525,16 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       grid-template-areas:
-        "head card"
-        "meta card"
-        "cta  cta";
-      gap: 20px 48px;
-      align-items: center;
+        "title card"
+        "lede  card"
+        "cta   cta";
+      gap: 16px 48px;
+      align-items: start;
       padding-bottom: 0;
     }
-    .result-head {
-      grid-area: head;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: none;
-    }
-    .result-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-50);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .result-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 36px;
-      height: 1px;
-      background: var(--ink-30);
-    }
+    .result-head { display: contents; }
     .result-title {
+      grid-area: title;
       font-size: clamp(44px, 7.2vw, 84px);
       font-weight: 900;
       line-height: 0.86;
@@ -573,6 +552,7 @@
       color: var(--ink-50);
     }
     .result-lede {
+      grid-area: lede;
       max-width: 640px;
       font-size: clamp(16px, 1.4vw, 20px);
       line-height: 1.55;
@@ -581,11 +561,13 @@
 
     /* Pillar card */
     .result-card {
+      --copy: 24rem;
       grid-area: card;
       justify-self: end;
       width: max-content;
-      max-width: min(100%, calc(32ch + 64px));
-      padding: 36px 32px;
+      min-width: 24rem;
+      max-width: min(100%, 32rem);
+      padding: 28px 24px;
       border: 1px solid rgba(239,234,226,0.3);
       border-radius: 4px;
       background: rgba(239,234,226,0.02);
@@ -603,7 +585,7 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--ink);
-      max-width: 32ch;
+      max-width: 100%;
     }
     .result-card-tag .accent { color: var(--ink); }
 
@@ -626,28 +608,22 @@
       line-height: 0.95;
       letter-spacing: -0.03em;
       color: var(--ink);
-      max-width: 32ch;
+      max-width: 100%;
+      white-space: nowrap;
     }
     .result-card-desc {
       font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.55;
       color: var(--ink);
-      max-width: 32ch;
+      width: 100%;
+      text-align: left;
     }
     .result-card-actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: flex-start;
       gap: 16px;
-      margin-top: 8px;
-    }
-
-    .result-meta {
-      grid-area: meta;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      color: var(--ink-50);
-      max-width: 52ch;
-      font-style: italic;
+      margin-top: 25px;
     }
 
     .result-cta-row {
@@ -735,18 +711,20 @@
       .result-inner {
         grid-template-columns: 1fr;
         grid-template-areas:
-          "head"
+          "title"
+          "lede"
           "card"
-          "meta"
           "cta";
         gap: 24px;
         align-items: stretch;
       }
       .result-card {
-        padding: 28px 22px;
+        padding: 24px 20px;
         justify-self: start;
-        max-width: min(100%, calc(32ch + 44px));
+        min-width: 0;
+        max-width: min(100%, 32rem);
       }
+      .result-card-name { white-space: normal; }
       .quiz:has(#screen-result.is-active) {
         height: auto;
         max-height: none;
@@ -1099,10 +1077,10 @@
     <section class="screen" id="screen-result">
       <div class="result-inner">
         <div class="result-head">
-          <span class="result-eyebrow" id="resultEyebrow">Your fit</span>
           <h2 class="result-title">
             Here's where<br>
-            <span class="ital">we'd start.</span>
+            we'd start
+            <span class="ital">This doesn't lock you into anything,<br>It's just a starting point.</span>
           </h2>
           <p class="result-lede" id="resultLede"></p>
         </div>
@@ -1119,8 +1097,6 @@
             </a>
           </div>
         </div>
-
-        <p class="result-meta">This doesn't lock you into anything — it's just a starting point.</p>
 
         <div class="result-cta-row">
           <a class="btn btn-primary" id="startProjectBtn" href="contact.html#form">
