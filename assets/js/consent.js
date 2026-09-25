@@ -23,7 +23,7 @@
   var GA4_ID = '';             // e.g. 'G-XXXXXXXXXX'
   var META_PIXEL_ID = '';      // e.g. '1234567890123456'
   var HOTJAR_ID = '';          // e.g. '1234567' (Site ID, digits only)
-  var HUBSPOT_PORTAL_ID = '343245815';
+  var HUBSPOT_PORTAL_ID = '343712461';
   var HUBSPOT_SCRIPT_HOST = 'js-na3.hs-scripts.com';
 
   // Bump when the Privacy Policy or cookie categories change materially.

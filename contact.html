@@ -1692,12 +1692,12 @@
     })();
 
     // ── HubSpot Forms API submission
-    // Portal: 343245815 · Form: "Work with us" (518f64e3-7707-421f-9863-4b439d9315b7)
+    // Portal: 343712461 · Form: "Work with us" (f3724542-495e-4980-8572-ff34842e27e2)
     // Maps our form inputs (company / email / service / budget) to the HubSpot
     // property internal names (company / email / service_type / budget_range).
     (function () {
-      const HS_PORTAL_ID = '343245815';
-      const HS_FORM_ID = '518f64e3-7707-421f-9863-4b439d9315b7';
+      const HS_PORTAL_ID = '343712461';
+      const HS_FORM_ID = 'f3724542-495e-4980-8572-ff34842e27e2';
       const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`;
       // HubSpot rejects the whole submission if a field isn't on the form, so
       // only turn this on after adding a "marketing_opt_in" property to the
