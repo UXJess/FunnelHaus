@@ -36,6 +36,7 @@
 
   <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
   <link rel="stylesheet" href="assets/css/consent.css" />
+  <link rel="stylesheet" href="assets/css/start.css" />
   <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
@@ -1046,6 +1047,36 @@
     </div>
   </section>
 
+  <!-- START -->
+  <section class="fh-start" aria-labelledby="fh-start-title">
+    <div class="fh-start-inner">
+      <div class="fh-start-head">
+        <h2 id="fh-start-title" class="reveal">
+          Getting started<br>
+          <span class="ital">Three steps to a fixed price.</span>
+        </h2>
+      </div>
+
+      <ol class="fh-start-steps reveal reveal-d1">
+        <li class="fh-start-step">
+          <span class="fh-start-num">Step 01</span>
+          <span class="fh-start-label">15-min fit call</span>
+          <span class="fh-start-desc">Tell us what you need. We&rsquo;ll tell you honestly if we&rsquo;re the right fit.</span>
+        </li>
+        <li class="fh-start-step">
+          <span class="fh-start-num">Step 02</span>
+          <span class="fh-start-label">We scope it together</span>
+          <span class="fh-start-desc">We agree on the work, the timeline, and how we&rsquo;ll know it worked.</span>
+        </li>
+        <li class="fh-start-step">
+          <span class="fh-start-num">Step 03</span>
+          <span class="fh-start-label">Fixed proposal within 48 hours</span>
+          <span class="fh-start-desc">One price for the agreed scope, in writing. No surprise line items.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta">
     <div class="cta-inner">
@@ -1067,7 +1098,7 @@
         </p>
 
         <div class="cta-actions">
-          <a href="contact.html#form" class="cta-link reveal reveal-d3">
+          <a href="contact.html#form" class="cta-link reveal reveal-d3" data-cta="primary" data-cta-location="photography-cta">
             <span>Start a Project</span>
             <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
           </a>

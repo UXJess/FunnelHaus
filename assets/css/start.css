@@ -1,0 +1,129 @@
+/* Start strip — sits directly above the closing CTA on service pages.
+   Prices must match the pricing source of truth; no numbers outside those ranges. */
+
+.fh-start {
+  padding: 120px 32px;
+  border-bottom: 1px solid color-mix(in srgb, #000 12%, transparent);
+  background: #fff;
+  font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+  color: #000;
+}
+
+.fh-start-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.fh-start-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.fh-start-head h2 {
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.fh-start-head h2 .ital {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: color-mix(in srgb, #000 50%, transparent);
+}
+
+.fh-start-price {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.fh-start-price-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #000 40%, transparent);
+}
+
+.fh-start-price strong {
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.fh-start-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fh-start-step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+}
+
+.fh-start-num {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #000 40%, transparent);
+}
+
+.fh-start-label {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.fh-start-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: color-mix(in srgb, #000 60%, transparent);
+}
+
+@media (max-width: 768px) {
+  .fh-start {
+    padding: 80px 20px;
+  }
+
+  .fh-start-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .fh-start-price {
+    text-align: left;
+  }
+
+  .fh-start-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fh-start .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
