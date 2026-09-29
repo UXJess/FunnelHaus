@@ -68,6 +68,7 @@
       --yellow:  #FDC942;
       --blue:    #2C60EF;
       --red:     #DD120E;
+      --radius-sm: 4px;
     }
 
     html.lenis { height: auto; }
@@ -416,32 +417,176 @@
       .contact-panel.is-active { animation: none; }
     }
 
-    /* Form */
-    .contact-form {
-      max-width: 980px;
+    /* Form — 2-col reassurance + card */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      max-width: 1200px;
       width: 100%;
       margin: 0 auto;
+      padding: 4rem 1.5rem;
+      align-items: start;
     }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px 48px;
-      margin-bottom: 48px;
+    @media (min-width: 992px) {
+      .contact-container {
+        grid-template-columns: 5fr 7fr;
+        align-items: stretch;
+      }
     }
-    .form-row {
+    .contact-card,
+    .contact-chip,
+    .contact-section select,
+    .contact-section button {
+      border-radius: var(--radius-sm);
+    }
+
+    .contact-reassurance {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding-top: 8px;
+    }
+    .contact-reassurance-top,
+    .contact-reassurance-bottom {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-reassurance-top { gap: 28px; }
+    .contact-reassurance-bottom {
+      gap: 32px;
+      padding-bottom: 2.5rem;
+    }
+    .contact-intro {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    @media (min-width: 992px) {
+      .contact-reassurance {
+        height: 100%;
+        justify-content: space-between;
+        gap: 0;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+    }
+    .contact-heading {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .contact-subhead {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 42ch;
+    }
+
+    .response-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      border: 1px solid rgba(44, 96, 239, 0.35);
+      border-radius: 999px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--blue);
+      background: rgba(44, 96, 239, 0.08);
+    }
+    .response-badge svg { width: 16px; height: 16px; color: var(--blue); flex-shrink: 0; }
+
+    .lead-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .lead-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .lead-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .lead-title {
+      display: block;
+      font-size: 13px;
+      color: var(--ink-50);
+      margin: 2px 0 6px;
+    }
+    .lead-email {
+      font-size: 13px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink-30);
+      padding-bottom: 1px;
+    }
+    .lead-email:hover { border-color: var(--ink); }
+
+    .proof-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .client-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .client-logo {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+    }
+
+    .contact-form {
+      width: 100%;
+      margin: 0;
+    }
+    .contact-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 2.5rem;
+    }
+    .form-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      margin-bottom: 28px;
     }
-    .form-row label {
+    .form-group label {
       font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-50);
       font-weight: 500;
     }
-    .form-row input,
-    .form-row select {
+    .optional-tag {
+      letter-spacing: 0.08em;
+      text-transform: none;
+      font-weight: 400;
+      color: var(--ink-30);
+    }
+    .form-group input,
+    .form-group select {
       font-family: inherit;
       font-size: 16px;
       color: var(--ink);
@@ -454,14 +599,34 @@
       width: 100%;
       border-radius: 0;
     }
-    .form-row input:focus,
-    .form-row select:focus {
+    .form-group input:focus,
+    .form-group select:focus {
       border-bottom-color: var(--ink);
     }
-    .form-row input::placeholder {
+    .form-group input::placeholder {
       color: var(--ink-30);
     }
-    .form-row select {
+    .form-group.is-nudged input {
+      border-bottom-color: var(--yellow);
+    }
+    .form-group.is-invalid input,
+    .form-group.is-invalid .chip-group {
+      border-color: rgba(221, 18, 14, 0.55);
+    }
+    .helper-text {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--red);
+      margin-top: 0.375rem;
+    }
+    .hidden { display: none !important; }
+    .form-group-error {
+      display: none;
+      font-size: 12px;
+      color: var(--red);
+    }
+    .form-group.is-invalid .form-group-error { display: block; }
+    .form-group select {
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -471,15 +636,47 @@
       padding-right: 24px;
       cursor: pointer;
     }
-    .form-row select option {
+    .form-group select option {
       background: #0b0b0b;
       color: var(--ink);
     }
 
-    .contact-submit {
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .contact-chip {
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .contact-chip:hover { border-color: var(--ink); }
+    .contact-chip.is-selected {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #ffffff;
+    }
+    .contact-chip:focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 3px;
+    }
+
+    .btn-primary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
+      width: 100%;
       font-family: inherit;
       font-size: 13px;
       letter-spacing: 0.08em;
@@ -489,24 +686,24 @@
       background: var(--blue);
       border: 1px solid var(--blue);
       padding: 14px 22px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       transition: background 0.2s, padding-right 0.2s, border-color 0.2s, opacity 0.2s;
     }
-    .contact-submit:hover {
+    .btn-primary:hover {
       background: #1f4dd6;
       border-color: #1f4dd6;
       padding-right: 28px;
     }
-    .contact-submit .arrow { transition: transform 0.2s; display: inline-block; }
-    .contact-submit:hover .arrow { transform: translate(4px, -4px); }
-    .contact-submit:disabled,
-    .contact-submit.is-loading {
+    .btn-primary .arrow { transition: transform 0.2s; display: inline-block; }
+    .btn-primary:hover .arrow { transform: translate(4px, -4px); }
+    .btn-primary:disabled,
+    .btn-primary.is-loading {
       opacity: 0.55;
       cursor: progress;
       pointer-events: none;
     }
-    .contact-submit.is-loading .arrow {
+    .btn-primary.is-loading .arrow {
       animation: submitSpin 0.9s linear infinite;
     }
     @keyframes submitSpin {
@@ -514,46 +711,67 @@
       to   { transform: rotate(360deg); }
     }
 
+    .micro-reassurance {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--ink-50);
+      line-height: 1.5;
+    }
+    .micro-reassurance svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      color: var(--ink-30);
+    }
+
     .form-meta {
-      margin-top: 24px;
+      margin-top: 16px;
       font-size: 12px;
       color: var(--ink-50);
       max-width: 56ch;
       line-height: 1.55;
     }
 
-    /* Error state — shown above the submit button if submission fails */
-    .form-error {
+    /* Inline form feedback */
+    .form-feedback {
       display: none;
       padding: 14px 18px;
       margin-bottom: 24px;
-      border: 1px solid rgba(221, 18, 14, 0.4);
-      border-radius: 4px;
-      background: rgba(221, 18, 14, 0.06);
+      border-radius: var(--radius-sm);
       font-size: 14px;
       line-height: 1.5;
       color: var(--ink);
-      max-width: 720px;
     }
-    .form-error.is-shown { display: block; }
-    .form-error a {
+    .form-feedback.success {
+      display: block;
+      border: 1px solid rgba(44, 96, 239, 0.28);
+      background: rgba(44, 96, 239, 0.06);
+    }
+    .form-feedback.error {
+      display: block;
+      border: 1px solid rgba(221, 18, 14, 0.4);
+      background: rgba(221, 18, 14, 0.06);
+    }
+    .form-feedback a {
       color: var(--ink);
       border-bottom: 1px solid var(--ink-30);
       padding-bottom: 1px;
     }
-    .form-error a:hover { border-color: var(--ink); }
+    .form-feedback a:hover { border-color: var(--ink); }
 
     /* Success state — replaces the form after a successful submission */
     .form-success {
       display: none;
-      max-width: 980px;
       width: 100%;
-      margin: 0 auto;
-      padding: 48px 0;
+      padding: 12px 4px 8px;
     }
     .form-success.is-shown { display: block; }
     .form-success-title {
-      font-size: clamp(28px, 3.4vw, 44px);
+      font-size: clamp(28px, 3.4vw, 40px);
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.025em;
@@ -668,10 +886,10 @@
     }
     .quiz-meta a:hover { border-color: var(--ink); }
 
-    .contact-panel.is-active .form-row select {
+    .contact-panel.is-active .form-group select {
       background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23070508' fill-opacity='0.55' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
     }
-    .contact-panel.is-active .form-row select option {
+    .contact-panel.is-active .form-group select option {
       background: #ffffff;
       color: #070508;
     }
@@ -699,7 +917,7 @@
     }
     .form-optin input:focus-visible,
     .form-legal a:focus-visible,
-    .contact-submit:focus-visible {
+    .btn-primary:focus-visible {
       outline: 2px solid var(--yellow);
       outline-offset: 3px;
     }
@@ -785,7 +1003,6 @@
       .process-grid { grid-template-columns: 1fr; }
       .step { border-right: none !important; border-bottom: 1px solid var(--line); }
       .step:last-child { border-bottom: none; }
-      .form-grid { grid-template-columns: 1fr; gap: 32px; }
       .contact-options { grid-template-columns: 1fr; }
       .contact-item:first-child .contact-option,
       .contact-item:last-child .contact-option {
@@ -796,7 +1013,9 @@
       }
       .contact-panel { grid-column: 1; grid-row: auto; }
       .contact-item:last-child .contact-option { border-bottom: none; }
-      .contact-panel.is-active { padding: 48px 32px; }
+      .contact-panel.is-active { padding: 40px 24px; }
+      .contact-container { padding: 0; }
+      .contact-card { padding: 28px 22px; }
     }
     @media (min-width: 769px) {
       .contact-hero {
@@ -832,6 +1051,8 @@
       .contact-panel.is-active {
         padding: 32px 20px calc(40px + 60px + env(safe-area-inset-bottom, 0px));
       }
+      .contact-container { padding: 0; }
+      .contact-card { padding: 24px 0; border: 0; }
       .process { padding: 80px 20px; }
       .process-head { margin-bottom: 36px; }
       .quiz-card { padding: 28px 0; border: 0; background: transparent; }
@@ -1129,79 +1350,129 @@
 
           <!-- Path 1: Work with us form -->
           <div class="contact-panel" id="panel-work" data-panel="work" role="tabpanel">
-            <form class="contact-form" id="workWithUsForm" novalidate>
-              <div class="form-grid">
-                <div class="form-row">
-                  <label for="company">Company name</label>
-                  <input type="text" id="company" name="company" required autocomplete="organization" />
+            <section class="contact-section">
+              <div class="contact-container">
+
+                <div class="contact-reassurance">
+                  <div class="contact-reassurance-top">
+                    <div class="contact-intro">
+                      <h2 class="contact-heading">Let's build your growth engine.</h2>
+                      <p class="contact-subhead">
+                        We partner with ambitious founders and teams to build digital systems across Design, Content, and Performance.
+                      </p>
+                    </div>
+
+                    <div class="response-badge">
+                      <svg class="icon-clock" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>We'll respond within 24 hours</span>
+                    </div>
+                  </div>
+
+                  <div class="contact-reassurance-bottom">
+                    <div class="lead-card">
+                      <img src="assets/email/jessie.png" alt="Jessie Och, Founder &amp; Lead Strategist" class="lead-avatar" width="64" height="64" />
+                      <div class="lead-info">
+                        <p class="lead-name">Jessie Och</p>
+                        <span class="lead-title">Founder &amp; Lead Strategist</span>
+                        <a href="mailto:hello@funnelhaus.ca" class="lead-email">hello@funnelhaus.ca</a>
+                      </div>
+                    </div>
+
+                    <div class="proof-block">
+                      <p class="proof-label">Trusted by teams at</p>
+                      <div class="client-logos">
+                        <span class="client-logo">Rocky Mountain Solutions</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-row">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required autocomplete="email" />
+
+                <div class="contact-card">
+                  <form id="contact-form" class="contact-form" novalidate>
+
+                    <div class="form-group" id="rowFullName">
+                      <label for="fullName">Full Name</label>
+                      <input type="text" id="fullName" name="fullName" placeholder="e.g. Alex Morgan" required autocomplete="name" />
+                      <span class="form-group-error">Add your name so we know who to reply to.</span>
+                    </div>
+
+                    <div class="form-group" id="rowEmail">
+                      <label for="email">Work Email</label>
+                      <input type="email" id="email" name="email" placeholder="alex@company.com" required autocomplete="email" />
+                      <p id="email-helper" class="helper-text hidden">
+                        Personal emails are totally fine for early-stage projects! If you have a business site or LinkedIn, share it below so we can prepare for our call.
+                      </p>
+                      <span class="form-group-error">Use a valid email so we can send the calendar link.</span>
+                    </div>
+
+                    <div class="form-group" id="rowWebsite">
+                      <label for="website">Website or LinkedIn URL</label>
+                      <input type="text" id="website" name="website" inputmode="url" autocomplete="url" placeholder="company.com or linkedin.com/in/alex" />
+                    </div>
+
+                    <div class="form-group" id="rowServices">
+                      <label id="servicesLabel">Services Needed</label>
+                      <div class="chip-group" id="service-chips" role="group" aria-labelledby="servicesLabel">
+                        <button type="button" class="contact-chip" data-value="Design &amp; Build" data-service="design-build" aria-pressed="false">Design &amp; Build</button>
+                        <button type="button" class="contact-chip" data-value="Creative &amp; Content" data-service="creative-content" aria-pressed="false">Creative &amp; Content</button>
+                        <button type="button" class="contact-chip" data-value="Growth &amp; Performance" data-service="growth-performance" aria-pressed="false">Growth &amp; Performance</button>
+                      </div>
+                      <span class="form-group-error">Pick at least one so we know where to start.</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="budget">Target Investment Range <span class="optional-tag">(Optional)</span></label>
+                      <select id="budget" name="budget">
+                        <option value="">Select range...</option>
+                        <option value="&lt;5k">Less than $5k</option>
+                        <option value="5-7k">$5k – $7k</option>
+                        <option value="7-10k">$7k – $10k</option>
+                        <option value="10-15k">$10k – $15k</option>
+                        <option value="15-20k">$15k – $20k</option>
+                        <option value="20k+">More than $20k</option>
+                      </select>
+                    </div>
+
+                    <div class="form-hp" aria-hidden="true">
+                      <label for="hp_website">Leave this field empty</label>
+                      <input type="text" id="hp_website" name="hp_website" tabindex="-1" autocomplete="off" />
+                    </div>
+
+                    <template id="marketingOptInTemplate">
+                      <div class="form-optin">
+                        <input type="checkbox" id="marketingOptIn" name="marketing_opt_in" value="true" />
+                        <label for="marketingOptIn">Send me occasional updates and insights from FunnelHaus. You can unsubscribe anytime.</label>
+                      </div>
+                    </template>
+
+                    <div id="form-feedback" class="form-feedback hidden" role="status" aria-live="polite"></div>
+
+                    <button type="submit" id="submit-btn" class="btn-primary">
+                      <span class="btn-primary-label">Get Your Proposal</span>
+                      <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+                    </button>
+                    <p class="micro-reassurance">
+                      <svg class="icon-lock" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      No sales spam. We'll follow up with a calendar link or brief scope assessment.
+                    </p>
+                    <p class="form-legal" id="formLegal">
+                      By submitting this form, you agree to our <a href="privacy.html">Privacy Policy</a>.
+                    </p>
+                  </form>
+
+                  <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+                    <h3 class="form-success-title">
+                      Thanks — we'll be in touch.
+                      <span class="ital">Inside one business day.</span>
+                    </h3>
+                    <p class="form-success-desc">
+                      Your brief just landed with the people who'll do the work. We'll reply with a calendar link or a short scope note. If you don't hear back within 24 hours, nudge us at <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>.
+                    </p>
+                  </div>
                 </div>
-                <div class="form-row">
-                  <label for="service">Service type</label>
-                  <select id="service" name="service" required>
-                    <option value="" disabled selected>Choose a service</option>
-                    <option value="design-build">Design &amp; Build</option>
-                    <option value="creative-content">Creative &amp; Content</option>
-                    <option value="growth-performance">Growth &amp; Performance</option>
-                    <option value="multiple">Multiple / Mixed</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="form-row">
-                  <label for="budget">Budget range</label>
-                  <select id="budget" name="budget" required>
-                    <option value="" disabled selected>Select a range</option>
-                    <option value="<5k">Less than $5k</option>
-                    <option value="5-7k">$5k – $7k</option>
-                    <option value="7-10k">$7k – $10k</option>
-                    <option value="10-15k">$10k – $15k</option>
-                    <option value="15-20k">$15k – $20k</option>
-                    <option value="20k+">More than $20k</option>
-                  </select>
-                </div>
+
               </div>
-
-              <!-- Honeypot — hidden from people, filled in by bots -->
-              <div class="form-hp" aria-hidden="true">
-                <label for="website">Leave this field empty</label>
-                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-              </div>
-
-              <!-- Rendered by the form script only when HS_SEND_MARKETING_OPT_IN is true -->
-              <template id="marketingOptInTemplate">
-                <div class="form-optin">
-                  <input type="checkbox" id="marketingOptIn" name="marketing_opt_in" value="true" />
-                  <label for="marketingOptIn">Send me occasional updates and insights from FunnelHaus. You can unsubscribe anytime.</label>
-                </div>
-              </template>
-
-              <div class="form-error" id="formError" role="alert"></div>
-
-              <button type="submit" class="contact-submit" id="formSubmit">
-                <span class="contact-submit-label">Send brief</span>
-                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-              </button>
-              <p class="form-legal" id="formLegal">
-                By submitting this form, you agree to our <a href="privacy.html">Privacy Policy</a>.
-              </p>
-              <p class="form-meta">
-                We respond inside one business day, never share your data, and won't add you to any list unless you opt in.
-              </p>
-            </form>
-
-            <!-- Success state — replaces form on successful submission -->
-            <div class="form-success" id="formSuccess" role="status" aria-live="polite">
-              <h3 class="form-success-title">
-                Thanks — we'll be in touch.
-                <span class="ital">Inside one business day.</span>
-              </h3>
-              <p class="form-success-desc">
-                Your brief just landed in our inbox. We read everything carefully and reply when there's a fit. If you don't hear back within 24 hours, give us a nudge at <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>.
-              </p>
-            </div>
+            </section>
           </div>
         </div>
 
@@ -1575,173 +1846,148 @@
       });
     })();
 
-    // ── Pre-fill service dropdown from URL param (?service=design-build, etc.)
-    // Used by the find-your-fit quiz's "Start a project" link, so the
-    // "Work with us" panel opens instead of starting closed.
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const service = params.get('service');
-      if (!service) return;
-      const select = document.getElementById('service');
-      if (!select) return;
-      const valid = Array.from(select.options).some(o => o.value === service);
-      if (!valid) return;
-      select.value = service;
-      document.querySelector('.contact-option[data-target="work"]:not(.is-active)')?.click();
-    })();
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      const emailInput = document.getElementById('email');
+      const emailHelper = document.getElementById('email-helper');
+      const chipGroup = document.getElementById('service-chips');
+      const submitBtn = document.getElementById('submit-btn');
+      const submitLabel = submitBtn && submitBtn.querySelector('.btn-primary-label');
+      const feedback = document.getElementById('form-feedback');
+      const websiteRow = document.getElementById('rowWebsite');
+      if (!form || !emailInput || !emailHelper || !chipGroup || !submitBtn || !submitLabel || !feedback) return;
 
-    // ── HubSpot Forms API submission
-    // Portal: 343712461 · Form: "Work with us" (f3724542-495e-4980-8572-ff34842e27e2)
-    // Maps our form inputs (company / email / service / budget) to the HubSpot
-    // property internal names (company / email / service_type / budget_range).
-    (function () {
-      const HS_PORTAL_ID = '343712461';
-      const HS_FORM_ID = 'f3724542-495e-4980-8572-ff34842e27e2';
-      const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`;
+      const genericDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'protonmail.com'];
+      const serviceKeys = ['design-build', 'creative-content', 'growth-performance'];
+      const selectedServices = new Set();
       const HS_SEND_MARKETING_OPT_IN = true;
-      // HubSpot subscription type "Marketing Information"
-      const HS_MARKETING_SUBSCRIPTION_ID = 3707224695;
-
-      const form = document.getElementById('workWithUsForm');
-      if (!form) return;
-      const submitBtn = document.getElementById('formSubmit');
-      const submitLabel = submitBtn?.querySelector('.contact-submit-label');
-      const errorEl = document.getElementById('formError');
-      const successEl = document.getElementById('formSuccess');
-      if (!submitBtn || !submitLabel || !errorEl || !successEl) return;
 
       const optInInput = HS_SEND_MARKETING_OPT_IN ? mountMarketingOptIn() : null;
-
       function mountMarketingOptIn() {
         const tpl = document.getElementById('marketingOptInTemplate');
         if (!tpl) return null;
-        errorEl.before(tpl.content.cloneNode(true));
+        feedback.before(tpl.content.cloneNode(true));
         return document.getElementById('marketingOptIn');
       }
 
-      // Only a ticked box subscribes; an unticked one must never unsubscribe
-      // someone who opted in earlier, so it sends no communication at all.
-      function applyMarketingOptIn(payload, { optedIn, optInText, processingText }) {
-        payload.legalConsentOptions = {
-          consent: {
-            consentToProcess: true,
-            text: processingText,
-            communications: optedIn
-              ? [{ value: true, subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_ID, text: optInText }]
-              : []
-          }
-        };
-      }
+      chipGroup.addEventListener('click', (e) => {
+        const chip = e.target.closest('.contact-chip');
+        if (!chip || !chipGroup.contains(chip)) return;
+        const value = chip.dataset.value;
+        if (selectedServices.has(value)) {
+          selectedServices.delete(value);
+          chip.classList.remove('is-selected');
+          chip.setAttribute('aria-pressed', 'false');
+        } else {
+          selectedServices.add(value);
+          chip.classList.add('is-selected');
+          chip.setAttribute('aria-pressed', 'true');
+        }
+        document.getElementById('rowServices')?.classList.remove('is-invalid');
+      });
+
+      emailInput.addEventListener('input', () => {
+        const email = emailInput.value.trim().toLowerCase();
+        const domain = email.split('@')[1];
+        const generic = !!(domain && genericDomains.includes(domain));
+        emailHelper.classList.toggle('hidden', !generic);
+        websiteRow?.classList.toggle('is-nudged', generic);
+      });
 
       function getCookie(name) {
         const m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]+)'));
         return m ? decodeURIComponent(m[2]) : null;
       }
 
-      function showError(msg) {
-        errorEl.innerHTML = msg;
-        errorEl.classList.add('is-shown');
-      }
-
-      function clearError() {
-        errorEl.innerHTML = '';
-        errorEl.classList.remove('is-shown');
-      }
-
       function setLoading(loading) {
-        if (loading) {
-          submitBtn.classList.add('is-loading');
-          submitBtn.disabled = true;
-          submitLabel.textContent = 'Sending…';
-        } else {
-          submitBtn.classList.remove('is-loading');
-          submitBtn.disabled = false;
-          submitLabel.textContent = 'Send brief';
-        }
+        submitBtn.disabled = loading;
+        submitBtn.classList.toggle('is-loading', loading);
+        submitLabel.textContent = loading ? 'Sending…' : 'Get Your Proposal';
       }
+
+      (function prefillFromQuiz() {
+        const service = new URLSearchParams(window.location.search).get('service');
+        if (!service) return;
+        const keys = service === 'multiple' ? serviceKeys : serviceKeys.filter((key) => key === service);
+        keys.forEach((key) => {
+          const chip = chipGroup.querySelector(`.contact-chip[data-service="${key}"]`);
+          if (!chip) return;
+          selectedServices.add(chip.dataset.value);
+          chip.classList.add('is-selected');
+          chip.setAttribute('aria-pressed', 'true');
+        });
+        document.querySelector('.contact-option[data-target="work"]:not(.is-active)')?.click();
+      })();
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        clearError();
+        feedback.classList.add('hidden');
+        feedback.className = 'form-feedback hidden';
 
-        // Minimal client-side validation (HTML5 required attrs are still set;
-        // novalidate only suppresses the browser bubble, we check ourselves).
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = emailInput.value.trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const nameOk = fullName.length > 1;
+        const servicesOk = selectedServices.size > 0;
+        document.getElementById('rowFullName')?.classList.toggle('is-invalid', !nameOk);
+        document.getElementById('rowEmail')?.classList.toggle('is-invalid', !emailOk);
+        document.getElementById('rowServices')?.classList.toggle('is-invalid', !servicesOk);
+        if (!nameOk || !emailOk || !servicesOk) return;
 
         setLoading(true);
 
-        const data = new FormData(form);
-
-        if ((data.get('website') || '').trim()) {
-          form.style.display = 'none';
-          successEl.classList.add('is-shown');
-          return;
-        }
-
-        const fields = [
-          { objectTypeId: '0-1', name: 'company',      value: (data.get('company') || '').trim() },
-          { objectTypeId: '0-1', name: 'email',         value: (data.get('email')   || '').trim() },
-          { objectTypeId: '0-1', name: 'service_type',  value: data.get('service') || '' },
-          { objectTypeId: '0-1', name: 'budget_range',  value: data.get('budget')  || '' }
-        ];
-
-        const context = {
-          pageUri: window.location.href,
-          pageName: document.title
-        };
+        const urlParams = new URLSearchParams(window.location.search);
         const hasMarketingConsent = !!(window.fhConsent && window.fhConsent.has('marketing'));
-        const hutk = hasMarketingConsent ? getCookie('hubspotutk') : null;
-        if (hutk) context.hutk = hutk;
 
-        const payload = { fields, context };
-
-        if (optInInput) {
-          applyMarketingOptIn(payload, {
-            optedIn: optInInput.checked,
-            optInText: optInInput.labels[0].textContent.trim(),
-            processingText: (document.getElementById('formLegal')?.textContent || '').replace(/\s+/g, ' ').trim()
-          });
-        }
+        const payload = {
+          fullName,
+          email,
+          website: document.getElementById('website').value.trim(),
+          services: Array.from(selectedServices),
+          budget: document.getElementById('budget').value,
+          utm_source: urlParams.get('utm_source') || '',
+          utm_medium: urlParams.get('utm_medium') || '',
+          utm_campaign: urlParams.get('utm_campaign') || '',
+          gclid: urlParams.get('gclid') || '',
+          hp_website: (form.hp_website && form.hp_website.value) || '',
+          marketingOptIn: !!(optInInput && optInInput.checked),
+          processingText: (document.getElementById('formLegal')?.textContent || '').replace(/\s+/g, ' ').trim(),
+          optInText: optInInput && optInInput.labels[0] ? optInInput.labels[0].textContent.trim() : '',
+          pageUri: window.location.href,
+          pageName: document.title,
+          hutk: hasMarketingConsent ? getCookie('hubspotutk') : ''
+        };
 
         try {
-          const res = await fetch(HS_ENDPOINT, {
+          const response = await fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
 
-          if (!res.ok) {
-            let detail = '';
-            try {
-              const body = await res.json();
-              detail = body?.message || (Array.isArray(body?.errors) && body.errors[0]?.message) || '';
-            } catch (_) {}
-            throw new Error(detail || `HubSpot returned ${res.status}`);
-          }
-
-          // Swap form for success state
-          form.style.display = 'none';
-          successEl.classList.add('is-shown');
-          if (typeof lenis !== 'undefined') {
-            const rect = successEl.getBoundingClientRect();
-            const target = window.scrollY + rect.top - 120;
-            lenis.scrollTo(target, { duration: 0.8 });
+          if (response.ok) {
+            form.reset();
+            selectedServices.clear();
+            document.querySelectorAll('.contact-chip').forEach((c) => {
+              c.classList.remove('is-selected');
+              c.setAttribute('aria-pressed', 'false');
+            });
+            emailHelper.classList.add('hidden');
+            websiteRow?.classList.remove('is-nudged');
+            feedback.textContent = "Thank you! We've received your request and will follow up within 24 hours.";
+            feedback.className = 'form-feedback success';
           } else {
-            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            throw new Error('Submission failed');
           }
         } catch (err) {
-          console.error('HubSpot submission error:', err);
-          showError(
-            'Something went wrong on our end. Try again, or send us a quick note at ' +
-            '<a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a> and we\'ll pick it up there.'
-          );
+          feedback.innerHTML = 'Something went wrong. Please email <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a> directly.';
+          feedback.className = 'form-feedback error';
+        } finally {
           setLoading(false);
+          feedback.classList.remove('hidden');
         }
       });
-    })();
+    });
   
     // ── Mobile hamburger menu
     (function () {

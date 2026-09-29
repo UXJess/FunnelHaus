@@ -47,14 +47,15 @@ Choices also expire after 12 months. Update the "Last updated" date in
 Other scripts can check consent with `window.fhConsent.has('analytics')` or
 `window.fhConsent.has('marketing')`, or listen for the `fhconsent:change` event.
 
-## Contact form marketing opt-in
+## Contact form
 
-`contact.html` sends the form to the HubSpot Forms API. The optional "Send me
-occasional updates" checkbox lives in a `<template>` and is only rendered (and
-sent) when `HS_SEND_MARKETING_OPT_IN` is `true` in the form script.
+`contact.html` posts to `/api/contact`, a Vercel function that proxies to the
+HubSpot Forms API (portal `343712461`, form `f3724542-…`). Override the IDs with
+`HUBSPOT_PORTAL_ID` / `HUBSPOT_FORM_GUID`, or the `HS_PORTAL_ID` / `HS_FORM_ID`
+aliases, plus `HS_MARKETING_SUBSCRIPTION_ID` if needed.
 
-How the opt-in reaches HubSpot is isolated in `applyMarketingOptIn()`. It sends
-a `legalConsentOptions` block with the privacy notice text and, only when the box
-is ticked, a subscription to "Marketing Information"
-(`HS_MARKETING_SUBSCRIPTION_ID`) with the checkbox label as the consent text. An
-unticked box sends no subscription, so it never unsubscribes an existing contact.
+The optional "Send me occasional updates" checkbox lives in a `<template>` and
+is only rendered (and sent) when `HS_SEND_MARKETING_OPT_IN` is `true` in the
+form script. A ticked box subscribes the contact to "Marketing Information"
+(`3707224695`). An unticked box sends no subscription, so it never unsubscribes
+an existing contact. The box is never pre-ticked.
