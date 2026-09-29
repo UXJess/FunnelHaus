@@ -1,0 +1,281 @@
+/* Proof band — sits between Approach and the closing CTA.
+   Colours come from the page tokens --ink, --yellow, --red, --blue. */
+
+.fh-proof {
+  padding: 120px 32px;
+  border-bottom: 1px solid color-mix(in srgb, #000 12%, transparent);
+  background: #fff;
+  font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
+  color: #000;
+}
+
+.fh-proof-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.fh-proof-head {
+  margin-bottom: 48px;
+}
+
+.fh-proof-head h2 {
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.fh-proof-head h2 .ital {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: color-mix(in srgb, #000 50%, transparent);
+}
+
+.fh-proof-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding: 28px;
+  border: 1px solid color-mix(in srgb, #000 18%, transparent);
+  border-radius: 4px;
+}
+
+.fh-proof-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 42ch) auto;
+  column-gap: 48px;
+  row-gap: 28px;
+  align-items: center;
+}
+
+.fh-proof-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  grid-column: 1 / -1;
+}
+
+.fh-proof-logo {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.fh-proof-kicker {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #000 40%, transparent);
+}
+
+.fh-proof-client {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.fh-proof-quote {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid color-mix(in srgb, #000 18%, transparent);
+}
+
+.fh-proof-quote p {
+  max-width: 68ch;
+  margin: 0 0 16px;
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+
+.fh-proof-quote p::before {
+  content: "\201C";
+  margin-right: 0.12em;
+  color: var(--yellow);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.fh-proof-quote p::after {
+  content: "\201D";
+  margin-left: 0.06em;
+  color: var(--yellow);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.fh-proof-quote footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  font-size: 13px;
+  font-style: normal;
+}
+
+.fh-proof-quote cite {
+  font-style: normal;
+  font-weight: 700;
+}
+
+.fh-proof-quote-role {
+  color: color-mix(in srgb, #000 50%, transparent);
+}
+
+.fh-proof-result {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.fh-proof-meta {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.fh-proof-meta div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.fh-proof-meta dt {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, #000 50%, transparent);
+}
+
+.fh-proof-meta dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.fh-proof-link {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, #000 30%, transparent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  transition: gap 0.2s, border-color 0.2s;
+}
+
+.fh-proof-link:hover {
+  gap: 14px;
+  border-color: #000;
+}
+
+.fh-proof-link svg {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.fh-proof-shot {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid color-mix(in srgb, #000 12%, transparent);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.fh-proof-browser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 36px;
+  padding: 0 14px;
+  background: color-mix(in srgb, #000 6%, #fff);
+}
+
+.fh-proof-browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.fh-proof-browser-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, #000 22%, transparent);
+}
+
+.fh-proof-browser-url {
+  flex: 1;
+  margin-right: 46px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: color-mix(in srgb, #000 55%, transparent);
+}
+
+.fh-proof-shot img {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.fh-proof-link:focus-visible,
+.fh-proof-shot:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .fh-proof {
+    padding: 80px 20px;
+  }
+
+  .fh-proof-card {
+    gap: 28px;
+    padding: 20px;
+  }
+
+  .fh-proof-copy {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .fh-proof-shot {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fh-proof .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .fh-proof-link {
+    transition: none;
+  }
+}

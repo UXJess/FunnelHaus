@@ -36,6 +36,7 @@
 
   <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
   <link rel="stylesheet" href="assets/css/consent.css" />
+  <link rel="stylesheet" href="assets/css/proof.css" />
   <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
@@ -1414,45 +1415,60 @@
   </section>
 
   <!-- FEATURED WORK -->
-  <section class="featured">
-    <div class="featured-inner">
-      <div class="featured-head">
-        <h2 class="reveal">
+  <section class="fh-proof" aria-labelledby="fh-featured-title">
+    <div class="fh-proof-inner">
+      <div class="fh-proof-head">
+        <h2 id="fh-featured-title" class="reveal">
           Recent<br>
-          <span class="ital hl hl-secondary" data-highlight>Rocky Mountain Solutions.</span>
+          <span class="ital">Rocky Mountain Solutions.</span>
         </h2>
       </div>
 
-      <div class="featured-details">
-        <span class="label">Project</span>
-        <div class="featured-meta-grid">
-          <div class="featured-meta-row"><span class="k">Year</span><span class="v">2026</span></div>
-          <div class="featured-meta-row"><span class="k">Scope</span><span class="v">Design · AI Build · CRO</span></div>
-          <div class="featured-meta-row"><span class="k">Sector</span><span class="v">Construction Safety · Strata · Renovation</span></div>
-          <div class="featured-meta-row"><span class="k">Site</span><span class="v"><a href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">rockymountainsolutions.ca</a></span></div>
-        </div>
-      </div>
-
-      <div class="featured-image">
-        <div class="featured-mock">
-          <div class="featured-mock-bar">
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            <span class="url">rockymountainsolutions.ca</span>
+      <article class="fh-proof-card reveal reveal-d1">
+        <div class="fh-proof-copy">
+          <div class="fh-proof-brand">
+            <img class="fh-proof-logo" src="assets/images/logo-rms356.png" alt="" width="356" height="356" loading="lazy" decoding="async" />
+            <div>
+              <p class="fh-proof-kicker">Client</p>
+              <p class="fh-proof-client">Rocky Mountain Solutions</p>
+            </div>
           </div>
-          <div class="featured-mock-frame">
-            <a class="featured-mock-link" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener" aria-label="Rocky Mountain Solutions website (opens in a new tab)">
-              <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage: Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" loading="lazy" decoding="async" />
-            </a>
-          </div>
+          <p class="fh-proof-result">Design, AI build, and CRO for a construction safety, strata, and renovation firm. Live in 2026.</p>
+          <!-- metric slot: leave empty until an approved number exists -->
+          <dl class="fh-proof-meta">
+            <div>
+              <dt>Year</dt>
+              <dd>2026</dd>
+            </div>
+            <div>
+              <dt>Scope</dt>
+              <dd>Design · AI Build · CRO</dd>
+            </div>
+            <div>
+              <dt>Sector</dt>
+              <dd>Construction Safety · Strata · Renovation</dd>
+            </div>
+          </dl>
+          <a class="fh-proof-link" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
+            <span>Visit site</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+          </a>
         </div>
-      </div>
-
-      <div class="featured-cta">
-        <a class="featured-cta-link" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
-          <span>Visit site</span>
-          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+        <a class="fh-proof-shot" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener" aria-label="Rocky Mountain Solutions website (opens in a new tab)">
+          <span class="fh-proof-browser" aria-hidden="true">
+            <span class="fh-proof-browser-dots"><span></span><span></span><span></span></span>
+            <span class="fh-proof-browser-url">rockymountainsolutions.ca</span>
+          </span>
+          <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage: Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" loading="lazy" decoding="async" />
         </a>
-      </div>
+        <blockquote class="fh-proof-quote">
+          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
+          <footer>
+            <cite>Andrew B.</cite>
+            <span class="fh-proof-quote-role">Owner, Rocky Mountain Solutions</span>
+          </footer>
+        </blockquote>
+      </article>
     </div>
   </section>
 
