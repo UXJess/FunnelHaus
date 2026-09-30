@@ -3,10 +3,10 @@
 
 .fh-start {
   padding: 120px 32px;
-  border-bottom: 1px solid color-mix(in srgb, #000 12%, transparent);
-  background: #fff;
+  border-bottom: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  background: #000;
   font-family: 'Niela', 'Helvetica Neue', Arial, sans-serif;
-  color: #000;
+  color: #fff;
 }
 
 .fh-start-inner {
@@ -33,14 +33,15 @@
   display: block;
   font-style: italic;
   font-weight: 400;
-  color: color-mix(in srgb, #000 50%, transparent);
+  color: color-mix(in srgb, #fff 50%, transparent);
 }
 
 .fh-start-price {
   flex-shrink: 0;
   margin: 0;
-  padding: 0;
-  text-align: right;
+  padding: 16px 20px;
+  border: 1px solid color-mix(in srgb, #fff 18%, transparent);
+  border-radius: 4px;
   font-size: 15px;
   line-height: 1.4;
 }
@@ -52,7 +53,7 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: color-mix(in srgb, #000 40%, transparent);
+  color: color-mix(in srgb, #fff 40%, transparent);
 }
 
 .fh-start-price strong {
@@ -64,17 +65,22 @@
 .fh-start-steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 48px;
   margin: 0;
   padding: 0;
   list-style: none;
+  border: 1px solid color-mix(in srgb, #fff 18%, transparent);
+  border-radius: 4px;
 }
 
 .fh-start-step {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 0;
+  padding: 28px;
+}
+
+.fh-start-step + .fh-start-step {
+  border-left: 1px solid color-mix(in srgb, #fff 12%, transparent);
 }
 
 .fh-start-num {
@@ -82,7 +88,7 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: color-mix(in srgb, #000 40%, transparent);
+  color: color-mix(in srgb, #fff 40%, transparent);
 }
 
 .fh-start-label {
@@ -95,7 +101,51 @@
 .fh-start-desc {
   font-size: 14px;
   line-height: 1.55;
-  color: color-mix(in srgb, #000 60%, transparent);
+  color: color-mix(in srgb, #fff 60%, transparent);
+}
+
+.fh-start-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.fh-start-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: padding-right 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.fh-start-cta:hover {
+  background: color-mix(in srgb, var(--blue) 82%, #000);
+  border-color: color-mix(in srgb, var(--blue) 82%, #000);
+  padding-right: 32px;
+}
+
+.fh-start-cta .arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+
+.fh-start-cta:hover .arrow {
+  transform: translate(4px, -4px);
+}
+
+.fh-start-cta:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
 }
 
 @media (max-width: 768px) {
@@ -110,13 +160,21 @@
     margin-bottom: 32px;
   }
 
-  .fh-start-price {
-    text-align: left;
-  }
-
   .fh-start-steps {
     grid-template-columns: 1fr;
-    gap: 28px;
+  }
+
+  .fh-start-step {
+    padding: 24px 20px;
+  }
+
+  .fh-start-step + .fh-start-step {
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  }
+
+  .fh-start-actions {
+    margin-top: 28px;
   }
 }
 
@@ -124,6 +182,11 @@
   .fh-start .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .fh-start-cta,
+  .fh-start-cta .arrow {
     transition: none;
   }
 }
