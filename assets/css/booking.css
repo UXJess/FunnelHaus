@@ -34,7 +34,9 @@
 .bk .contact-reassurance {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  justify-content: flex-start;
+  gap: 42px;
+  height: auto;
   padding-top: 8px;
 }
 
@@ -49,6 +51,9 @@
 
 @media (min-width: 992px) {
   .bk .contact-reassurance {
+    height: auto;
+    justify-content: flex-start;
+    gap: 42px;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
