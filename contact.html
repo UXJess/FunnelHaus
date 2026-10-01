@@ -36,6 +36,7 @@
 
   <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
   <link rel="stylesheet" href="assets/css/consent.css" />
+  <link rel="stylesheet" href="assets/css/booking.css" />
   <script src="assets/js/consent.js" defer></script>
 
   <!-- Lenis smooth scroll -->
@@ -222,14 +223,18 @@
       grid-template-rows: 1fr auto;
       gap: 32px;
     }
+    .contact-hero.is-open {
+      grid-template-rows: auto auto;
+    }
     .contact-hero-title-wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 32px 72px;
       max-width: 1480px;
       margin: 0 auto;
       width: 100%;
+      min-height: 0;
     }
     .contact-hero-title {
       font-size: clamp(44px, 7.2vw, 84px);
@@ -252,8 +257,47 @@
       width: calc(100% + 64px);
       margin-left: -32px;
     }
-    .contact-hero.is-open {
-      grid-template-rows: auto auto;
+
+    .contact-hero .studio-meta-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 220px;
+    }
+    .contact-hero .studio-fact {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .contact-hero .studio-fact .k {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-30);
+    }
+    .contact-hero .studio-fact .v {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--ink-50);
+    }
+    .contact-hero .studio-fact .v .ital {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-30);
+      font-size: 0.92em;
+      display: inline;
+      margin-left: 0.4em;
+    }
+    .contact-hero .studio-fact .v .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      margin-right: 6px;
+      vertical-align: middle;
     }
 
     /* ─── WHAT HAPPENS NEXT (3-step) ────────────────────────── */
@@ -317,18 +361,18 @@
     /* Path toggle */
     .contact-options {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
       border-top: 1px solid var(--line);
       margin-bottom: 0;
     }
     /* contact-item flattens into the .contact-options grid so each button's panel
-       can be explicitly placed below both columns on desktop, while on mobile
-       (where grid-row/column resets to auto) it falls into document order right
-       after its own button, producing an accordion list instead of a tab strip. */
+       can be explicitly placed below all columns on desktop, while on mobile
+       it falls into document order right after its own button. */
     .contact-item { display: contents; }
-    .contact-item:first-child .contact-option { grid-column: 1; }
-    .contact-item:last-child .contact-option { grid-column: 2; }
+    .contact-item:nth-child(1) .contact-option { grid-column: 1; }
+    .contact-item:nth-child(2) .contact-option { grid-column: 2; }
+    .contact-item:nth-child(3) .contact-option { grid-column: 3; }
     .contact-option {
       grid-row: 1;
       background: transparent;
@@ -412,6 +456,10 @@
     @keyframes contactPanelIn {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
+    }
+    .contact-panel .bk {
+      padding: 0;
+      background: transparent;
     }
     @media (prefers-reduced-motion: reduce) {
       .contact-panel.is-active { animation: none; }
@@ -1004,8 +1052,9 @@
       .step { border-right: none !important; border-bottom: 1px solid var(--line); }
       .step:last-child { border-bottom: none; }
       .contact-options { grid-template-columns: 1fr; }
-      .contact-item:first-child .contact-option,
-      .contact-item:last-child .contact-option {
+      .contact-item:nth-child(1) .contact-option,
+      .contact-item:nth-child(2) .contact-option,
+      .contact-item:nth-child(3) .contact-option {
         grid-column: 1;
         grid-row: auto;
         border-right: none;
@@ -1024,7 +1073,7 @@
         gap: clamp(12px, 2vh, 24px);
       }
       .contact-hero-title-wrap {
-        gap: clamp(12px, 2.4vh, 28px);
+        gap: 32px 64px;
         min-height: 0;
       }
       .contact-hero-title {
@@ -1043,6 +1092,16 @@
       .contact-hero-foot {
         width: calc(100% + 40px);
         margin-left: -20px;
+      }
+      .contact-hero-title-wrap {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .contact-hero .studio-meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 24px;
+        min-width: 0;
       }
       .contact-hero-title { font-size: clamp(36px, 11vw, 56px); }
       .contact-hero-title .ital { font-size: clamp(18px, 4.4vw, 24px); }
@@ -1337,13 +1396,95 @@
         Start a conversation<br>
         <span class="ital">Either way, we'll be in touch.</span>
       </h1>
+
+      <div class="studio-meta-grid">
+        <div class="studio-fact">
+          <span class="k">Location</span>
+          <span class="v">Vancouver<span class="ital">British Columbia, Canada</span></span>
+        </div>
+        <div class="studio-fact">
+          <span class="k">Time zone</span>
+          <span class="v">PST<span class="ital">UTC −8 / −7</span></span>
+        </div>
+        <div class="studio-fact">
+          <span class="k">Capacity</span>
+          <span class="v">3–4<span class="ital">clients per quarter</span></span>
+        </div>
+        <div class="studio-fact">
+          <span class="k">Status</span>
+          <span class="v"><span class="dot"></span>Open<span class="ital">Sprint slots — <span class="sprint-month">October</span> 2026</span></span>
+        </div>
+      </div>
     </div>
 
     <div class="contact-hero-foot">
       <div class="contact-options" role="tablist" aria-label="Contact path">
         <div class="contact-item">
+          <button class="contact-option" data-target="book" role="tab" aria-selected="false" aria-controls="panel-book" type="button">
+            <span class="contact-option-name">Book a discovery call</span>
+            <svg class="contact-option-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6L8 10L12 6"/></svg>
+            <span class="contact-option-desc">45 minutes in Pacific Time. You'll get a calendar invite.</span>
+          </button>
+
+          <div class="contact-panel" id="panel-book" data-panel="book" role="tabpanel">
+            <section class="bk" id="booking-workspace">
+              <div class="contact-container">
+                <div class="contact-reassurance">
+                  <div class="contact-reassurance-top">
+                    <div class="contact-intro">
+                      <h2 class="contact-heading">Let's find a time that works.</h2>
+                      <p class="contact-subhead">
+                        A 45-minute video call with the people who'll do the work. Pick a time in Pacific Time — HubSpot puts it on both calendars.
+                      </p>
+                    </div>
+                    <div class="response-badge">
+                      <svg class="icon-clock" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>Booked times are held</span>
+                    </div>
+                  </div>
+                  <div class="contact-reassurance-bottom">
+                    <div class="lead-card">
+                      <img src="assets/email/jessie.png" alt="Jessie Och, Founder &amp; Lead Strategist" class="lead-avatar" width="64" height="64" loading="lazy" decoding="async" />
+                      <div class="lead-info">
+                        <p class="lead-name">Jessie Och</p>
+                        <span class="lead-title">Founder &amp; Lead Strategist</span>
+                        <a href="mailto:hello@funnelhaus.ca" class="lead-email">hello@funnelhaus.ca</a>
+                      </div>
+                    </div>
+                    <div class="proof-block">
+                      <p class="proof-label">Trusted by teams at</p>
+                      <div class="client-logos">
+                        <span class="client-logo">Rocky Mountain Solutions</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-card bk-meetings-card">
+                  <div
+                    class="meetings-iframe-container"
+                    id="bk-meetings"
+                    data-src="https://meetings-na3.hubspot.com/joch"
+                    data-lenis-prevent
+                  ></div>
+                  <p class="bk-meetings-fallback" id="bk-meetings-fallback" hidden>
+                    The scheduler isn’t connected yet. Email
+                    <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
+                    to pick a time.
+                  </p>
+                  <p class="form-legal">
+                    Times follow Jessie’s HubSpot calendar. You’ll get a video link with the invite.
+                    By booking, you agree to our <a href="privacy.html">Privacy Policy</a>.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="contact-item">
           <button class="contact-option" data-target="work" role="tab" aria-selected="false" aria-controls="panel-work" type="button">
-            <span class="contact-option-name">Work with us</span>
+            <span class="contact-option-name">Send us a message</span>
             <svg class="contact-option-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6L8 10L12 6"/></svg>
             <span class="contact-option-desc">Direct path. Share the basics — we'll respond in a day.</span>
           </button>
@@ -1478,9 +1619,9 @@
 
         <div class="contact-item">
           <button class="contact-option" data-target="quiz" role="tab" aria-selected="false" aria-controls="panel-quiz" type="button">
-            <span class="contact-option-name">Not sure where to start</span>
+            <span class="contact-option-name">Not sure?</span>
             <svg class="contact-option-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6L8 10L12 6"/></svg>
-            <span class="contact-option-desc">Take the fit quiz — five questions, two minutes.</span>
+            <span class="contact-option-desc">Take the quiz — five questions, two minutes.</span>
           </button>
 
           <!-- Path 2: Not sure where to start -->
@@ -1514,6 +1655,47 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="bk-faq" id="faq">
+    <div class="bk-faq-inner">
+      <div class="bk-faq-head">
+        <h2 class="reveal">
+          Questions?<br>
+          <span class="ital">Before you pick a time.</span>
+        </h2>
+      </div>
+      <div>
+        <div class="bk-faq-item">
+          <button type="button" aria-expanded="false">
+            <span>What happens after the call?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="bk-faq-panel">
+            If there's a fit, we send a fixed proposal within 48 hours: a scope, a timeline, a price, and the metric we'd use to know it worked. If there isn't, we'll say so and point you toward someone better suited.
+          </div>
+        </div>
+        <div class="bk-faq-item">
+          <button type="button" aria-expanded="false">
+            <span>Is this a video call or in person?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="bk-faq-panel">
+            Calls are video. HubSpot sends the link with your calendar invite. We're based in Vancouver and work asynchronously by default — on-site when the work calls for it, not for the first conversation.
+          </div>
+        </div>
+        <div class="bk-faq-item">
+          <button type="button" aria-expanded="false">
+            <span>What should I prepare?</span>
+            <span aria-hidden="true">+</span>
+          </button>
+          <div class="bk-faq-panel">
+            Nothing formal. Come ready to talk about what's breaking, what a win looks like, and any site or deck we should look at beforehand.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- WHAT HAPPENS NEXT -->
   <section class="process" id="what-happens">
     <div class="process-inner">
@@ -1533,7 +1715,7 @@
         <div class="step reveal reveal-d1">
           <span class="num">Step 02</span>
           <span class="label">A real conversation.</span>
-          <span class="desc">A 30-minute call to understand what you're trying to build — not pitch services. By the end, both sides usually know whether there's a fit. If there isn't, we'll point you toward someone better suited.</span>
+          <span class="desc">A 45-minute call to understand what you're trying to build — not pitch services. By the end, both sides usually know whether there's a fit. If there isn't, we'll point you toward someone better suited.</span>
         </div>
         <div class="step reveal reveal-d2">
           <span class="num">Step 03</span>
@@ -1578,7 +1760,7 @@
           <span class="footer-label">Connect</span>
           <a href="mailto:hello@funnelhaus.ca">hello@funnelhaus.ca</a>
           <a href="contact.html">Contact</a>
-          <a href="#form">Work with us</a>
+          <a href="#form">Send a message</a>
         </div>
 
         <div class="footer-col">
@@ -1615,6 +1797,7 @@
       smoothWheel: true,
       smoothTouch: false
     });
+    window.lenis = lenis;
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
 
@@ -1785,18 +1968,18 @@
       const hero = document.querySelector('.contact-hero');
       if (!options.length || !panels.length) return;
 
-      const titleWrap = hero?.querySelector('.contact-hero-title-wrap');
+      const titleEl = hero?.querySelector('.contact-hero-title');
 
       function lockTitleHeight() {
-        if (!titleWrap || titleWrap.dataset.locked === '1') return;
-        titleWrap.style.minHeight = titleWrap.getBoundingClientRect().height + 'px';
-        titleWrap.dataset.locked = '1';
+        if (!titleEl || titleEl.dataset.locked === '1') return;
+        titleEl.style.minHeight = titleEl.getBoundingClientRect().height + 'px';
+        titleEl.dataset.locked = '1';
       }
 
       function unlockTitleHeight() {
-        if (!titleWrap) return;
-        titleWrap.style.minHeight = '';
-        delete titleWrap.dataset.locked;
+        if (!titleEl) return;
+        titleEl.style.minHeight = '';
+        delete titleEl.dataset.locked;
       }
 
       function tabScrollOffset() {
@@ -1834,8 +2017,8 @@
             panels.forEach(p => {
               p.classList.toggle('is-active', p.dataset.panel === target);
             });
-            const tabs = document.querySelector('.contact-options');
-            if (tabs) scrollToEl(tabs, tabScrollOffset());
+            const facts = document.querySelector('.contact-hero .studio-meta-grid');
+            if (facts) scrollToEl(facts, tabScrollOffset());
           } else {
             panels.forEach(p => p.classList.remove('is-active'));
             hero?.classList.remove('is-open');
@@ -1844,6 +2027,15 @@
           }
         });
       });
+
+      const hash = (location.hash || '').replace('#', '');
+      if (hash === 'book' || hash === 'call') {
+        document.querySelector('.contact-option[data-target="book"]:not(.is-active)')?.click();
+      } else if (hash === 'quiz') {
+        document.querySelector('.contact-option[data-target="quiz"]:not(.is-active)')?.click();
+      } else if (hash === 'message' || hash === 'form') {
+        document.querySelector('.contact-option[data-target="work"]:not(.is-active)')?.click();
+      }
     })();
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -2080,5 +2272,6 @@
       updateNavTheme();
     })();
   </script>
+  <script src="assets/js/booking.js"></script>
 </body>
 </html>
