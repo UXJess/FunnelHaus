@@ -193,11 +193,12 @@
   flex-shrink: 0;
 }
 
+fh-site-preview,
 .fh-proof-shot {
   display: flex;
   flex-direction: column;
+  position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   border: 1px solid color-mix(in srgb, #000 12%, transparent);
   border-radius: 4px;
   background: #fff;
@@ -233,17 +234,46 @@
   color: color-mix(in srgb, #000 55%, transparent);
 }
 
-.fh-proof-shot img {
+.fh-proof-viewport {
+  /* Layout width the live site sees. 1220 = 1:1 (too tight);
+     2440 = old 2× shrink. 1366 is ~12% pulled back from 1:1. */
+  --fh-proof-view: 1421;
+  position: relative;
   display: block;
   width: 100%;
-  min-height: 0;
-  flex: 1 1 auto;
-  object-fit: cover;
-  object-position: top center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0a0a0a;
+  container-type: inline-size;
+}
+
+.fh-proof-viewport iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--fh-proof-view) * 1px);
+  height: calc(var(--fh-proof-view) * 9 / 16 * 1px);
+  border: 0;
+  transform: scale(calc(100cqi / (var(--fh-proof-view) * 1px)));
+  transform-origin: top left;
+  pointer-events: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.fh-proof-viewport iframe::-webkit-scrollbar {
+  display: none;
+}
+
+.fh-proof-shot-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .fh-proof-link:focus-visible,
-.fh-proof-shot:focus-visible {
+.fh-proof-shot-link:focus-visible,
+fh-site-preview:focus-within {
   outline: 2px solid var(--yellow);
   outline-offset: 4px;
 }
@@ -263,8 +293,8 @@
     row-gap: 20px;
   }
 
-  .fh-proof-shot {
-    aspect-ratio: 16 / 10;
+  .fh-proof-viewport {
+    --fh-proof-view: 1331;
   }
 }
 
