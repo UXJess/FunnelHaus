@@ -619,6 +619,24 @@
       border-radius: var(--radius-sm);
       padding: 2.5rem;
     }
+    /* Booking calendar needs the wide column. The HubSpot frame splits into
+       a month and a time list, and both get cramped in the form's 7fr share. */
+    @media (min-width: 992px) {
+      #booking-workspace .contact-container {
+        grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+        gap: 32px 40px;
+        max-width: none;
+        padding: 0;
+      }
+    }
+    .bk-meetings-card {
+      padding: 12px 12px 20px;
+    }
+    #bk-meetings,
+    #bk-meetings iframe {
+      width: 100%;
+      max-width: none;
+    }
     .form-group {
       display: flex;
       flex-direction: column;
