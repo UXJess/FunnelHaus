@@ -903,14 +903,17 @@
 
     /* ─── SECTION 3: CAPABILITIES (numbered gallery) ────────── */
     .capabilities {
-      padding: 140px 0;
+      padding: 140px 32px;
       border-bottom: 1px solid var(--line);
+    }
+    .capabilities-inner {
+      max-width: 1280px;
+      margin: 0 auto;
     }
     .cap-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 0 32px;
       margin-bottom: 80px;
       gap: 32px;
     }
@@ -937,14 +940,14 @@
       grid-template-columns: 80px 1.4fr 1fr 1fr 60px;
       gap: 24px;
       align-items: center;
-      padding: 32px;
+      padding: 32px 0;
       border-bottom: 1px solid var(--line);
       position: relative;
       transition: padding 0.3s;
       cursor: pointer;
     }
 
-    .cap-item:hover { padding-left: 48px; padding-right: 16px; }
+    .cap-item:hover { padding-left: 16px; }
 
     .cap-item .num {
       font-size: 13px;
@@ -1471,9 +1474,9 @@
       .statement-grid { grid-template-columns: 1fr; gap: 32px; }
       .statement-head { flex-direction: column; gap: 16px; margin-bottom: 48px; }
       .footnotes { grid-template-columns: 1fr; gap: 16px; }
-      .capabilities { padding: 80px 0; }
-      .cap-head { padding: 0 20px; flex-direction: column; gap: 16px; margin-bottom: 48px; }
-      .cap-item { grid-template-columns: 40px 1fr 24px; padding: 24px 20px; gap: 12px; }
+      .capabilities { padding: 80px 20px; }
+      .cap-head { flex-direction: column; gap: 16px; margin-bottom: 48px; }
+      .cap-item { grid-template-columns: 40px 1fr 24px; padding: 24px 0; gap: 12px; }
       .cap-item .desc, .cap-item .tags { display: none; }
       .featured { padding: 80px 20px; }
       .featured-head, .featured-display { grid-template-columns: 1fr; }
@@ -1871,6 +1874,7 @@
 
   <!-- CAPABILITIES -->
   <section class="capabilities">
+    <div class="capabilities-inner">
     <div class="cap-head">
       <h2 class="reveal">
         Capabilities<br>
@@ -1922,6 +1926,7 @@
         <div class="preview"><div class="preview-art"></div></div>
       </a>
 
+    </div>
     </div>
   </section>
 
