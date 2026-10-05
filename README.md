@@ -8,20 +8,28 @@ code lives in `assets/`.
 Cookie consent is handled by `assets/js/consent.js` + `assets/css/consent.css`,
 loaded in the `<head>` of every page right after the Google Consent Mode v2
 defaults. Analytics and marketing tags load **only** after the visitor opts in
-to that category **and** the tag's ID is set.
+to that category **and** the tag is enabled (`VERCEL_ANALYTICS`) or its ID is set.
 
 | Category  | Tools                          |
 |-----------|--------------------------------|
 | Necessary | `fh_consent` cookie (always on) |
-| Analytics | Google Analytics 4, Hotjar     |
+| Analytics | Vercel Web Analytics, Google Analytics 4, Hotjar |
 | Marketing | Meta Pixel, HubSpot tracking code |
 
-Do not paste GA4, Hotjar, Meta Pixel or HubSpot snippets into the HTML pages —
-they would run before consent. Set the IDs in `consent.js` instead.
+Do not paste Vercel Analytics, GA4, Hotjar, Meta Pixel or HubSpot snippets into the HTML pages —
+they would run before consent. Vercel Analytics is toggled in `consent.js`; set the other IDs there too.
 
-### Adding GA4, Meta Pixel or Hotjar
+### Adding Vercel Web Analytics, GA4, Meta Pixel or Hotjar
 
-Edit the config block at the top of `assets/js/consent.js`:
+This is a static HTML site, so Vercel Web Analytics is the official HTML script
+(`/_vercel/insights/script.js`) injected from `consent.js` after analytics opt-in —
+not the `@vercel/analytics` npm package, which needs a framework/bundler.
+
+Enable Web Analytics on the Vercel project, then keep `VERCEL_ANALYTICS = true`
+in `consent.js`. Set `false` to stop loading it. After the next production deploy,
+page views from visitors who opted in appear at the project's Analytics tab.
+
+Edit the other IDs in the config block at the top of `assets/js/consent.js`:
 
 ```js
 var GA4_ID = 'G-XXXXXXXXXX';        // GA4 Measurement ID
