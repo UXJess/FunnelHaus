@@ -3,11 +3,11 @@
  * ---------------------------------------------------------------
  * Categories:
  *   necessary  — always on (this cookie, security, basic site function)
- *   analytics  — Google Analytics 4, Hotjar
+ *   analytics  — Vercel Web Analytics, Google Analytics 4, Hotjar
  *   marketing  — Meta Pixel, HubSpot tracking code
  *
  * Nothing in analytics/marketing loads until the visitor opts in AND the
- * matching ID below is non-empty. See README.md for setup.
+ * matching ID / flag below is set. See README.md for setup.
  *
  * Public API:
  *   fhConsent.has('analytics' | 'marketing' | 'necessary') -> boolean
@@ -25,10 +25,12 @@
   var HOTJAR_ID = '';          // e.g. '1234567' (Site ID, digits only)
   var HUBSPOT_PORTAL_ID = '343712461';
   var HUBSPOT_SCRIPT_HOST = 'js-na3.hs-scripts.com';
+  // First-party, cookieless page views for the Vercel Web Analytics dashboard.
+  var VERCEL_ANALYTICS = true;
 
   // Bump when the Privacy Policy or cookie categories change materially.
   // Every visitor with an older version is asked again.
-  var POLICY_VERSION = 1;
+  var POLICY_VERSION = 2;
 
   var COOKIE_NAME = 'fh_consent';
   var MAX_AGE_DAYS = 365;
@@ -138,6 +140,18 @@
     document.head.appendChild(s);
   }
 
+  function loadVercelAnalytics() {
+    if (!VERCEL_ANALYTICS) return false;
+    if (document.getElementById('fh-vercel-analytics')) return true;
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    var s = document.createElement('script');
+    s.defer = true;
+    s.src = '/_vercel/insights/script.js';
+    s.id = 'fh-vercel-analytics';
+    document.head.appendChild(s);
+    return true;
+  }
+
   function loadGA4() {
     if (!GA4_ID) return false;
     window['ga-disable-' + GA4_ID] = false;
@@ -180,9 +194,10 @@
   function applyState(s) {
     updateConsentMode(s);
     if (s.analytics && !loaded.analytics) {
-      var a1 = loadGA4();
-      var a2 = loadHotjar();
-      loaded.analytics = a1 || a2;
+      var a1 = loadVercelAnalytics();
+      var a2 = loadGA4();
+      var a3 = loadHotjar();
+      loaded.analytics = a1 || a2 || a3;
     }
     if (s.marketing && !loaded.marketing) {
       var m1 = loadMetaPixel();
@@ -339,7 +354,7 @@
       '</p>' +
       '<form class="fhc-form" novalidate>' +
         toggleRow('fhc-necessary', 'Necessary', 'Keeps the site working and remembers your cookie choice. Can\'t be turned off.', { locked: true }) +
-        toggleRow('fhc-analytics', 'Analytics', 'Google Analytics and Hotjar help us see which pages are useful, anonymously and in aggregate.', { name: 'analytics' }) +
+        toggleRow('fhc-analytics', 'Analytics', 'Vercel Web Analytics, Google Analytics, and Hotjar help us see which pages are useful, anonymously and in aggregate.', { name: 'analytics' }) +
         toggleRow('fhc-marketing', 'Marketing', 'Meta Pixel and HubSpot tracking help us measure ads and follow up on inquiries.', { name: 'marketing' }) +
         '<div class="fhc-dialog-actions">' +
           '<button type="submit" class="fhc-btn fhc-btn-choice">Save preferences</button>' +
