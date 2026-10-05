@@ -400,23 +400,23 @@
       background: #fff;
     }
     .projects-grid {
-      display: grid;
-      grid-template-columns: 300px minmax(0, 1fr);
-      gap: 12px;
       max-width: 1040px;
       margin: 0 auto;
-      align-items: start;
     }
     .project-card {
-      grid-column: 1 / -1;
       display: grid;
-      grid-template-columns: subgrid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      grid-template-areas:
+        "shot body"
+        "see see";
       background: #fff;
       color: #121212;
       border: 1px solid rgba(0,0,0,0.12);
       border-radius: 12px;
       overflow: hidden;
     }
+    .project-card-shot { grid-area: shot; }
+    .project-card-body { grid-area: body; }
     .project-card-shot {
       display: block;
       height: 100%;
@@ -485,25 +485,23 @@
       border-color: var(--blue);
     }
     .project-see {
-      grid-column: 1 / -1;
+      grid-area: see;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 64px;
-      padding: 16px 24px;
-      border: 1px solid rgba(0,0,0,0.12);
-      border-radius: 12px;
+      min-height: 56px;
+      padding: 14px 24px;
+      border-top: 1px solid rgba(0,0,0,0.12);
       background: #fff;
       color: #121212;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      transition: background 0.25s, color 0.25s;
     }
     .project-see:hover {
       background: var(--blue);
-      border-color: var(--blue);
       color: #fff;
     }
     .project-see .arrow { width: 16px; height: 16px; }
@@ -912,8 +910,13 @@
       .projects-scroll-cue { padding: 18px 20px calc(28px + 60px + env(safe-area-inset-bottom, 0px)); }
       .projects-scroll-cue::after { bottom: calc(20px + 60px + env(safe-area-inset-bottom, 0px)); }
       .projects { padding-top: 48px; padding-bottom: 72px; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .project-card { grid-template-columns: 1fr; }
+      .project-card {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "shot"
+          "body"
+          "see";
+      }
       .project-card-shot { height: 160px; }
       .project-card-body { padding: 16px 18px 18px; }
       .cs-hero { height: 72svh; min-height: 420px; padding: 32px; }
@@ -1026,11 +1029,11 @@
             </ul>
           </div>
         </div>
+        <a class="project-see" href="rocky-mountain-solutions.html">
+          <span>See project</span>
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+        </a>
       </article>
-      <a class="project-see" href="rocky-mountain-solutions.html">
-        <span>See project</span>
-        <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-      </a>
     </div>
   </section>
 
