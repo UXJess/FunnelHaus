@@ -292,10 +292,24 @@
 
     /* ─── CASE STUDY ──────────────────────────────────────── */
     .cs-hero {
-      padding: 148px 32px 72px;
-      background: #070508;
+      height: 100svh;
+      min-height: 560px;
+      background: #0d0e0f;
+      overflow: hidden;
+    }
+    .cs-hero img {
+      width: 100%;
+      height: 118%;
+      object-fit: cover;
+      object-position: center top;
+      transform: translateY(-10%);
     }
     .cs-wrap { max-width: 1180px; margin: 0 auto; }
+    .cs-intro {
+      padding: 96px 32px 80px;
+      background: var(--paper);
+      color: var(--paper-ink);
+    }
     .cs-kicker {
       margin-bottom: 28px;
       font-size: 11px;
@@ -304,7 +318,7 @@
       text-transform: uppercase;
       color: #8a8a8a;
     }
-    .cs-hero h1 {
+    .cs-intro h1 {
       max-width: 14ch;
       font-size: clamp(52px, 8vw, 108px);
       font-weight: 800;
@@ -318,6 +332,10 @@
       line-height: 1.55;
       letter-spacing: -0.015em;
     }
+    .cs-intro .cs-meta {
+      border-top-color: var(--paper-line);
+    }
+    .cs-intro .cs-meta dt { color: rgba(18,18,18,0.45); }
     .cs-meta {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -664,9 +682,11 @@
       .nav .nav-logo .wordmark { display: none; }
       .nav-hamburger { display: block; }
       .nav-links, .nav-dropdown { display: none !important; }
-      .cs-hero, .cs-stage, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
-      .cs-hero { padding-top: 48px; }
-      .cs-hero h1 { font-size: clamp(46px, 14vw, 72px); }
+      .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .cs-hero { height: 72svh; min-height: 420px; }
+      .cs-hero img { object-position: left top; }
+      .cs-intro { padding-top: 72px; }
+      .cs-intro h1 { font-size: clamp(46px, 14vw, 72px); }
       .cs-section { padding-top: 72px; padding-bottom: 72px; }
       .footer-meta { grid-template-columns: 1fr; text-align: center; }
       .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
@@ -732,6 +752,10 @@
   </div>
 
   <header class="cs-hero">
+    <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
+  </header>
+
+  <section class="cs-intro" id="intro">
     <div class="cs-wrap">
       <p class="cs-kicker">Case study · 2026</p>
       <h1>Rocky Mountain Solutions</h1>
@@ -762,117 +786,57 @@
           <dd>Design, build, conversion</dd>
         </div>
       </dl>
-
-      <nav class="cs-jump" aria-label="On this page">
-        <a href="#problem">01 Problem</a>
-        <a href="#built">02 What we built</a>
-        <a href="#decisions">03 Design decisions</a>
-        <a href="#result">04 Result</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="cs-stage" aria-label="Live site">
-    <div class="cs-wrap">
-      <fh-site-preview src="https://rockymountainsolutions.ca" label="Rocky Mountain Solutions homepage"></fh-site-preview>
     </div>
   </section>
 
-  <section class="cs-section" id="problem">
+  <section class="cs-section" id="overview">
     <div class="cs-grid">
       <div class="cs-label">
-        <span class="cs-num">01</span>
-        <h2>The problem</h2>
+        <h2>Project overview</h2>
       </div>
+      <div>
       <div class="cs-prose">
         <p>
           The company was already doing the work. What it lacked was a website that
           could carry any of it. Construction safety, strata care, and home renovations
-          are three different conversations, and they were competing for the same first
-          impression. A visitor could not tell, in a few seconds, who the company was
-          for — or what to do next.
+          were competing for the same first impression, so a visitor could not tell who
+          the company was for. A quote still depended on someone already knowing the
+          phone number.
         </p>
         <p>
-          A quote still depended on someone already knowing the phone number. There was
-          no page a superintendent could send to a project manager, no place a strata
-          council could check the coverage area, and no form that asked for the job
-          instead of a blank message.
+          We designed and built <a href="https://rockymountainsolutions.ca" target="_blank" rel="noopener"><strong>rockymountainsolutions.ca</strong></a>
+          from the ground up. The homepage opens on one line — your site, your strata,
+          your home — then opens into three service pages, a coverage map for Maple
+          Ridge, the Tri-Cities, and the Fraser Valley, and a request form that asks
+          for the company, the service, the site, and the scope. A submitted request
+          confirms that someone will be in touch within four business hours.
         </p>
         <p>
-          The owner, Andrew, put the brief in one line: the site had to bring in work,
-          and it had to make requesting a quote simple.
+          The company now has a site that explains the work and makes a quote
+          straightforward. The phone number is still one tap away. A visitor can also
+          read the service that matches the job, check the city, and send a request
+          that already includes the scope.
         </p>
+      </div>
+      <blockquote class="cs-quote">
+          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
+          <footer>
+            <cite>Andrew B.</cite>
+            <span class="role">Owner, Rocky Mountain Solutions</span>
+          </footer>
+        </blockquote>
+        <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
+          <span>Visit the site</span>
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="cs-section" id="built">
+  <section class="cs-section cs-section-dark" id="approach">
     <div class="cs-grid">
       <div class="cs-label">
-        <span class="cs-num">02</span>
-        <h2>What we<br>built</h2>
-      </div>
-      <div>
-        <div class="cs-prose">
-          <p>
-            We designed and built <a href="https://rockymountainsolutions.ca" target="_blank" rel="noopener"><strong>rockymountainsolutions.ca</strong></a>
-            from the ground up. One company, one site, three clear ways in.
-          </p>
-          <p>
-            The homepage opens on a single line — your site, your strata, your home —
-            then hands the visitor a service, a coverage area, or a request. Each
-            service has its own page. The coverage section names the cities they
-            actually reach. The contact block asks for the job: company, service,
-            site location, and scope, with the phone number beside the form.
-          </p>
-          <p>
-            Submit the request and the page confirms it: a safety professional will
-            be in touch within four business hours. Call, and the number is one tap.
-          </p>
-        </div>
-
-        <div class="cs-built">
-          <figure class="cs-shot">
-            <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage: dark field, copper accent, and the line Your Site. Your Strata. Your Home. Done Right." width="1440" height="900" />
-            <figcaption>Homepage, first screen. The offer is the headline.</figcaption>
-          </figure>
-          <div class="cs-pages">
-            <a href="https://rockymountainsolutions.ca/" target="_blank" rel="noopener">
-              <span class="idx">01</span>
-              <span class="name">Homepage</span>
-              <span class="where">The offer</span>
-            </a>
-            <a href="https://rockymountainsolutions.ca/construction-safety.html" target="_blank" rel="noopener">
-              <span class="idx">02</span>
-              <span class="name">Construction safety</span>
-              <span class="where">CSO, first aid, COR</span>
-            </a>
-            <a href="https://rockymountainsolutions.ca/strata-maintenance.html" target="_blank" rel="noopener">
-              <span class="idx">03</span>
-              <span class="name">Strata maintenance</span>
-              <span class="where">Property care</span>
-            </a>
-            <a href="https://rockymountainsolutions.ca/home-renovations.html" target="_blank" rel="noopener">
-              <span class="idx">04</span>
-              <span class="name">Home renovations</span>
-              <span class="where">Interior and exterior</span>
-            </a>
-            <div>
-              <span class="idx">05</span>
-              <span class="name">Coverage and request</span>
-              <span class="where">Map and form</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cs-section cs-section-dark" id="decisions">
-    <div class="cs-grid">
-      <div class="cs-label">
-        <span class="cs-num">03</span>
-        <h2>Design<br><span class="ital">decisions.</span></h2>
+        <h2>Approach</h2>
       </div>
       <div class="decisions">
         <article class="decision">
@@ -938,62 +902,6 @@
             </p>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="cs-section" id="result">
-    <div class="cs-grid">
-      <div class="cs-label">
-        <span class="cs-num">04</span>
-        <h2>The result</h2>
-      </div>
-      <div>
-        <div class="cs-prose">
-          <p>
-            Rocky Mountain Solutions now has a website that does the job the owner
-            asked for. It explains the work, shows where the crew operates, and
-            makes a quote request straightforward.
-          </p>
-          <p>
-            The phone number is still there. What changed is that a visitor no
-            longer needs it in order to start. They can read the service that
-            matches the job, check the city, and send a request that already
-            includes the scope.
-          </p>
-        </div>
-
-        <div class="cs-result-grid">
-          <article class="cs-result-card">
-            <h3>Three offers, one first impression</h3>
-            <p>Safety, strata, and renovation each have a page. The homepage still introduces them as one company.</p>
-          </article>
-          <article class="cs-result-card">
-            <h3>A quote path with the job on it</h3>
-            <p>Service, company, site location, and scope are collected up front. The reply window is stated: four business hours.</p>
-          </article>
-          <article class="cs-result-card">
-            <h3>Trust before the ask</h3>
-            <p>WorkSafeBC, COR audit support, and OFA Level 3 sit with the contact details, where a contractor looks.</p>
-          </article>
-          <article class="cs-result-card">
-            <h3>A service area you can point to</h3>
-            <p>Maple Ridge, the Tri-Cities, and the Fraser Valley are named on the page, with a map behind them.</p>
-          </article>
-        </div>
-
-        <blockquote class="cs-quote">
-          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
-          <footer>
-            <cite>Andrew B.</cite>
-            <span class="role">Owner, Rocky Mountain Solutions</span>
-          </footer>
-        </blockquote>
-
-        <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
-          <span>Visit the site</span>
-          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-        </a>
       </div>
     </div>
   </section>
