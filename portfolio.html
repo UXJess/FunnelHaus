@@ -395,10 +395,22 @@
       100%    { background: var(--blue); }
     }
     .projects {
-      padding: 96px 32px;
+      scroll-margin-top: 16px;
+      padding: 72px 32px 96px;
       background: #fff;
     }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 12px;
+      max-width: 1040px;
+      margin: 0 auto;
+      align-items: start;
+    }
     .project-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
       background: #fff;
       color: #121212;
       border: 1px solid rgba(0,0,0,0.12);
@@ -407,18 +419,22 @@
     }
     .project-card-shot {
       display: block;
+      height: 100%;
+      min-height: 180px;
       background: #f4f4f4;
     }
     .project-card-shot img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 10;
+      height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: left top;
     }
-    .project-card-body { padding: 36px 36px 40px; }
+    .project-card-body {
+      padding: 20px 24px;
+      min-width: 0;
+    }
     .project-card-meta {
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.16em;
@@ -426,20 +442,21 @@
       color: #8a8a8a;
     }
     .project-card h2 {
-      font-size: clamp(32px, 4vw, 52px);
+      font-size: clamp(26px, 2.4vw, 34px);
       font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.035em;
+      line-height: 1;
+      letter-spacing: -0.03em;
     }
     .project-card h2 a:hover { color: var(--blue); }
-    .project-card .cs-lede { margin-top: 20px; }
-    .project-caps {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(0,0,0,0.12);
+    .project-card .cs-lede {
+      max-width: none;
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.45;
     }
+    .project-caps { margin-top: 16px; }
     .project-caps-label {
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.14em;
@@ -449,16 +466,16 @@
     .project-caps ul {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       list-style: none;
     }
     .project-caps a {
       display: inline-flex;
       align-items: center;
-      padding: 10px 16px;
+      padding: 6px 12px;
       border: 1px solid rgba(0,0,0,0.14);
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -467,17 +484,29 @@
       color: var(--blue);
       border-color: var(--blue);
     }
-    .project-card .feature-actions {
+    .project-see {
+      grid-column: 1 / -1;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px 32px;
-      margin-top: 28px;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      padding: 16px 24px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 12px;
+      background: #fff;
+      color: #121212;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
     }
-    .project-card .cs-quote {
-      margin-top: 36px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(0,0,0,0.12);
+    .project-see:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
     }
+    .project-see .arrow { width: 16px; height: 16px; }
 
     /* ─── CASE STUDY ──────────────────────────────────────── */
     .cs-hero {
@@ -882,8 +911,11 @@
       .projects-hero-foot { width: calc(100% + 40px); margin-left: -20px; }
       .projects-scroll-cue { padding: 18px 20px calc(28px + 60px + env(safe-area-inset-bottom, 0px)); }
       .projects-scroll-cue::after { bottom: calc(20px + 60px + env(safe-area-inset-bottom, 0px)); }
-      .projects { padding-top: 72px; padding-bottom: 72px; }
-      .project-card-body { padding: 24px 20px 28px; }
+      .projects { padding-top: 48px; padding-bottom: 72px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-card-shot { height: 160px; }
+      .project-card-body { padding: 16px 18px 18px; }
       .cs-hero { height: 72svh; min-height: 420px; padding: 32px; }
       .cs-hero img { object-position: left top; }
       .cs-intro { padding-top: 72px; }
@@ -971,49 +1003,35 @@
   </section>
 
   <section class="projects" id="projects" aria-label="Projects">
-    <article class="project-card">
-      <a class="project-card-shot" href="rocky-mountain-solutions.html">
-        <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
+    <div class="projects-grid">
+      <article class="project-card">
+        <a class="project-card-shot" href="rocky-mountain-solutions.html">
+          <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
+        </a>
+        <div class="project-card-body">
+          <p class="project-card-meta">2026 · Maple Ridge, BC</p>
+          <h2><a href="rocky-mountain-solutions.html">Rocky Mountain Solutions</a></h2>
+          <p class="cs-lede">
+            A Maple Ridge company covering construction safety, strata maintenance,
+            and home renovations. The site explains three jobs to three buyers,
+            and makes a quote straightforward to request.
+          </p>
+          <div class="project-caps">
+            <p class="project-caps-label">Capabilities</p>
+            <ul>
+              <li><a href="web-design.html">Web Design</a></li>
+              <li><a href="ai-build.html">AI Build</a></li>
+              <li><a href="cro.html">CRO</a></li>
+              <li><a href="analytics.html">Analytics</a></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <a class="project-see" href="rocky-mountain-solutions.html">
+        <span>See project</span>
+        <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
       </a>
-      <div class="project-card-body">
-        <p class="project-card-meta">2026 · Maple Ridge, BC</p>
-        <h2><a href="rocky-mountain-solutions.html">Rocky Mountain Solutions</a></h2>
-        <p class="cs-lede">
-          A Maple Ridge company covering construction safety, strata maintenance,
-          and home renovations. We built a site that explains three jobs to three
-          buyers, and makes a quote straightforward to request.
-        </p>
-
-        <div class="project-caps">
-          <p class="project-caps-label">Capabilities</p>
-          <ul>
-            <li><a href="web-design.html">Web Design</a></li>
-            <li><a href="ai-build.html">AI Build</a></li>
-            <li><a href="cro.html">CRO</a></li>
-            <li><a href="analytics.html">Analytics</a></li>
-          </ul>
-        </div>
-
-        <div class="feature-actions">
-          <a class="cs-visit" href="rocky-mountain-solutions.html">
-            <span>Read the case study</span>
-            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-          </a>
-          <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
-            <span>Visit the site</span>
-            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-          </a>
-        </div>
-
-        <blockquote class="cs-quote">
-          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
-          <footer>
-            <cite>Andrew B.</cite>
-            <span class="role">Owner, Rocky Mountain Solutions</span>
-          </footer>
-        </blockquote>
-      </div>
-    </article>
+    </div>
   </section>
 
   <section class="cta">
