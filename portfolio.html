@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rocky Mountain Solutions — Case study · FunnelHaus</title>
-  <meta name="description" content="How FunnelHaus designed and built the Rocky Mountain Solutions website: one company, three services, and a quote path that brings the work in." />
+  <title>Portfolio — FunnelHaus</title>
+  <meta name="description" content="Rocky Mountain Solutions, the featured FunnelHaus project: a website for a Maple Ridge construction, strata, and renovation company." />
 
   <link rel="icon" href="/assets/logos/funnelhaus-logo-blue.svg" type="image/svg+xml" />
   <link rel="mask-icon" href="/assets/logos/funnelhaus-logo-blue.svg" color="#2C60EF" />
 
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   <meta property="og:site_name" content="FunnelHaus" />
-  <meta property="og:title" content="Rocky Mountain Solutions — Case study" />
-  <meta property="og:description" content="A Maple Ridge construction, strata, and renovation company needed a website that could explain three jobs and make a quote easy to request. This is what we built." />
-  <meta property="og:url" content="https://funnelhaus.ca/rocky-mountain-solutions" />
+  <meta property="og:title" content="Portfolio — FunnelHaus" />
+  <meta property="og:description" content="Rocky Mountain Solutions, featured. A site that explains the work and makes a quote easy to request." />
+  <meta property="og:url" content="https://funnelhaus.ca/portfolio" />
   <meta name="twitter:card" content="summary" />
-  <meta name="theme-color" content="#070508" />
+  <meta name="theme-color" content="#ffffff" />
 
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -289,6 +289,46 @@
       text-transform: uppercase;
       border-radius: 10px;
     }
+
+
+    .feature {
+      padding: 148px 32px 96px;
+      background: #fff;
+      color: #121212;
+    }
+    .feature h1 {
+      max-width: 12ch;
+      font-size: clamp(56px, 8vw, 108px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+    }
+    .feature-shot {
+      margin: 56px 0 8px;
+    }
+    .feature-shot img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+    .feature .cs-meta {
+      border-top-color: rgba(0,0,0,0.12);
+    }
+    .feature .cs-meta dt { color: rgba(18,18,18,0.45); }
+    .feature-note {
+      max-width: 62ch;
+      margin-top: 36px;
+      font-size: clamp(18px, 1.5vw, 22px);
+      line-height: 1.55;
+      letter-spacing: -0.015em;
+    }
+    .feature-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      margin-top: 32px;
+    }
+    .feature .cs-quote { margin-top: 56px; }
 
     /* ─── CASE STUDY ──────────────────────────────────────── */
     .cs-hero {
@@ -679,7 +719,9 @@
       .nav .nav-logo .wordmark { display: none; }
       .nav-hamburger { display: block; }
       .nav-links, .nav-dropdown { display: none !important; }
-      .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .feature, .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .feature { padding-top: 112px; }
+      .feature h1 { font-size: clamp(46px, 14vw, 72px); }
       .cs-hero { height: 72svh; min-height: 420px; padding: 32px; }
       .cs-hero img { object-position: left top; }
       .cs-intro { padding-top: 72px; }
@@ -705,7 +747,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li class="has-dropdown"><a href="capabilities.html">Capabilities</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="portfolio.html" class="is-current">Portfolio</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -731,7 +773,7 @@
           <a href="growth-and-performance.html" class="mobile-menu-sublink">Growth &amp; Performance</a>
         </div>
       </div>
-      <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+      <a href="portfolio.html" class="mobile-menu-link is-current">Portfolio</a>
     <a href="about.html" class="mobile-menu-link">About</a>
       <a href="contact.html" class="mobile-menu-link">Contact</a>
     </nav>
@@ -750,23 +792,22 @@
     <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
   </div>
 
-  <header class="cs-hero">
-    <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
-  </header>
-
-  <section class="cs-intro" id="intro">
+  <article class="feature">
     <div class="cs-wrap">
-      <p class="cs-kicker">Case study · 2026</p>
+      <p class="cs-kicker">Portfolio</p>
       <h1>Rocky Mountain Solutions</h1>
       <p class="cs-lede">
-        Rocky Mountain Solutions is a Maple Ridge company covering construction safety,
-        strata maintenance, and home renovations across the Lower Mainland. They needed
-        a website that could explain three different jobs to three different buyers — a
-        site superintendent, a strata council, and a homeowner — and give each of them
-        a straightforward way to ask for the work. The goal was a professional site that
-        made the company easy to trust and easy to hire.
+        A Maple Ridge company covering construction safety, strata maintenance,
+        and home renovations. We built a site that explains three jobs to three
+        buyers, and makes a quote straightforward to request.
       </p>
+    </div>
 
+    <figure class="feature-shot">
+      <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
+    </figure>
+
+    <div class="cs-wrap">
       <dl class="cs-meta">
         <div>
           <dt>Client</dt>
@@ -781,129 +822,37 @@
           <dd>Maple Ridge, BC</dd>
         </div>
         <div>
-          <dt>Scope</dt>
-          <dd>Design, build, conversion</dd>
+          <dt>Year</dt>
+          <dd>2026</dd>
         </div>
       </dl>
-    </div>
-  </section>
 
-  <section class="cs-section" id="overview">
-    <div class="cs-grid">
-      <div class="cs-label">
-        <h2>Project overview</h2>
-      </div>
-      <div>
-      <div class="cs-prose">
-        <p>
-          The company was already doing the work. What it lacked was a website that
-          could carry any of it. Construction safety, strata care, and home renovations
-          were competing for the same first impression, so a visitor could not tell who
-          the company was for. A quote still depended on someone already knowing the
-          phone number.
-        </p>
-        <p>
-          We designed and built <a href="https://rockymountainsolutions.ca" target="_blank" rel="noopener"><strong>rockymountainsolutions.ca</strong></a>
-          from the ground up. The homepage opens on one line — your site, your strata,
-          your home — then opens into three service pages, a coverage map for Maple
-          Ridge, the Tri-Cities, and the Fraser Valley, and a request form that asks
-          for the company, the service, the site, and the scope. A submitted request
-          confirms that someone will be in touch within four business hours.
-        </p>
-        <p>
-          The company now has a site that explains the work and makes a quote
-          straightforward. The phone number is still one tap away. A visitor can also
-          read the service that matches the job, check the city, and send a request
-          that already includes the scope.
-        </p>
-      </div>
-      <blockquote class="cs-quote">
-          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
-          <footer>
-            <cite>Andrew B.</cite>
-            <span class="role">Owner, Rocky Mountain Solutions</span>
-          </footer>
-        </blockquote>
+      <p class="feature-note">
+        The homepage opens on one line — your site, your strata, your home —
+        then opens into the services, the cities they cover, and a request
+        that already includes the job.
+      </p>
+
+      <div class="feature-actions">
+        <a class="cs-visit" href="rocky-mountain-solutions.html">
+          <span>Read the case study</span>
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+        </a>
         <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
           <span>Visit the site</span>
           <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
         </a>
       </div>
-    </div>
-  </section>
 
-  <section class="cs-section" id="approach">
-    <div class="cs-grid">
-      <div class="cs-label">
-        <h2>Approach</h2>
-      </div>
-      <div class="decisions">
-        <article class="decision">
-          <span class="n">01</span>
-          <div>
-            <h3>One line that sorts the visitor.</h3>
-            <p>
-              “Your Site. Your Strata. Your Home. Done Right.” Copper is reserved
-              for the last two words. A superintendent, a strata manager, and a
-              homeowner can each find themselves before they scroll, and the rest
-              of the page only has to prove the line.
-            </p>
-          </div>
-        </article>
-        <article class="decision">
-          <span class="n">02</span>
-          <div>
-            <h3>Three doors, one company.</h3>
-            <p>
-              Construction safety, strata maintenance, and home renovations each
-              have a page. A WorkSafeBC conversation and a kitchen renovation need
-              different proof. The homepage still holds the three together, so the
-              business reads as one crew with one standard: do the work right,
-              say what will happen, stand behind it.
-            </p>
-          </div>
-        </article>
-        <article class="decision">
-          <span class="n">03</span>
-          <div>
-            <h3>A field palette, and the credentials up front.</h3>
-            <p>
-              Near-black, warm paper, and copper. The crest — mountains over a
-              saw blade — sits large and quiet in the hero, so the page feels
-              like the work. WorkSafeBC compliance, COR audit support, and OFA
-              Level 3 sit beside the contact details. Those are the facts a
-              contractor checks before they call.
-            </p>
-          </div>
-        </article>
-        <article class="decision">
-          <span class="n">04</span>
-          <div>
-            <h3>Geography specific enough to hire against.</h3>
-            <p>
-              “The Lower Mainland” is too wide. The coverage section names Maple
-              Ridge and Pitt Meadows, the Tri-Cities, and the Fraser Valley, on
-              a map of the cities they actually reach. Someone in Langley can
-              see they are in range. Someone outside it can see they are not.
-            </p>
-          </div>
-        </article>
-        <article class="decision">
-          <span class="n">05</span>
-          <div>
-            <h3>The ask is the job.</h3>
-            <p>
-              The button reads Request Site Deployment. The form asks for the
-              service, the company, and the site. A phone call sits next to it,
-              because a lot of this work still starts that way. Both paths are
-              one action, and the confirmation tells the visitor when to expect
-              a reply: within four business hours.
-            </p>
-          </div>
-        </article>
-      </div>
+      <blockquote class="cs-quote">
+        <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
+        <footer>
+          <cite>Andrew B.</cite>
+          <span class="role">Owner, Rocky Mountain Solutions</span>
+        </footer>
+      </blockquote>
     </div>
-  </section>
+  </article>
 
   <section class="cta">
     <div class="cta-inner">
