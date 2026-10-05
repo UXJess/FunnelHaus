@@ -165,6 +165,14 @@
   line-height: 1.4;
 }
 
+.fh-proof-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  grid-column: 1 / -1;
+  align-items: center;
+}
+
 .fh-proof-link {
   display: inline-flex;
   grid-column: 1 / -1;
