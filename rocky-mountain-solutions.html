@@ -292,17 +292,19 @@
 
     /* ─── CASE STUDY ──────────────────────────────────────── */
     .cs-hero {
+      box-sizing: border-box;
       height: 100svh;
       min-height: 560px;
-      background: #0d0e0f;
-      overflow: hidden;
+      /* 32px of blue on every side. Top clears the fixed nav so that gap stays visible. */
+      padding: calc(76px + 32px) 32px 32px;
+      background: #2C60EF;
     }
     .cs-hero img {
       width: 100%;
-      height: 118%;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
-      transform: translateY(-10%);
+      border-radius: 12px;
     }
     .cs-wrap { max-width: 1180px; margin: 0 auto; }
     .cs-intro {
@@ -683,7 +685,7 @@
       .nav-hamburger { display: block; }
       .nav-links, .nav-dropdown { display: none !important; }
       .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
-      .cs-hero { height: 72svh; min-height: 420px; }
+      .cs-hero { height: 72svh; min-height: 420px; padding: 32px; }
       .cs-hero img { object-position: left top; }
       .cs-intro { padding-top: 72px; }
       .cs-intro h1 { font-size: clamp(46px, 14vw, 72px); }
