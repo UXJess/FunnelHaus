@@ -619,14 +619,16 @@
       border-radius: var(--radius-sm);
       padding: 2.5rem;
     }
-    /* Wide enough for the month and the time list, without stretching across the row. */
+    /* Same centered column as the other contact tabs. The calendar stays capped. */
     @media (min-width: 992px) {
       #booking-workspace .contact-container {
-        grid-template-columns: minmax(260px, 340px) minmax(0, 720px);
-        justify-content: start;
+        grid-template-columns: minmax(260px, 1fr) minmax(0, 720px);
+        justify-content: center;
         gap: 40px 48px;
-        max-width: none;
-        padding: 0;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
       }
     }
     .bk-meetings-card {
