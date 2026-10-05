@@ -291,44 +291,101 @@
     }
 
 
-    .feature {
-      padding: 148px 32px 96px;
+    .projects-hero {
+      padding: 148px 32px 0;
       background: #fff;
       color: #121212;
     }
-    .feature h1 {
-      max-width: 12ch;
+    .projects-hero h1 {
       font-size: clamp(56px, 8vw, 108px);
       font-weight: 800;
       line-height: 0.9;
       letter-spacing: -0.045em;
     }
-    .feature-shot {
-      margin: 56px 0 8px;
+    .projects {
+      padding: 56px 32px 96px;
+      background: #fff;
     }
-    .feature-shot img {
+    .project-card {
+      background: #fff;
+      color: #121212;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .project-card-shot {
+      display: block;
+      background: #f4f4f4;
+    }
+    .project-card-shot img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: center top;
     }
-    .feature .cs-meta {
-      border-top-color: rgba(0,0,0,0.12);
+    .project-card-body { padding: 36px 36px 40px; }
+    .project-card-meta {
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #8a8a8a;
     }
-    .feature .cs-meta dt { color: rgba(18,18,18,0.45); }
-    .feature-note {
-      max-width: 62ch;
-      margin-top: 36px;
-      font-size: clamp(18px, 1.5vw, 22px);
-      line-height: 1.55;
-      letter-spacing: -0.015em;
+    .project-card h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.035em;
     }
-    .feature-actions {
+    .project-card h2 a:hover { color: var(--blue); }
+    .project-card .cs-lede { margin-top: 20px; }
+    .project-caps {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
+    .project-caps-label {
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(18,18,18,0.45);
+    }
+    .project-caps ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+    }
+    .project-caps a {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 16px;
+      border: 1px solid rgba(0,0,0,0.14);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .project-caps a:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+    .project-card .feature-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px 32px;
-      margin-top: 32px;
+      margin-top: 28px;
     }
-    .feature .cs-quote { margin-top: 56px; }
+    .project-card .cs-quote {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
 
     /* ─── CASE STUDY ──────────────────────────────────────── */
     .cs-hero {
@@ -719,9 +776,11 @@
       .nav .nav-logo .wordmark { display: none; }
       .nav-hamburger { display: block; }
       .nav-links, .nav-dropdown { display: none !important; }
-      .feature, .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
-      .feature { padding-top: 112px; }
-      .feature h1 { font-size: clamp(46px, 14vw, 72px); }
+      .projects-hero, .projects, .cs-intro, .cs-section, .cta, .site-footer { padding-left: 20px; padding-right: 20px; }
+      .projects-hero { padding-top: 112px; }
+      .projects-hero h1 { font-size: clamp(46px, 14vw, 72px); }
+      .projects { padding-top: 36px; }
+      .project-card-body { padding: 24px 20px 28px; }
       .cs-hero { height: 72svh; min-height: 420px; padding: 32px; }
       .cs-hero img { object-position: left top; }
       .cs-intro { padding-top: 72px; }
@@ -792,67 +851,55 @@
     <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
   </div>
 
-  <article class="feature">
-    <div class="cs-wrap">
-      <p class="cs-kicker">Portfolio</p>
-      <h1>Rocky Mountain Solutions</h1>
-      <p class="cs-lede">
-        A Maple Ridge company covering construction safety, strata maintenance,
-        and home renovations. We built a site that explains three jobs to three
-        buyers, and makes a quote straightforward to request.
-      </p>
-    </div>
+  <section class="projects-hero">
+    <h1>Projects</h1>
+  </section>
 
-    <figure class="feature-shot">
-      <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
-    </figure>
+  <section class="projects" aria-label="Projects">
+    <article class="project-card">
+      <a class="project-card-shot" href="rocky-mountain-solutions.html">
+        <img src="assets/images/rocky-mountain-solutions-preview.jpg" alt="Rocky Mountain Solutions homepage. The headline reads Your Site. Your Strata. Your Home. Done Right." width="1900" height="1440" />
+      </a>
+      <div class="project-card-body">
+        <p class="project-card-meta">2026 · Maple Ridge, BC</p>
+        <h2><a href="rocky-mountain-solutions.html">Rocky Mountain Solutions</a></h2>
+        <p class="cs-lede">
+          A Maple Ridge company covering construction safety, strata maintenance,
+          and home renovations. We built a site that explains three jobs to three
+          buyers, and makes a quote straightforward to request.
+        </p>
 
-    <div class="cs-wrap">
-      <dl class="cs-meta">
-        <div>
-          <dt>Client</dt>
-          <dd>Rocky Mountain Solutions</dd>
+        <div class="project-caps">
+          <p class="project-caps-label">Capabilities</p>
+          <ul>
+            <li><a href="web-design.html">Web Design</a></li>
+            <li><a href="ai-build.html">AI Build</a></li>
+            <li><a href="cro.html">CRO</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+          </ul>
         </div>
-        <div>
-          <dt>Sector</dt>
-          <dd>Construction safety, strata, renovation</dd>
-        </div>
-        <div>
-          <dt>Location</dt>
-          <dd>Maple Ridge, BC</dd>
-        </div>
-        <div>
-          <dt>Year</dt>
-          <dd>2026</dd>
-        </div>
-      </dl>
 
-      <p class="feature-note">
-        The homepage opens on one line — your site, your strata, your home —
-        then opens into the services, the cities they cover, and a request
-        that already includes the job.
-      </p>
+        <div class="feature-actions">
+          <a class="cs-visit" href="rocky-mountain-solutions.html">
+            <span>Read the case study</span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+          </a>
+          <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
+            <span>Visit the site</span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+          </a>
+        </div>
 
-      <div class="feature-actions">
-        <a class="cs-visit" href="rocky-mountain-solutions.html">
-          <span>Read the case study</span>
-          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-        </a>
-        <a class="cs-visit" href="https://rockymountainsolutions.ca" target="_blank" rel="noopener">
-          <span>Visit the site</span>
-          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
-        </a>
+        <blockquote class="cs-quote">
+          <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
+          <footer>
+            <cite>Andrew B.</cite>
+            <span class="role">Owner, Rocky Mountain Solutions</span>
+          </footer>
+        </blockquote>
       </div>
-
-      <blockquote class="cs-quote">
-        <p>We needed a site that actually brings in work, not just looks good. The FunnelHaus team built ours from the ground up and made it easy for people to request a quote. It was fast, fixed-price, and we'll be working with FunnelHaus moving forward.</p>
-        <footer>
-          <cite>Andrew B.</cite>
-          <span class="role">Owner, Rocky Mountain Solutions</span>
-        </footer>
-      </blockquote>
-    </div>
-  </article>
+    </article>
+  </section>
 
   <section class="cta">
     <div class="cta-inner">
