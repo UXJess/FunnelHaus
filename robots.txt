@@ -5,4 +5,4 @@ Allow: /
 Disallow: /start-a-project.html
 Disallow: /start-a-project
 
-Sitemap: https://funnelhaus.ca/sitemap.xml
+Sitemap: https://www.funnelhaus.ca/sitemap.xml
