@@ -1,0 +1,108 @@
+@font-face {
+  font-family: Niela;
+  src: url("assets/fonts/Niela-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --page: #111b29;
+  --panel: #fff;
+  --blue: #2c60ef;
+  --blue-hover: #1f4dd6;
+  --gutter: 16px;
+}
+@media (min-width: 768px) { :root { --gutter: 40px; } }
+
+* { box-sizing: border-box; margin: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--page);
+  font-family: 'Montserrat', sans-serif;
+}
+
+main {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  background: var(--panel);
+}
+
+main svg { display: block; width: 100%; height: 100%; }
+
+.headline { font-size: 99px; font-weight: 900; }
+.brand { font-size: 150px; font-weight: 900; letter-spacing: -0.045em; }
+.kicker { font-size: 28px; font-weight: 600; }
+.lead { font-weight: 700; text-transform: uppercase; }
+
+/* Scroll cue: boxed down arrow with its label, centred 20px above the bottom, on the white clouds */
+#arrow-btn {
+  position: absolute;
+  left: 50%;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 8px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: #225e92; /* the mountain sky's blue; 6.8:1 on the white clouds */
+  font: 500 10px/1 Niela, 'Helvetica Neue', Arial, sans-serif; /* small cue label, kept at 10px by request */
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+#arrow-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+#arrow-btn:focus-visible { outline: 2px solid #225e92; outline-offset: 3px; }
+
+/* Centered at the bottom of the revealed frame, sized to its label; styled after the live site's .btn-primary */
+.cta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(var(--gutter), env(safe-area-inset-bottom));
+  width: fit-content;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 14px 32px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  background: var(--blue);
+  color: #fff;
+  font: 500 13px/1.2 Niela, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, padding 0.2s;
+}
+.cta-arrow { width: 16px; height: 16px; transition: transform 0.2s; }
+.cta:hover { background: var(--blue-hover); border-color: var(--blue-hover); padding-right: 38px; }
+.cta:hover .cta-arrow { transform: translate(4px, -4px); }
+.cta:focus-visible { outline: 2px solid #162a43; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .cta, .cta-arrow { transition: none; }
+  .cta:hover { padding-right: 32px; }
+  .cta:hover .cta-arrow { transform: none; }
+}
+
+.scrollDist { width: 100%; height: 200%; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}

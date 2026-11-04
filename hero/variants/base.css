@@ -1,0 +1,87 @@
+/* Shared by the four end-frame variants. Each page adds its own look inline. */
+@font-face {
+  font-family: Niela;
+  src: url("../assets/fonts/Niela-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --navy: #162a43;
+  --blue: #2c60ef;
+  --blue-hover: #1f4dd6;
+  --gutter: 16px;
+}
+@media (min-width: 768px) { :root { --gutter: 40px; } }
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body { background: var(--navy); font: 500 16px/1.5 Niela, 'Helvetica Neue', Arial, sans-serif; }
+
+/* One full-screen frame: the last frame of the hero */
+.frame {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 96px var(--gutter);
+  text-align: center;
+  background: center / cover no-repeat var(--bg, none);
+}
+
+a { color: inherit; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn:focus-visible, .pill:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+
+/* Variant switcher, so the four can be flicked through */
+.switch {
+  position: fixed;
+  z-index: 10;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgb(10 18 30 / 0.82);
+  font: 500 13px/1 Niela, sans-serif;
+}
+@media (max-width: 767px) { .switch { top: 64px; bottom: auto; left: auto; right: 12px; } } /* clear of the cabin, buttons and titles */
+.switch a {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+}
+.switch a[aria-current] { background: #fff; color: var(--navy); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
