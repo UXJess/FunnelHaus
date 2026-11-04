@@ -1,5 +1,4 @@
-// Homepage hero (see assets/css/hero-mountain.css). Same motion as /hero (hero/full-hero.js + hero/variants/v4.js),
-// scoped to .fh-hero and wired to the page's Lenis instance instead of GSAP's ScrollToPlugin.
+// Homepage hero (see assets/css/hero-mountain.css), scoped to .fh-hero and wired to the page's Lenis instance.
 // Runs after the page's main script, which registers ScrollTrigger and feeds it Lenis' scroll.
 (function () {
   var hero = document.querySelector('.fh-hero');

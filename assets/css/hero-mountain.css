@@ -1,8 +1,8 @@
 /* Homepage hero: the mountain frame ("Imagine if finding your business was THIS HARD") whose cloud wipe
-   opens onto the clear-sky end frame ("We are FunnelHaus"). Same build as /hero (hero/), scoped to .fh-hero
-   so nothing leaks into the rest of the page, and laid out in the page flow instead of fixed:
+   opens onto the clear-sky end frame ("We are FunnelHaus"). Scoped to .fh-hero so nothing leaks into the
+   rest of the page, and laid out in the page flow instead of fixed:
    both frames sit in a sticky, screen-tall box; the spacers after it give the scroll, and once the end
-   frame has settled the box scrolls away and the statement section follows. Images live in hero/. */
+   frame has settled the box scrolls away and the statement section follows. Images live in hero/variants/assets/. */
 
 .fh-hero { position: relative; --gutter: 16px; }
 @media (min-width: 768px) { .fh-hero { --gutter: 40px; } }
