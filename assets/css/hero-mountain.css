@@ -165,7 +165,15 @@ html.fh-in-hero .nav-logo .wordmark { mix-blend-mode: normal; }
   .fh-hero .v4 .ground { height: 18svh; }
   .fh-hero .v4 .cabin { height: 173px; }
   .fh-hero .v4 .backdrop { width: 220%; left: -57%; top: calc(64svh - 16vw); }
-  .fh-hero .v4 .see { bottom: 185px; }
+  /* Join the centred copy stack, directly under the secondary line */
+  .fh-hero .v4 .see,
+  .fhc-banner-open .fh-hero .v4 .see {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 24px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .fh-hero .endScroll { display: none; }
