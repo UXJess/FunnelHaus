@@ -34,6 +34,38 @@ const SERVICE_LABELS = {
 
 const BUDGET_VALUES = new Set(['<5k', '5-7k', '7-10k', '10-15k', '15-20k', '20k+']);
 
+// Recorded with the HubSpot consent, so it lives here rather than coming from the browser.
+// Keep in sync with #formLegal and the opt-in label in contact.html.
+const PROCESSING_TEXT = 'By submitting this form, you agree to our Privacy Policy.';
+const OPT_IN_TEXT = 'Send me occasional updates and insights from FunnelHaus. You can unsubscribe anytime.';
+
+// Per-instance memory: Vercel runs several instances and recycles them, so this slows a flood
+// from one address rather than guaranteeing an exact limit.
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const recentByIp = new Map();
+
+function clientIp(req) {
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  return forwarded || String(req.headers['x-real-ip'] || '') || 'unknown';
+}
+
+function isRateLimited(ip, now = Date.now()) {
+  const recent = (recentByIp.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    recentByIp.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  recentByIp.set(ip, recent);
+  if (recentByIp.size > 5000) {
+    for (const [key, times] of recentByIp) {
+      if (!times.some((t) => now - t < RATE_WINDOW_MS)) recentByIp.delete(key);
+    }
+  }
+  return false;
+}
+
 function str(value, max) {
   if (typeof value !== 'string') return '';
   return value.trim().slice(0, max);
@@ -147,6 +179,11 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true, ok: true });
   }
 
+  if (isRateLimited(clientIp(req))) {
+    res.setHeader('Retry-After', String(RATE_WINDOW_MS / 1000));
+    return res.status(429).json({ error: 'Too many submissions. Please try again later.' });
+  }
+
   const fullName = str(body.fullName, 120);
   const email = str(body.email, 254).toLowerCase();
   const website = str(body.website, 500);
@@ -165,7 +202,7 @@ module.exports = async function handler(req, res) {
   }
 
   const context = {
-    pageUri: str(body.pageUri, 1000) || req.headers.referer || 'https://funnelhaus.ca/contact.html',
+    pageUri: str(body.pageUri, 1000) || req.headers.referer || 'https://www.funnelhaus.ca/contact.html',
     pageName: str(body.pageName, 200) || 'Contact Page - FunnelHaus'
   };
   const hutk = str(body.hutk, 64);
@@ -179,17 +216,12 @@ module.exports = async function handler(req, res) {
     context
   };
 
-  const processingText = str(body.processingText, 500) ||
-    'By submitting this form, you agree to our Privacy Policy.';
-  const optInText = str(body.optInText, 400) ||
-    'Send me occasional updates and insights from FunnelHaus. You can unsubscribe anytime.';
-
   payload.legalConsentOptions = {
     consent: {
       consentToProcess: true,
-      text: processingText,
+      text: PROCESSING_TEXT,
       communications: body.marketingOptIn === true
-        ? [{ value: true, subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_ID, text: optInText }]
+        ? [{ value: true, subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_ID, text: OPT_IN_TEXT }]
         : []
     }
   };
