@@ -10,10 +10,12 @@
 .fh-hero__sticky {
   position: sticky;
   top: 0;
-  height: 100vh;
-  height: 100svh;
-  margin-bottom: -100vh;   /* takes no room in the flow, so the spacers start at the top of the hero */
-  margin-bottom: -100svh;
+  /* Always the full visible screen: dvh follows phone toolbars as they slide in and out (svh left a strip of
+     the page's blue showing below the hero once the toolbar hid), and 2px extra covers rounding at odd heights */
+  height: calc(100vh + 2px);
+  height: calc(100dvh + 2px);
+  margin-bottom: calc(-100vh - 2px);   /* takes no room in the flow, so the spacers start at the top of the hero */
+  margin-bottom: calc(-100dvh - 2px);
   overflow: hidden;
   background: #225e92;
 }
