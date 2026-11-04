@@ -19,6 +19,7 @@
 }
 .fh-hero .scrollDist { height: 200vh; }                 /* the mountain frame's cloud wipe */
 .fh-hero .endScroll { height: 250vh; height: 250svh; }  /* the end frame settling */
+.fh-hero .endHold { height: 90vh; height: 90svh; }      /* the settled end frame holds still for a beat before scrolling away */
 
 /* Screen-reader copy of the mountain frame's line (the scene itself is a drawing) */
 .fh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
