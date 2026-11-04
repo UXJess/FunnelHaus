@@ -76,6 +76,7 @@ Gmail, not in this repo, so a file can look unused here and still be live in
 every email already sent. Never delete or rename these files; add a new file
 name instead.
 
-The blue signature in Gmail uses `jessie.png`, `name-blue.gif`,
-`icon-mail-white.png`, `icon-web-white.png` and `icon-instagram-white.png`.
-The `email-signature/` pages use the dark and light variants.
+The blue signature in Gmail (`email-signature/signature-blue.html`) uses
+`jessie.png`, `name-blue.gif`, `icon-mail-white.png`, `icon-web-white.png` and
+`icon-instagram-white.png`. The dark and light variants are in the same folder,
+and `email-signature/preview.html` shows all three.
