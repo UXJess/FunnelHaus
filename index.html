@@ -1715,8 +1715,6 @@
     .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
     .nav--light .nav-hamburger { color: #0f0f0f; }
   </style>
-  <!-- Vercel Web Analytics -->
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 <body>
 
@@ -1793,12 +1791,13 @@
     <p class="sub">and we build digital systems for your growing business</p>
 
     <!-- Downtown skyline with a big snow-capped mountain looming behind (Kling render, 2400 x 1029) -->
-    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-left.png" alt="" width="2400" height="1029"><!-- far-left peak, moved lower; sits behind the city -->
-    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-right.png" alt="" width="2400" height="1029"><!-- far-right peak, moved lower and right; sits behind the city -->
-    <img class="backdrop" src="hero/variants/assets/v4-layers/backdrop-ridge.png" alt="" width="2400" height="1029">
+    <!-- sizes mirror hero-mountain.css: the backdrop is 220% wide on phones, 100% above 767px -->
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-left-1800.webp" srcset="hero/variants/assets/v4-layers/peak-left-1200.webp 1200w, hero/variants/assets/v4-layers/peak-left-1800.webp 1800w, hero/variants/assets/v4-layers/peak-left-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async"><!-- far-left peak, moved lower; sits behind the city -->
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-right-1800.webp" srcset="hero/variants/assets/v4-layers/peak-right-1200.webp 1200w, hero/variants/assets/v4-layers/peak-right-1800.webp 1800w, hero/variants/assets/v4-layers/peak-right-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async"><!-- far-right peak, moved lower and right; sits behind the city -->
+    <img class="backdrop" src="hero/variants/assets/v4-layers/backdrop-ridge-1800.webp" srcset="hero/variants/assets/v4-layers/backdrop-ridge-1200.webp 1200w, hero/variants/assets/v4-layers/backdrop-ridge-1800.webp 1800w, hero/variants/assets/v4-layers/backdrop-ridge-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async">
     <div class="ground" aria-hidden="true">
       <!-- Realistic high-contrast cabin render, keyed from green (v4-layers/_raw/cabin-a-raw.png; cabin-real-b.png is the cooler sky-reflection version) -->
-      <img class="cabin" src="hero/variants/assets/v4-layers/cabin-real.png" alt="" width="1000" height="974">
+      <img class="cabin" src="hero/variants/assets/v4-layers/cabin-real-1000.webp" srcset="hero/variants/assets/v4-layers/cabin-real-600.webp 600w, hero/variants/assets/v4-layers/cabin-real-1000.webp 1000w" sizes="(max-width: 767px) 178px, 296px" alt="" width="1000" height="974" decoding="async">
     </div>
 
     <!-- Capabilities from funnelhaus.ca, plus AI Kits (the Haus Rules offer, named for the public) -->
@@ -1895,7 +1894,7 @@
           <g class="mountBg">
             <g transform="translate(588.75 364.46) scale(0.01125)">
               <!-- New realistic cabin, same footprint as the old one (x 401-1599, bottom 1337 in these units) -->
-              <image href="hero/variants/assets/v4-layers/cabin-real.png" x="401" y="170" width="1198" height="1167" filter="url(#house-grade)" />
+              <image href="hero/variants/assets/v4-layers/cabin-real-600.webp" x="401" y="170" width="1198" height="1167" filter="url(#house-grade)" />
               <polyline points="410,596 1000,150 1590,596" fill="none" stroke="#e8eef5" stroke-width="64" stroke-linejoin="round" stroke-linecap="round" filter="url(#soft-roof)" />
             </g>
             <image href="hero/variants/assets/frame1-mountBg.png" width="1200" height="800" clip-path="url(#ridge-front)" />
@@ -2068,7 +2067,7 @@
       <article class="fh-proof-card reveal reveal-d1">
         <div class="fh-proof-copy">
           <div class="fh-proof-brand">
-            <img class="fh-proof-logo" src="assets/images/logo-rms356.png" alt="" width="356" height="356" loading="lazy" decoding="async" />
+            <img class="fh-proof-logo" src="assets/images/logo-rms216.webp" alt="" width="216" height="216" loading="lazy" decoding="async" />
             <div>
               <p class="fh-proof-kicker">Client</p>
               <p class="fh-proof-client">Rocky Mountain Solutions</p>
