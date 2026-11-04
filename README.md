@@ -67,3 +67,15 @@ is only rendered (and sent) when `HS_SEND_MARKETING_OPT_IN` is `true` in the
 form script. A ticked box subscribes the contact to "Marketing Information"
 (`3707224695`). An unticked box sends no subscription, so it never unsubscribes
 an existing contact. The box is never pre-ticked.
+
+## Email signature images
+
+Everything in `assets/email/` is loaded by email signatures, which link to
+`https://www.funnelhaus.ca/assets/email/…` directly. Those signatures live in
+Gmail, not in this repo, so a file can look unused here and still be live in
+every email already sent. Never delete or rename these files; add a new file
+name instead.
+
+The blue signature in Gmail uses `jessie.png`, `name-blue.gif`,
+`icon-mail-white.png`, `icon-web-white.png` and `icon-instagram-white.png`.
+The `email-signature/` pages use the dark and light variants.
