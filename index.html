@@ -37,6 +37,10 @@
   <!-- Consent manager — loads HubSpot tracking, GA4, Hotjar and Meta Pixel only after opt-in -->
   <link rel="stylesheet" href="assets/css/consent.css" />
   <link rel="stylesheet" href="assets/css/proof.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Archivo:wght@600;900&family=Caveat:wght@500&display=swap" />
+  <link rel="stylesheet" href="assets/css/hero-mountain.css" />
   <script src="assets/js/consent.js" defer></script>
   <script src="assets/js/site-preview.js" defer></script>
 
@@ -1776,49 +1780,166 @@
     <a href="growth-and-performance.html" class="dropdown-item">Growth &amp; Performance</a>
   </div>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero__sticky">
-      <div class="hero__media">
-        <video
-          class="hero__video hero__video--island"
-          src="assets/videos/herovideo1.mp4"
-          poster="assets/videos/herovideo1-poster.jpg"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-        ></video>
-        <video
-          class="hero__video hero__video--city"
-          src="assets/videos/herovideo2.mp4"
-          poster="assets/videos/herovideo2-poster.jpg"
-          muted
-          playsinline
-          preload="auto"
-        ></video>
-      </div>
-      <div class="hero__scrim" aria-hidden="true"></div>
-      <div class="hero__copy">
-        <p class="hero__line hero__line--1">Imagine if finding your business was <strong>this hard</strong></p>
-        <div class="hero__line hero__line--2">
-          <h1 class="hero__h1">FunnelHaus</h1>
-          <p class="hero__t2">Building digital systems for your growing business</p>
-        </div>
-      </div>
-      <div class="hero__bar">
-        <div class="hero__center">
-          <button type="button" class="hero__continue">Continue</button>
-          <button type="button" class="hero__scroll" aria-label="Scroll down">
-            <svg class="hero__scroll-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-        </div>
-        <a class="hero__cta" href="contact.html">Let's talk</a>
-      </div>
+  <!-- HERO: the mountain frame's cloud wipe opens onto the "We are FunnelHaus" end frame (assets/css/hero-mountain.css, assets/js/hero-mountain.js; images in hero/) -->
+  <section class="fh-hero" id="hero" aria-label="Introduction">
+    <p class="fh-sr">Imagine if finding your business was this hard.</p>
+    <div class="fh-hero__sticky">
+      <!-- End frame, underneath -->
+      <div class="v4">
+    <div class="sky" aria-hidden="true"></div>
+
+    <p class="we">We are</p>
+    <h1>FunnelHaus</h1>
+    <p class="sub">and we build digital systems for your growing business</p>
+
+    <!-- Downtown skyline with a big snow-capped mountain looming behind (Kling render, 2400 x 1029) -->
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-left.png" alt="" width="2400" height="1029"><!-- far-left peak, moved lower; sits behind the city -->
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-right.png" alt="" width="2400" height="1029"><!-- far-right peak, moved lower and right; sits behind the city -->
+    <img class="backdrop" src="hero/variants/assets/v4-layers/backdrop-ridge.png" alt="" width="2400" height="1029">
+    <div class="ground" aria-hidden="true">
+      <!-- Realistic high-contrast cabin render, keyed from green (v4-layers/_raw/cabin-a-raw.png; cabin-real-b.png is the cooler sky-reflection version) -->
+      <img class="cabin" src="hero/variants/assets/v4-layers/cabin-real.png" alt="" width="1000" height="974">
     </div>
+
+    <!-- Capabilities from funnelhaus.ca, plus AI Kits (the Haus Rules offer, named for the public) -->
+    <ul class="caps" aria-label="Capabilities">
+      <li>Strategy</li><li>UX / UI</li><li>AI Build</li><li>AI Kits</li><li>CRO</li><li>Photo</li><li>Video</li>
+      <li>Campaigns</li><li>Social</li><li>SEO</li><li>Analytics</li><li>Funnel Ops</li>
+    </ul>
+
+    <a class="btn see" href="https://www.funnelhaus.ca/capabilities.html">See what we do</a>
+  </div>
+
+      <!-- Mountain frame, on top -->
+      <div class="fh-mountain">
+    <svg class="scene" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <filter id="lift" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#0b1a2e" flood-opacity="0.55" />
+      </filter>
+      <!-- Grades the studio-lit house to the scene's cold, hazy daylight -->
+      <filter id="house-grade" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="0.5" />
+        <feColorMatrix type="matrix" values="0.8 0 0 0 0.03  0 0.88 0 0 0.05  0 0 0.98 0 0.1  0 0 0 1 0" />
+      </filter>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="0.3" />
+      </filter>
+      <filter id="soft-roof" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur stdDeviation="10" />
+      </filter>
+      <linearGradient id="house-shade" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0.45" stop-color="#0a2140" stop-opacity="0" />
+        <stop offset="1" stop-color="#0a2140" stop-opacity="0.35" />
+      </linearGradient>
+      <clipPath id="ridge-front">
+        <rect x="584" y="378.2" width="32" height="12" />
+      </clipPath>
+      <mask id="ridge-alpha" mask-type="alpha" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="800">
+        <image href="hero/variants/assets/frame1-mountBg.png" width="1200" height="800" />
+      </mask>
+      <!-- Traced in the photo's own pixels, to drop its white backdrop -->
+      <clipPath id="house-outline">
+        <polygon points="1000,142 1599,598 1599,606 1571,623 1573,1307 1529,1307 1529,1337 471,1337 471,1307 425,1307 427,623 401,606 401,598" />
+      </clipPath>
+      <!-- The cloud wipe as a hole: the original white-panel mask, inverted, so the scene
+           disappears behind the rising cloud and the end frame underneath shows through -->
+      <filter id="invert" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2400" height="2000" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" />
+        <!-- Steepened, so the hole only opens where the cloud is nearly solid and its soft edges stay scene -->
+        <feComponentTransfer>
+          <feFuncR type="linear" slope="4" /><feFuncG type="linear" slope="4" /><feFuncB type="linear" slope="4" />
+        </feComponentTransfer>
+      </filter>
+      <!-- Billowy underside for the front cloud: its image ends in a straight edge at y=800, so the bottom is
+           shaped into soft overlapping puffs that (with their feathering) fade out before that edge.
+           In the image's own coordinates, so it rises with the cloud. -->
+      <filter id="puff-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="9" /></filter>
+      <mask id="cloud-base" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1400" height="1000">
+        <g fill="#fff" filter="url(#puff-soft)">
+          <rect x="-100" y="-100" width="1400" height="760" />
+          <circle cx="-60" cy="693" r="53" /> <circle cx="1" cy="697" r="70" /> <circle cx="81" cy="681" r="60" /> <circle cx="150" cy="664" r="52" />
+          <circle cx="210" cy="665" r="64" /> <circle cx="284" cy="683" r="62" /> <circle cx="355" cy="697" r="39" /> <circle cx="400" cy="692" r="37" />
+          <circle cx="442" cy="673" r="53" /> <circle cx="503" cy="662" r="52" /> <circle cx="563" cy="672" r="43" /> <circle cx="612" cy="691" r="57" />
+          <circle cx="678" cy="698" r="74" /> <circle cx="762" cy="684" r="61" /> <circle cx="833" cy="666" r="48" /> <circle cx="888" cy="664" r="57" />
+          <circle cx="953" cy="681" r="57" /> <circle cx="1018" cy="697" r="37" /> <circle cx="1061" cy="694" r="36" /> <circle cx="1101" cy="675" r="56" />
+          <circle cx="1166" cy="662" r="59" /> <circle cx="1234" cy="670" r="49" />
+        </g>
+      </mask>
+      <mask id="m">
+        <g transform="translate(0 70)">
+          <g class="cloud1">
+            <rect fill="#fff" width="1200" height="801" y="799" />
+            <image href="hero/variants/assets/frame1-cloud1Mask.jpg" width="1200" height="800" />
+          </g>
+        </g>
+      </mask>
+      <mask id="hole" maskUnits="userSpaceOnUse" x="-600" y="-600" width="2400" height="2000">
+        <g filter="url(#invert)">
+          <rect x="-600" y="-600" width="2400" height="2000" fill="#000" />
+          <g transform="translate(0 70)">
+            <g class="cloud1">
+              <rect fill="#fff" width="1200" height="801" y="799" />
+              <image href="hero/variants/assets/frame1-cloud1Mask.jpg" width="1200" height="800" />
+            </g>
+          </g>
+        </g>
+      </mask>
+
+      <g mask="url(#hole)">
+        <!-- Scene sits 70 units lower; the sky's flat top color fills the gap above it -->
+        <g transform="translate(0 70)">
+          <rect class="sky" fill="#215d91" y="-230" width="1200" height="240" />
+          <image class="sky" href="hero/variants/assets/frame1-sky.jpg" width="1200" height="590" />
+          <image class="mountBg" href="hero/variants/assets/frame1-mountBg.png" width="1200" height="800" />
+          <!-- Tiny house cut into the back ridge, under the arrow; moves with mountBg -->
+          <g class="mountBg">
+            <g transform="translate(588.75 364.46) scale(0.01125)">
+              <!-- New realistic cabin, same footprint as the old one (x 401-1599, bottom 1337 in these units) -->
+              <image href="hero/variants/assets/v4-layers/cabin-real.png" x="401" y="170" width="1198" height="1167" filter="url(#house-grade)" />
+              <polyline points="410,596 1000,150 1590,596" fill="none" stroke="#e8eef5" stroke-width="64" stroke-linejoin="round" stroke-linecap="round" filter="url(#soft-roof)" />
+            </g>
+            <image href="hero/variants/assets/frame1-mountBg.png" width="1200" height="800" clip-path="url(#ridge-front)" />
+            <g mask="url(#ridge-alpha)">
+              <path d="M602 377.6 L614 380.2 L613 382.4 L601.5 380 Z" fill="#06213f" opacity="0.5" filter="url(#soft)" />
+            </g>
+            <!-- Hand-drawn light blue arrow pointing at the tiny cabin; rides with the back ridge -->
+            <g class="cabin-pointer" fill="#a9dcff" transform="translate(11 1) rotate(65 597 359) translate(1208 0) scale(-1 1)"><!-- mirrored, then turned so it sweeps from top right down to the cabin at bottom left -->
+              <!-- Thin tail sweeping into a bold head (after the user's reference icon), pointing down at the cabin -->
+              <path transform="translate(611 359) rotate(100) scale(0.105 -0.105) translate(-488 -265)" d="M160 483 C 150 330, 240 213, 352 213 L 352 168 Q 352 156, 362 163 L 482 257 Q 491 265, 482 273 L 362 367 Q 352 374, 352 362 L 352 317 C 262 317, 192 378, 166 482 Q 162 490, 160 483 Z" />
+            </g>
+          </g>
+          <image class="mountMg" href="hero/variants/assets/frame1-mountMg.png" width="1200" height="800" />
+          <image class="cloud2" href="hero/variants/assets/frame1-cloud2.png" width="1200" height="800" />
+          <image class="mountFg" href="hero/variants/assets/frame1-mountFg.png" width="1200" height="800" />
+          <image class="cloud3" href="hero/variants/assets/frame1-cloud3.png" width="1200" height="800" />
+        </g>
+        <text class="lead" fill="#fff" x="600" y="95" text-anchor="middle"
+          data-wide="Imagine if finding|your business was"
+          data-narrow="Imagine if|finding your|business was"><tspan x="600">Imagine if finding</tspan><tspan x="600" dy="1em">your business was</tspan></text>
+        <text class="headline" fill="#fff" x="600" y="200" text-anchor="middle">THIS HARD</text>
+      </g>
+
+      <!-- The front cloud stays outside the hole and covers its leading edge, as it hid the white panel in the original -->
+      <g transform="translate(0 70)">
+        <image class="cloud1" href="hero/variants/assets/frame1-cloud1.png" width="1200" height="800" mask="url(#cloud-base)" />
+      </g>
+
+      <!-- The original white panel behind the cloud, so the opening looks as it always has;
+           it fades as the wipe gets going and the end frame shows through instead -->
+      <g class="panel" mask="url(#m)">
+        <rect fill="#fff" x="-600" y="-600" width="2400" height="2000" />
+      </g>
+    </svg>
+    <!-- Scroll cue on the white clouds at the bottom of the scene: a bobbing down arrow and its label -->
+    <button id="arrow-btn" type="button">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path class="arrow" d="M20 6V30M11 22L20 31L29 22" /></svg>
+      Scroll Down
+    </button>
+  </div>
+    </div>
+    <!-- Scroll for the mountain frame, then for the end frame to settle -->
+    <div class="scrollDist" aria-hidden="true"></div>
+    <div class="endScroll" aria-hidden="true"></div>
   </section>
 
   <!-- STATEMENT -->
@@ -2312,110 +2433,6 @@
       });
     })();
 
-    // ── Hero: click to reveal city scene
-    (function () {
-      var island = document.querySelector('.hero__video--island');
-      var city   = document.querySelector('.hero__video--city');
-      var line1  = document.querySelector('.hero__line--1');
-      var line2  = document.querySelector('.hero__line--2');
-      var nextBtn = document.querySelector('.hero__continue');
-      var cue    = document.querySelector('.hero__scroll');
-      var cta    = document.querySelector('.hero__cta');
-      var hero   = document.querySelector('#hero');
-      if (!hero || !island || !city || !nextBtn || !cue) return;
-
-      var scene2 = false;
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var lockKeys = { ArrowDown: 1, ArrowUp: 1, PageDown: 1, PageUp: 1, Home: 1, End: 1, ' ': 1 };
-
-      function lockScroll() {
-        document.documentElement.classList.add('is-hero-locked');
-        window.scrollTo(0, 0);
-        if (typeof lenis !== 'undefined') {
-          lenis.scrollTo(0, { immediate: true });
-          lenis.stop();
-        }
-      }
-
-      function unlockScroll() {
-        document.documentElement.classList.remove('is-hero-locked');
-        if (typeof lenis !== 'undefined') lenis.start();
-      }
-
-      function onLockKey(e) {
-        if (!document.documentElement.classList.contains('is-hero-locked')) return;
-        if (lockKeys[e.key]) e.preventDefault();
-      }
-
-      lockScroll();
-      window.addEventListener('keydown', onLockKey, { passive: false });
-
-      function playSafe(video) {
-        if (!video) return;
-        var attempt = video.play();
-        if (attempt && attempt.catch) attempt.catch(function () {});
-      }
-
-      function playIsland() { playSafe(island); }
-
-      playIsland();
-      document.addEventListener('pointerdown', playIsland, { once: true });
-      document.addEventListener('touchstart', playIsland, { once: true, passive: true });
-
-      if (reduce) {
-        island.removeAttribute('autoplay');
-        island.pause();
-      }
-
-      function goToStatement(e) {
-        if (e) e.preventDefault();
-        var next = document.querySelector('#statement');
-        if (!next) return;
-        if (typeof lenis !== 'undefined') lenis.scrollTo(next, { duration: 1.35 });
-        else next.scrollIntoView({ behavior: 'smooth' });
-      }
-
-      function revealScene2() {
-        if (scene2) return;
-        scene2 = true;
-        city.loop = true;
-        city.currentTime = 0;
-        playSafe(city);
-        island.pause();
-        unlockScroll();
-        window.removeEventListener('keydown', onLockKey);
-
-        if (reduce || typeof gsap === 'undefined') {
-          if (line1) line1.style.opacity = '0';
-          if (line2) line2.style.opacity = '1';
-          city.style.opacity = '1';
-          nextBtn.style.opacity = '0';
-          nextBtn.style.pointerEvents = 'none';
-          cue.style.opacity = '1';
-          if (cta) cta.style.opacity = '1';
-          hero.classList.add('hero--scene-2');
-          return;
-        }
-
-        nextBtn.disabled = true;
-        gsap.timeline({
-          defaults: { ease: 'power2.inOut' },
-          onComplete: function () {
-            hero.classList.add('hero--scene-2');
-          }
-        })
-          .to(line1, { opacity: 0, duration: 1.1 }, 0)
-          .to(nextBtn, { opacity: 0, duration: 0.35 }, 0)
-          .to(city, { opacity: 1, duration: 1.65 }, 0.2)
-          .to(line2, { opacity: 1, duration: 1.15 }, 0.85)
-          .to(cue, { opacity: 1, duration: 0.55 }, 1.7)
-          .to(cta, { opacity: 1, duration: 0.55 }, 1.7);
-      }
-
-      nextBtn.addEventListener('click', revealScene2);
-      cue.addEventListener('click', goToStatement);
-    })();
-  
     // ── Mobile hamburger menu
     (function () {
       const hamburger = document.getElementById('navHamburger');
@@ -2474,6 +2491,7 @@
     })();
 
   </script>
+  <script src="assets/js/hero-mountain.js"></script>
   <script>
     (function(){
       var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -2494,6 +2512,10 @@
         for (var i = 0; i < els.length; i++) {
           var el = els[i];
           if (el === nav || nav.contains(el)) continue;
+          if (el.closest && el.closest('.fh-hero')) {
+            nav.classList.remove('nav--light');
+            return;
+          }
           if (el.classList && el.classList.contains('hero')) {
             nav.classList.remove('nav--light');
             return;

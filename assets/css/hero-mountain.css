@@ -1,0 +1,170 @@
+/* Homepage hero: the mountain frame ("Imagine if finding your business was THIS HARD") whose cloud wipe
+   opens onto the clear-sky end frame ("We are FunnelHaus"). Same build as /hero (hero/), scoped to .fh-hero
+   so nothing leaks into the rest of the page, and laid out in the page flow instead of fixed:
+   both frames sit in a sticky, screen-tall box; the spacers after it give the scroll, and once the end
+   frame has settled the box scrolls away and the statement section follows. Images live in hero/. */
+
+.fh-hero { position: relative; --gutter: 16px; }
+@media (min-width: 768px) { .fh-hero { --gutter: 40px; } }
+
+.fh-hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  margin-bottom: -100vh;   /* takes no room in the flow, so the spacers start at the top of the hero */
+  margin-bottom: -100svh;
+  overflow: hidden;
+  background: #225e92;
+}
+.fh-hero .scrollDist { height: 200vh; }                 /* the mountain frame's cloud wipe */
+.fh-hero .endScroll { height: 250vh; height: 250svh; }  /* the end frame settling */
+
+/* Screen-reader copy of the mountain frame's line (the scene itself is a drawing) */
+.fh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── Mountain frame, on top ─────────────────────────────────── */
+.fh-mountain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  font-family: 'Montserrat', sans-serif;
+}
+.fh-mountain svg.scene { display: block; width: 100%; height: 100%; max-width: none; }
+.fh-mountain .headline { font-size: 99px; font-weight: 900; }
+.fh-mountain .lead { font-weight: 700; text-transform: uppercase; }
+.show-end .fh-mountain { visibility: hidden; } /* reduced motion: swaps straight to the end frame */
+
+/* Scroll cue: a bobbing down arrow and its label, centred on the white clouds 20px above the bottom */
+.fh-hero #arrow-btn {
+  position: absolute;
+  left: 50%;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 8px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: #225e92; /* the mountain sky's blue; 6.8:1 on the white clouds */
+  font: 500 10px/1 Niela, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.fh-hero #arrow-btn svg { display: block; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.fh-hero #arrow-btn:focus-visible { outline: 2px solid #225e92; outline-offset: 3px; }
+
+/* ── End frame, underneath ──────────────────────────────────── */
+.fh-hero .v4 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 96px var(--gutter) 156px; /* the extra bottom padding lifts the centred words 30px */
+  background: #225e92;
+  color: #fff;
+  text-align: center;
+  font-family: Niela, 'Helvetica Neue', Arial, sans-serif;
+}
+.fh-hero .v4 .sky { position: absolute; left: 0; right: 0; top: -80px; bottom: 0; background: url("../../hero/variants/assets/frame1-sky.jpg") center top / cover no-repeat; }
+.fh-hero .v4 .we, .fh-hero .v4 h1, .fh-hero .v4 .sub, .fh-hero .v4 .caps, .fh-hero .v4 .see { z-index: 1; }
+.fh-hero .v4 .we, .fh-hero .v4 h1, .fh-hero .v4 .sub { position: relative; text-shadow: 0 1px 18px rgb(11 26 46 / 0.35); }
+
+.fh-hero .v4 .we { font: 500 clamp(32px, 3.4vw, 46px)/1 Caveat, cursive; rotate: -3deg; }
+.fh-hero .v4 h1 {
+  margin-top: 6px;
+  font: 900 clamp(38px, 12vw, 184px)/0.9 Archivo, 'Arial Black', sans-serif;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+}
+.fh-hero .v4 .sub { max-width: 17em; margin-top: 4svh; font-size: 19px; font-weight: 500; line-height: 1.4; text-wrap: balance; text-shadow: 0 1px 2px rgb(11 26 46 / 0.45), 0 1px 14px rgb(11 26 46 / 0.55); }
+
+/* Capabilities stacked on the right edge, just above the button */
+.fh-hero .v4 .caps {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(var(--gutter) + 44px + 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 600 14.25px/1 Archivo, sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: 0 1px 10px rgb(11 26 46 / 0.4);
+}
+
+/* Same as the site's primary button (.hero__cta), with a 44px tap height */
+.fh-hero .v4 .see {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 12px 22px;
+  border: 1px solid #2c60ef;
+  border-radius: 4px;
+  background: #2c60ef;
+  color: #fff;
+  font: 500 12px/normal Niela, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.22s, border-color 0.22s, color 0.22s;
+}
+.fh-hero .v4 .see:hover { background: #1e50d9; border-color: #1e50d9; color: #fff; }
+.fh-hero .v4 .see:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+/* City and mountain backdrop (the two outer peaks are their own layers, behind it), then the cabin */
+.fh-hero .v4 .backdrop {
+  position: absolute;
+  left: 0;
+  top: calc(66svh - 13.3vw);
+  width: 100%;
+  max-width: none;
+  height: auto;
+  opacity: 0.9;
+}
+.fh-hero .v4 .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 26svh; pointer-events: none; }
+.fh-hero .v4 .cabin { position: absolute; left: 50%; bottom: -10px; height: min(288px, 31.6svh); width: auto; max-width: none; aspect-ratio: 1000 / 974; translate: -50% 0; }
+
+/* While the hero is on screen the nav drops its difference blend, which would turn it orange over the sky */
+html.fh-in-hero .nav-links,
+html.fh-in-hero .nav-logo .wordmark { mix-blend-mode: normal; }
+
+/* Keep the scroll cue and the button clear of the cookie banner until a choice is made */
+.fhc-banner-open .fh-hero #arrow-btn { bottom: calc(var(--fhc-banner-h, 0px) + 20px); }
+.fhc-banner-open .fh-hero .v4 .see { bottom: calc(var(--fhc-banner-h, 0px) + var(--gutter)); }
+.fhc-banner-open .fh-hero .v4 .caps { bottom: calc(var(--fhc-banner-h, 0px) + var(--gutter) + 64px); }
+
+@media (max-width: 899px), (max-height: 720px) {
+  .fh-hero .v4 .caps { display: none; }
+}
+@media (max-width: 767px) {
+  .fh-hero .v4 .ground { height: 18svh; }
+  .fh-hero .v4 .cabin { height: 173px; }
+  .fh-hero .v4 .backdrop { width: 220%; left: -57%; top: calc(64svh - 16vw); }
+  .fh-hero .v4 .see { bottom: 185px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fh-hero .endScroll { display: none; }
+  .fh-hero .v4 .see { transition: none; }
+}
