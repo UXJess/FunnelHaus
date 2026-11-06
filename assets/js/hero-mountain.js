@@ -109,12 +109,16 @@
   if (document.fonts) document.fonts.ready.then(fitScene);
   window.addEventListener('resize', fitScene);
 
-  // The scroll cue takes you one screen down, into the wipe
+  // The scroll cue plays the whole wipe and stops on the settled end frame (the end of .endScroll)
   var arrowBtn = hero.querySelector('#arrow-btn');
   if (arrowBtn) {
     arrowBtn.addEventListener('click', function () {
-      if (typeof lenis !== 'undefined') lenis.scrollTo(window.innerHeight, { duration: reduceMotion ? 0 : 1.5 });
-      else window.scrollTo({ top: window.innerHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
+      // reduced motion has no .endScroll; the swap happens halfway down .scrollDist, so its end is safely past it
+      var target = reduceMotion
+        ? hero.querySelector('.scrollDist').getBoundingClientRect().bottom + window.scrollY
+        : hero.querySelector('.endScroll').getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+      if (typeof lenis !== 'undefined') lenis.scrollTo(target, { duration: reduceMotion ? 0 : 3.5 });
+      else window.scrollTo({ top: target, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   }
 })();
