@@ -42,13 +42,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Archivo:wght@600;900&family=Caveat:wght@500&display=swap" />
   <link rel="stylesheet" href="assets/css/hero-mountain.css" />
+  <!-- The mountain scene's images jump the queue: until they're all in, the scene is see-through -->
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-sky.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud1Mask.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-mountBg.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-mountMg.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-mountFg.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud1.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud2.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud3.png" fetchpriority="high" />
+  <!-- hero-mountain.js lifts this once the mountain scene's images are in (see hero-mountain.css) -->
+  <script>
+    document.documentElement.classList.add('fh-loading');
+    setTimeout(function () { document.documentElement.classList.remove('fh-loading'); }, 10000);
+  </script>
   <script src="assets/js/consent.js" defer></script>
   <script src="assets/js/site-preview.js" defer></script>
-
-  <!-- Lenis smooth scroll -->
-  <script src="assets/js/vendor/lenis-1.0.42.min.js"></script>
-  <script src="assets/js/vendor/gsap-3.12.5.min.js"></script>
-  <script src="assets/js/vendor/ScrollTrigger-3.12.5.min.js"></script>
 
   <style>
     /* ─── NIELA FONT ────────────────────────────────────────── */
@@ -1793,12 +1802,12 @@
 
     <!-- Downtown skyline with a big snow-capped mountain looming behind (Kling render, 2400 x 1029) -->
     <!-- sizes mirror hero-mountain.css: the backdrop is 220% wide on phones, 100% above 767px -->
-    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-left-1800.webp" srcset="hero/variants/assets/v4-layers/peak-left-1200.webp 1200w, hero/variants/assets/v4-layers/peak-left-1800.webp 1800w, hero/variants/assets/v4-layers/peak-left-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async"><!-- far-left peak, moved lower; sits behind the city -->
-    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-right-1800.webp" srcset="hero/variants/assets/v4-layers/peak-right-1200.webp 1200w, hero/variants/assets/v4-layers/peak-right-1800.webp 1800w, hero/variants/assets/v4-layers/peak-right-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async"><!-- far-right peak, moved lower and right; sits behind the city -->
-    <img class="backdrop" src="hero/variants/assets/v4-layers/backdrop-ridge-1800.webp" srcset="hero/variants/assets/v4-layers/backdrop-ridge-1200.webp 1200w, hero/variants/assets/v4-layers/backdrop-ridge-1800.webp 1800w, hero/variants/assets/v4-layers/backdrop-ridge-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async">
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-left-1800.webp" srcset="hero/variants/assets/v4-layers/peak-left-1200.webp 1200w, hero/variants/assets/v4-layers/peak-left-1800.webp 1800w, hero/variants/assets/v4-layers/peak-left-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async" fetchpriority="low"><!-- far-left peak, moved lower; sits behind the city -->
+    <img class="backdrop peak" src="hero/variants/assets/v4-layers/peak-right-1800.webp" srcset="hero/variants/assets/v4-layers/peak-right-1200.webp 1200w, hero/variants/assets/v4-layers/peak-right-1800.webp 1800w, hero/variants/assets/v4-layers/peak-right-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async" fetchpriority="low"><!-- far-right peak, moved lower and right; sits behind the city -->
+    <img class="backdrop" src="hero/variants/assets/v4-layers/backdrop-ridge-1800.webp" srcset="hero/variants/assets/v4-layers/backdrop-ridge-1200.webp 1200w, hero/variants/assets/v4-layers/backdrop-ridge-1800.webp 1800w, hero/variants/assets/v4-layers/backdrop-ridge-2400.webp 2400w" sizes="(max-width: 767px) 220vw, 100vw" alt="" width="2400" height="1029" decoding="async" fetchpriority="low">
     <div class="ground" aria-hidden="true">
       <!-- Realistic high-contrast cabin render, keyed from green (v4-layers/_raw/cabin-a-raw.png; cabin-real-b.png is the cooler sky-reflection version) -->
-      <img class="cabin" src="hero/variants/assets/v4-layers/cabin-real-1000.webp" srcset="hero/variants/assets/v4-layers/cabin-real-600.webp 600w, hero/variants/assets/v4-layers/cabin-real-1000.webp 1000w" sizes="(max-width: 767px) 178px, 296px" alt="" width="1000" height="974" decoding="async">
+      <img class="cabin" src="hero/variants/assets/v4-layers/cabin-real-1000.webp" srcset="hero/variants/assets/v4-layers/cabin-real-600.webp 600w, hero/variants/assets/v4-layers/cabin-real-1000.webp 1000w" sizes="(max-width: 767px) 178px, 296px" alt="" width="1000" height="974" decoding="async" fetchpriority="low">
     </div>
 
     <!-- Capabilities from funnelhaus.ca, plus AI Kits (the Haus Rules offer, named for the public) -->
@@ -1942,6 +1951,14 @@
     <div class="endScroll" aria-hidden="true"></div>
     <!-- A pause (170svh) once the end frame has settled, before the page moves on -->
     <div class="endHold" aria-hidden="true"></div>
+    <!-- Lifts the head's fh-loading hold once every image in the mountain scene has loaded (see hero-mountain.css) -->
+    <script>
+      Promise.all(Array.from(new Set(Array.from(document.querySelectorAll('.fh-mountain image'), function (i) { return i.getAttribute('href'); })), function (src) {
+        var img = new Image();
+        img.src = src;
+        return img.decode().catch(function () {});
+      })).then(function () { document.documentElement.classList.remove('fh-loading'); });
+    </script>
   </section>
 
   <!-- STATEMENT -->
@@ -2247,6 +2264,9 @@
     </div>
   </footer>
 
+  <script src="assets/js/vendor/lenis-1.0.42.min.js"></script>
+  <script src="assets/js/vendor/gsap-3.12.5.min.js"></script>
+  <script src="assets/js/vendor/ScrollTrigger-3.12.5.min.js"></script>
   <script>
     // ── Lenis smooth scroll
     const lenis = new Lenis({

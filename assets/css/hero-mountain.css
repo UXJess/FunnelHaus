@@ -38,6 +38,11 @@
 .fh-mountain .headline { font-size: 99px; font-weight: 900; }
 .fh-mountain .lead { font-weight: 700; text-transform: uppercase; }
 .show-end .fh-mountain { visibility: hidden; } /* reduced motion: swaps straight to the end frame */
+/* Until every image in the scene is in, the scene is see-through and the end frame would show through it:
+   hold both back, so the sky and the words come first and the mountains then arrive all at once */
+.fh-loading .fh-hero .v4,
+.fh-loading .fh-mountain image,
+.fh-loading .fh-mountain .mountBg { visibility: hidden; }
 
 /* Scroll cue: a bobbing down arrow and its label, centred on the white clouds 20px above the bottom */
 .fh-hero #arrow-btn {
