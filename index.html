@@ -45,6 +45,7 @@
   <!-- The mountain scene's images jump the queue: until they're all in, the scene is see-through -->
   <link rel="preload" as="image" href="hero/variants/assets/frame1-sky.jpg" fetchpriority="high" />
   <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud1Mask.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="hero/variants/assets/frame1-cloud1Hole.png" fetchpriority="high" />
   <link rel="preload" as="image" href="hero/variants/assets/frame1-mountBg.png" fetchpriority="high" />
   <link rel="preload" as="image" href="hero/variants/assets/frame1-mountMg.png" fetchpriority="high" />
   <link rel="preload" as="image" href="hero/variants/assets/frame1-mountFg.png" fetchpriority="high" />
@@ -1850,15 +1851,6 @@
       <clipPath id="house-outline">
         <polygon points="1000,142 1599,598 1599,606 1571,623 1573,1307 1529,1307 1529,1337 471,1337 471,1307 425,1307 427,623 401,606 401,598" />
       </clipPath>
-      <!-- The cloud wipe as a hole: the original white-panel mask, inverted, so the scene
-           disappears behind the rising cloud and the end frame underneath shows through -->
-      <filter id="invert" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2400" height="2000" color-interpolation-filters="sRGB">
-        <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" />
-        <!-- Steepened, so the hole only opens where the cloud is nearly solid and its soft edges stay scene -->
-        <feComponentTransfer>
-          <feFuncR type="linear" slope="4" /><feFuncG type="linear" slope="4" /><feFuncB type="linear" slope="4" />
-        </feComponentTransfer>
-      </filter>
       <!-- Billowy underside for the front cloud: its image ends in a straight edge at y=800, so the bottom is
            shaped into soft overlapping puffs that (with their feathering) fade out before that edge.
            In the image's own coordinates, so it rises with the cloud. -->
@@ -1882,14 +1874,16 @@
           </g>
         </g>
       </mask>
+      <!-- The cloud wipe as a hole: the white-panel mask above, inverted, so the scene disappears behind
+           the rising cloud and the end frame underneath shows through. The inversion is baked into
+           frame1-cloud1Hole.png (255 - v, steepened x4 so the soft edges stay scene): iOS Safari drops
+           a mask whose content is filtered, which hid the whole scene. -->
       <mask id="hole" maskUnits="userSpaceOnUse" x="-600" y="-600" width="2400" height="2000">
-        <g filter="url(#invert)">
-          <rect x="-600" y="-600" width="2400" height="2000" fill="#000" />
-          <g transform="translate(0 70)">
-            <g class="cloud1">
-              <rect fill="#fff" width="1200" height="801" y="799" />
-              <image href="hero/variants/assets/frame1-cloud1Mask.jpg" width="1200" height="800" />
-            </g>
+        <rect x="-600" y="-600" width="2400" height="2000" fill="#fff" />
+        <g transform="translate(0 70)">
+          <g class="cloud1">
+            <rect fill="#000" width="1200" height="801" y="799" />
+            <image href="hero/variants/assets/frame1-cloud1Hole.png" width="1200" height="800" />
           </g>
         </g>
       </mask>
