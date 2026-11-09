@@ -24,7 +24,7 @@
       .fromTo('.fh-mountain .mountFg', { y: -50 }, { y: -600 }, 0)
       // the tweens above use GSAP's default 0.5s, so the timeline is 0.5 long; these fit inside it
       .to('.fh-hero #arrow-btn', { autoAlpha: 0, duration: 0.025 }, 0.125)
-      .to('.fh-mountain .panel', { opacity: 0, duration: 0.175 }, 0.1);
+      .to('.fh-mountain .panel', { autoAlpha: 0, duration: 0.175 }, 0.1);
 
     // the scroll cue's arrow bobs gently
     gsap.to('.fh-hero #arrow-btn .arrow', { y: 5, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: -1 });
@@ -67,6 +67,7 @@
   // ── Fit the mountain scene: the art is 1200x800; on screens taller than that (phones) crop the sides
   // so it fills the height, then shrink the words to fit.
   var scene = hero.querySelector('.fh-mountain .scene');
+  var hole = scene.querySelector('#hole');
   var headlines = hero.querySelectorAll('.fh-mountain .headline');
   var lead = hero.querySelector('.fh-mountain .lead');
 
@@ -84,6 +85,10 @@
     if (!box.width || !box.height) return;
     var w = Math.min(1200, (800 * box.width) / box.height);
     scene.setAttribute('viewBox', (600 - w / 2) + ' 0 ' + w + ' 800');
+    hole.setAttribute('x', 600 - w / 2);
+    hole.setAttribute('y', 0);
+    hole.setAttribute('width', w);
+    hole.setAttribute('height', 800);
 
     var stacked = w < 900;
     var leadLines = lead.dataset[stacked ? 'narrow' : 'wide'].split('|');
