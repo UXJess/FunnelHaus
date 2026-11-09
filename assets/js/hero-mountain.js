@@ -51,6 +51,7 @@
     ScrollTrigger.create({
       trigger: '.fh-hero .scrollDist',
       start: '50% 0',
+      end: 'max', // stays swapped until you scroll back up past the halfway point
       toggleClass: { targets: 'body', className: 'show-end' }
     });
   });
