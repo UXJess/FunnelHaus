@@ -39,9 +39,9 @@
       .from('.fh-hero .v4 .backdrop', { y: 35 }, 0)
       .from('.fh-hero .v4 .ground', { y: 90 }, 0)
       .from('.fh-hero .v4 .cabin', { y: 80 }, 0)
-      .from('.fh-hero .v4 .we', { y: 60 }, 0)
-      .from('.fh-hero .v4 h1', { y: 100 }, 0)
-      .from('.fh-hero .v4 .sub', { y: 150 }, 0)
+      .from('.fh-hero .v4 .we', { y: 30 }, 0)
+      .from('.fh-hero .v4 h1', { y: 45 }, 0)
+      .from('.fh-hero .v4 .sub', { y: 55 }, 0)
       .from('.fh-hero .v4 .caps li', { autoAlpha: 0, y: 18, duration: 0.3, stagger: { each: 0.025, from: 'end' } }, 0.35)
       .from('.fh-hero .v4 .see', { autoAlpha: 0, y: 16, duration: 0.15 }, 0.55);
   });
