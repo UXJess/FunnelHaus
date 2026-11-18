@@ -84,7 +84,7 @@
     return h >>> 0;
   }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
-  function initials(name) { return name.split(' ').map(function (p) { return p.charAt(0); }).join(''); }
+  function slug(name) { return name.toLowerCase().replace(/[^a-z]+/g, '-'); }
   function dollars(n) { return '$' + n; }
   // The same class always shows the same room, so a refresh does not reshuffle it.
   function spotsLeft(key) {
@@ -209,7 +209,7 @@
         '<p class="bk-row__time">' + clock(c.start) + '<small>' + CLASS_MIN + ' min</small></p>' +
         '<p class="bk-row__where">Railtown</p>' +
         '<div class="bk-row__class">' +
-          '<span class="bk-row__avatar" aria-hidden="true">' + initials(c.coach) + '</span>' +
+          '<img class="bk-row__avatar" src="/work/kith-kiln/assets/images/coaches/' + slug(c.coach) + '.webp" alt="" width="256" height="256" loading="lazy" decoding="async">' +
           '<div><h4 class="bk-row__name">' + esc(c.type) + ' · ' + CLASS_MIN + ' min</h4>' +
           '<p class="bk-row__meta">' + esc(c.coach) + '</p>' +
           '<p class="bk-row__meta">' + esc(TYPES[c.type].room) + '</p></div>' +
