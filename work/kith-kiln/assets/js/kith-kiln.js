@@ -420,134 +420,30 @@
     );
   });
 
-  function bindScrub(section) {
-    var frame = section && section.querySelector('.plate__frame--scrub');
-    if (!frame || reduce || typeof createImageBitmap !== 'function') return;
-    var count = parseInt(frame.getAttribute('data-frames'), 10) || 0;
-    var base = frame.getAttribute('data-base');
-    var canvas = frame.querySelector('.plate__canvas');
-    var still = frame.querySelector('.plate__still');
-    if (!canvas || !count || !base) return;
-    var ctx = canvas.getContext('2d', { alpha: false });
-    var bitmaps = {};
-    var pending = {};
-    var painted = -1;
-    var want = 0;
-    var busy = false;
-
-    function url(i) {
-      return base + String(i + 1).padStart(3, '0') + '.webp';
-    }
-
-    function release(center) {
-      Object.keys(bitmaps).forEach(function (key) {
-        var n = +key;
-        if (Math.abs(n - center) > 4) {
-          if (bitmaps[n].close) bitmaps[n].close();
-          delete bitmaps[n];
-        }
-      });
-    }
-
-    function load(i) {
-      if (bitmaps[i]) return Promise.resolve(bitmaps[i]);
-      if (pending[i]) return pending[i];
-      pending[i] = fetch(url(i))
-        .then(function (res) { return res.blob(); })
-        .then(function (blob) { return createImageBitmap(blob); })
-        .then(function (bmp) {
-          delete pending[i];
-          bitmaps[i] = bmp;
-          return bmp;
-        })
-        .catch(function () {
-          delete pending[i];
-          return null;
-        });
-      return pending[i];
-    }
-
-    function paint(bmp) {
-      if (canvas.width !== bmp.width || canvas.height !== bmp.height) {
-        canvas.width = bmp.width;
-        canvas.height = bmp.height;
-      }
-      ctx.drawImage(bmp, 0, 0);
-      canvas.hidden = false;
-      if (still) still.hidden = true;
-    }
-
-    function warm(center) {
-      var d;
-      for (d = -1; d <= 3; d++) {
-        var n = center + d;
-        if (n >= 0 && n < count) load(n);
-      }
-      release(center);
-    }
-
-    function show(i) {
-      i = Math.max(0, Math.min(count - 1, i));
-      want = i;
-      if (i === painted) return;
-      if (bitmaps[i]) {
-        paint(bitmaps[i]);
-        painted = i;
-        warm(i);
-        return;
-      }
-      if (busy) return;
-      busy = true;
-      var target = i;
-      load(target).then(function (bmp) {
-        busy = false;
-        if (!bmp) return;
-        if (want === target) {
-          paint(bmp);
-          painted = target;
-          warm(want);
-        } else {
-          show(want);
-        }
-      });
-    }
-
-    var shown = 0;
-    var goal = 0;
-    var last = count - 1;
-    var soften = gsap.parseEase('power1.inOut');
-
-    gsap.ticker.add(function () {
-      var gap = goal - shown;
-      if (Math.abs(gap) < 0.15) shown = goal;
-      else shown += gap * 0.08;
-      show(Math.round(shown));
-    });
-
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: '+=22%',
-      pin: true,
-      anticipatePin: 0,
-      invalidateOnRefresh: true
-    });
-
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top 140%',
-      end: 'bottom -60%',
-      invalidateOnRefresh: true,
-      onUpdate: function (self) {
-        goal = soften(self.progress) * last;
-      }
-    });
-
-    requestAnimationFrame(function () { warm(0); });
-  }
-
+  // The tumbler plays as a silent loop. It rests while it is off screen, and stays on its first
+  // frame for people who ask for reduced motion.
   function bindTumbler() {
-    document.querySelectorAll('.shop-scrub').forEach(bindScrub);
+    var video = document.querySelector('#shop .plate__video--loop');
+    if (!video) return;
+    video.muted = true;
+    video.playsInline = true;
+    if (reduce) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      return;
+    }
+    if (!('IntersectionObserver' in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var play = video.play();
+          if (play && play.catch) play.catch(function () {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(video);
   }
 
   bindSettle();
