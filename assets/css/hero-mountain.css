@@ -146,6 +146,10 @@
   position: absolute;
   left: 0;
   top: calc(66svh - 13.3vw);
+  /* Never let the ocean end above the bottom of the screen. The box is dvh tall but the position above is svh,
+     so once a phone's toolbar slides away (or on tall tablets) a strip of sky showed under the water.
+     The image is 100vw wide and 42.875vw tall (2400x1029); max() only ever pushes it down, never up. */
+  top: max(calc(66svh - 13.3vw), calc(100dvh + 2px - 42.875vw));
   width: 100%;
   max-width: none;
   height: auto;
@@ -169,7 +173,8 @@ html.fh-in-hero .nav-logo .wordmark { mix-blend-mode: normal; }
 @media (max-width: 767px) {
   .fh-hero .v4 .ground { height: 18svh; }
   .fh-hero .v4 .cabin { height: 173px; }
-  .fh-hero .v4 .backdrop { width: 220%; left: -57%; top: calc(64svh - 16vw); }
+  /* 220vw wide, so 94.325vw tall; same bottom-edge guard as above */
+  .fh-hero .v4 .backdrop { width: 220%; left: -57%; top: calc(64svh - 16vw); top: max(calc(64svh - 16vw), calc(100dvh + 2px - 94.325vw)); }
   /* Join the centred copy stack, directly under the secondary line */
   .fh-hero .v4 .see,
   .fhc-banner-open .fh-hero .v4 .see {
