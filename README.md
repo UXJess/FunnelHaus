@@ -1,7 +1,26 @@
 # FunnelHaus website
 
-Static HTML site hosted on Vercel. Each page carries its own inline CSS/JS; shared
-code lives in `assets/`.
+Static HTML site hosted on Vercel. Styles and scripts that several pages share live
+in `assets/`; what is unique to one page stays in that page.
+
+## Where to change styles and scripts
+
+Each page loads its CSS in this order, so a later layer can override an earlier one:
+
+| Layer | File | Used by | Change it to... |
+|---|---|---|---|
+| 1 | `assets/css/site.css` | every page | change something on every page |
+| 2 | `assets/css/service.css` | the 12 service pages and 3 hub pages | change the service page template |
+| 2 | `assets/css/company.css` | about, careers, capabilities, privacy, terms | change those pages together |
+| 3 | the page's own `<style>` | that page only | change one page |
+
+Other CSS files (`consent.css`, `hero-mountain.css`, `booking.css`, `proof.css`, `start.css`) belong to
+one feature each. Shared scripts: `assets/js/site.js` (smooth scroll, scroll reveals, scroll cues) and
+`assets/js/nav-theme.js` (nav colour). Pages with different behaviour (home, contact, find-your-fit,
+privacy/terms, portfolio) keep their own script inline.
+
+Rule of thumb: if a change should apply to many pages, edit the shared file. If you edit a rule inside one
+page and it also exists in a shared file, the page's version wins on that page only.
 
 ## Working on this project
 
