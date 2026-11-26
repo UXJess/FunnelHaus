@@ -162,6 +162,11 @@
 html.fh-in-hero .nav-links,
 html.fh-in-hero .nav-logo .wordmark { mix-blend-mode: normal; }
 
+/* Pulling down past the top of the page (rubber-band scroll on phones and Macs) shows the page's own background,
+   which is the site's primary blue. While the hero is on screen, make that the hero's sky blue instead, so the
+   overscroll reads as more sky. Off the hero, the page background is unchanged (e.g. the bounce at the footer). */
+html.fh-in-hero { background-color: #215d91; }
+
 /* Keep the scroll cue and the button clear of the cookie banner until a choice is made */
 .fhc-banner-open .fh-hero #arrow-btn { bottom: calc(var(--fhc-banner-h, 0px) + 20px); }
 .fhc-banner-open .fh-hero .v4 .see { bottom: calc(var(--fhc-banner-h, 0px) + var(--gutter)); }
