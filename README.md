@@ -3,6 +3,31 @@
 Static HTML site hosted on Vercel. Each page carries its own inline CSS/JS; shared
 code lives in `assets/`.
 
+## Working on this project
+
+**Open this folder in Cursor** (File, Open Folder, `FunnelHaus Company/FunnelHaus Website`).
+It is the git repository, so Cursor can show what has changed.
+
+How a change reaches the live site:
+
+```
+this folder  →  GitHub (UXJess/FunnelHaus)  →  Vercel  →  funnelhaus.ca
+```
+
+`main` is the live site. Every push to `main` is published automatically in seconds.
+Any other branch gets a private preview link (login protected, team only), which is the safe way
+to try something before it goes live.
+
+| I want to... | Do this |
+|---|---|
+| Make a small change that goes live now | Work on `main`, check it, then "commit, push and deploy" |
+| Build something to ship later | Ask for a new branch (e.g. `feature/case-study`), work there, review the preview link, then ask to merge into `main` |
+| See where I am | Ask "which branch am I on and what is uncommitted?" |
+| Undo a bad deploy | Vercel, Deployments, pick the previous one, Promote (Instant Rollback) |
+
+Keep large files (videos) out of this repo. Originals live in `Kith and Kiln Film/`.
+The rules the Cursor agent follows are in `.cursor/rules/workflow.mdc`.
+
 ## Consent and tracking
 
 Cookie consent is handled by `assets/js/consent.js` + `assets/css/consent.css`,

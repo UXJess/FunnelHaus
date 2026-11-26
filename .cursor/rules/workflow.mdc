@@ -1,0 +1,46 @@
+---
+description: How to change, commit, push and deploy the FunnelHaus website safely
+alwaysApply: true
+---
+
+# FunnelHaus website workflow
+
+This repo is the live site. `main` is production: Vercel publishes every push to `main` to
+funnelhaus.ca within seconds. Any other branch gets a private preview link instead.
+
+The person working here is a designer, not a developer. Explain git steps in plain language and
+say what you are about to do before doing it.
+
+## Before changing anything
+
+- Say which branch you are on (`git branch --show-current`).
+- For a small fix the owner wants live now, work on `main`.
+- For a bigger feature, a redesign, or anything the owner says to "ship later", create a branch first
+  (e.g. `feature/case-study`) and work there. Never push that work to `main`.
+
+## Before pushing to `main`
+
+- Show the owner what changed (a screenshot or before/after for visual work) and wait for a yes.
+- Only an explicit "commit, push and deploy" (or similar) is permission to push to `main`.
+- Stage only the files that belong to the change (`git add <file>`), never `git add .`.
+  Mention anything else that is uncommitted instead of sweeping it in.
+
+## Never commit
+
+- Videos or other large files (over about 5 MB). Keep originals in `Kith and Kiln Film/` and
+  host or compress web versions deliberately.
+- Secrets or `.env` files.
+- Anything in `assets/email/` may be deleted or renamed. Email signatures link to those files.
+  Add new files instead.
+
+## Branch preview and release
+
+1. Push the branch. Vercel builds a private preview link (login protected, team only).
+2. The owner reviews the preview on a phone.
+3. Only after approval, merge into `main` and deploy.
+
+## Checking a deploy
+
+After a push to `main`, confirm the Vercel deployment reaches READY before saying it is live.
+To undo a bad deploy, use Vercel's Instant Rollback (Deployments, previous one, Promote) or
+`git revert <commit>` and push.
