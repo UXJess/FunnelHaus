@@ -9,6 +9,7 @@
 .idea/
 *.swp
 *.swo
+FunnelHaus.code-workspace
 
 # Logs
 *.log
