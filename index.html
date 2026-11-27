@@ -793,6 +793,10 @@
     .capabilities {
       padding: 140px 32px;
       border-bottom: 1px solid var(--line);
+      /* same layering as .statement, so the hero photo scrolling away can't show through */
+      position: relative;
+      z-index: 2;
+      background: var(--bg);
     }
     .capabilities-inner {
       max-width: 1280px;

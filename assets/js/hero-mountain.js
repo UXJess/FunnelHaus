@@ -33,7 +33,7 @@
     var spacer = document.querySelector('.fh-hero .endScroll');
     gsap.timeline({
       defaults: { ease: 'none', duration: 1 },
-      scrollTrigger: { trigger: spacer, start: 'top bottom', end: 'bottom bottom', scrub: 1 }
+      scrollTrigger: { trigger: spacer, start: 'top bottom', end: 'bottom bottom', scrub: 0.25 } // tighter catch-up than the wipe's 1
     })
       .from('.fh-hero .v4 .sky', { y: 80 }, 0)
       .from('.fh-hero .v4 .backdrop', { y: 35 }, 0)
@@ -42,8 +42,9 @@
       .from('.fh-hero .v4 .we', { y: 30 }, 0)
       .from('.fh-hero .v4 h1', { y: 45 }, 0)
       .from('.fh-hero .v4 .sub', { y: 55 }, 0)
-      .from('.fh-hero .v4 .caps li', { autoAlpha: 0, y: 18, duration: 0.3, stagger: { each: 0.025, from: 'end' } }, 0.35)
-      .from('.fh-hero .v4 .see', { autoAlpha: 0, y: 16, duration: 0.15 }, 0.55);
+      // the capabilities and the button arrive early, so they are in place well before the layers finish rising
+      .from('.fh-hero .v4 .caps li', { autoAlpha: 0, y: 18, duration: 0.2, stagger: { each: 0.015, from: 'end' } }, 0.05)
+      .from('.fh-hero .v4 .see', { autoAlpha: 0, y: 16, duration: 0.12 }, 0.12);
   });
 
   // Reduced motion: no scrubbed wipe; past the first half of the scroll, swap to the end frame
