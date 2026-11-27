@@ -195,39 +195,7 @@
       padding: 120px 32px;
       border-bottom: 1px solid var(--line);
     }
-    .principles-inner { max-width: 1280px; margin: 0 auto; }
-    .principles-head {
-      margin-bottom: 64px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 32px;
-    }
-    .principles-head h2 {
-      font-size: clamp(32px, 4.4vw, 56px);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-    }
     .principles-head h2 .ital { font-style: italic; font-weight: 400; color: var(--ink-50); }
-
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
-      border-top: 1px solid var(--line);
-      border-left: 1px solid var(--line);
-    }
-    .principle {
-      padding: 40px 32px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: background-color 0.3s;
-    }
-    .principle:hover { background-color: rgba(239,234,226,0.03); }
     .principle .num {
       font-size: 11px;
       letter-spacing: 0.18em;
@@ -323,9 +291,17 @@
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .statement-row, .roles-head { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 1024px) {
       .statement-meta { position: static; }
-      .principles-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 1024px) {
       .roles-empty { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    @media (max-width: 1024px) {
       .cta-inner { grid-template-columns: 1fr; gap: 32px; }
     }
     @media (min-width: 769px) {
@@ -336,63 +312,81 @@
         padding: 88px 32px 0;
         gap: clamp(12px, 2vh, 24px);
       }
+    }
+
+    @media (min-width: 769px) {
       .careers-hero-title-wrap {
         gap: clamp(12px, 2.4vh, 28px);
         min-height: 0;
       }
+    }
+
+    @media (min-width: 769px) {
       .careers-hero-title {
         font-size: clamp(48px, min(11vw, 15vh), 150px);
       }
+    }
+
+    @media (min-width: 769px) {
       .careers-hero-lede {
         font-size: clamp(16px, min(1.5vw, 2.1vh), 22px);
       }
+    }
+
+    @media (min-width: 769px) {
       .careers-hero-foot { padding: 0; }
+    }
+
+    @media (min-width: 769px) {
       .careers-scroll-cue { padding: 16px 32px 48px; }
     }
 
     @media (max-width: 768px) {
-      .nav { padding: 18px 20px; }
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 11px; }
-      .nav-links a::before { margin-right: 10px; }
       .careers-hero { padding: 100px 20px 0; gap: 18px; }
+    }
+
+    @media (max-width: 768px) {
       .careers-hero-foot {
         width: calc(100% + 40px);
         margin-left: -20px;
         padding: 0;
       }
-      .careers-scroll-cue { padding: 18px 20px 40px; }
-      .careers-hero { height: auto; max-height: none; min-height: 0; }
-      .careers-hero-title { font-size: clamp(40px, 14vw, 80px); }
-      .careers-hero-title .ital { font-size: clamp(22px, 5.5vw, 32px); }
-      .careers-hero-lede { font-size: clamp(16px, 4.4vw, 20px); }
-      .statement { padding: 80px 20px; }
-      .statement + .statement { padding-top: 0; }
-      .principles { padding: 80px 20px; }
-      .roles { padding: 80px 20px; }
-      .cta { padding: 80px 20px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
-      .footer-brand { grid-column: 1 / -1; }
-      .footer-meta { grid-template-columns: 1fr; text-align: center; gap: 12px; }
-      .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
     }
 
     @media (max-width: 768px) {
-      /* ── Bottom nav bar — transparent, icon only ── */
-      body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
-      .nav {
-        top: auto;
-        bottom: 0;
-        height: calc(60px + env(safe-area-inset-bottom, 0px));
-        padding: 0 30px;
-        padding-bottom: env(safe-area-inset-bottom, 0px);
-      }
-      .nav .nav-logo .wordmark { display: none; }
-      .nav-hamburger { display: block; }
-      .nav-links { display: none; }
-      /* Sheet floats above the nav bar */
-      .mobile-menu { bottom: 0; }
-      .menu-cta { padding: 16px 24px 20px; }
+      .careers-scroll-cue { padding: 18px 20px 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .careers-hero { height: auto; max-height: none; min-height: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .careers-hero-title { font-size: clamp(40px, 14vw, 80px); }
+    }
+
+    @media (max-width: 768px) {
+      .careers-hero-title .ital { font-size: clamp(22px, 5.5vw, 32px); }
+    }
+
+    @media (max-width: 768px) {
+      .careers-hero-lede { font-size: clamp(16px, 4.4vw, 20px); }
+    }
+
+    @media (max-width: 768px) {
+      .statement { padding: 80px 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .statement + .statement { padding-top: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .principles { padding: 80px 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .roles { padding: 80px 20px; }
     }
   </style>
 </head>

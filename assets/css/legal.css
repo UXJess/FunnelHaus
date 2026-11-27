@@ -1,0 +1,38 @@
+/* Shared by the legal pages (privacy, terms).
+   Linked after site.css and before each page's own inline <style>. Change a rule here to change it on all of
+   those pages. A rule that only one page needs belongs in that page's <style>. */
+
+:root {
+  --bg:      #2C60EF;
+  --paper:   #1E50D9;
+  --ink:     #ffffff;
+  --ink-50:  rgba(255,255,255,0.5);
+  --ink-30:  rgba(255,255,255,0.3);
+  --ink-15:  rgba(255,255,255,0.15);
+  --line:    rgba(255,255,255,0.12);
+  --accent:  #5884FC;
+  --yellow:  #FDC942;
+  --blue:    #2C60EF;
+  --red:     #DD120E;
+  --page:    var(--yellow);
+  --page-rgb: 253, 201, 66;
+}
+
+.nav-logo .logo-mark { width: 32px; height: 32px; display: block; mix-blend-mode: normal; isolation: isolate; flex-shrink: 0; }
+
+.nav-dropdown .dropdown-overview {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+}
+
+.legal-title .ital {
+  display: block; font-style: italic; font-weight: 400;
+  font-size: clamp(24px, 3vw, 40px); line-height: 1.15;
+  letter-spacing: -0.02em; margin-top: 0.25em; color: var(--ink-50);
+}
+
+.legal-section h2 .num {
+  display: block; margin-bottom: 14px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--ink-50);
+}

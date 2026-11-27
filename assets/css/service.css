@@ -359,15 +359,98 @@ body {
 /* ─── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .statement-row, .svc-list-head { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 1024px) {
   .statement-meta { position: static; }
-  .svc-row { grid-template-columns: 40px 1fr 60px; }
-  .svc-row .svc-meta { grid-column: 2 / -1; }
-  .upnext-grid { grid-template-columns: 1fr; }
-  .upnext-card { border-right: none; }
+}
+
+@media (max-width: 1024px) {
   .process-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
   .step:nth-child(2) { border-right: none; }
+}
+
+@media (max-width: 1024px) {
   .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 1024px) {
   .cta-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 18px 20px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { gap: 16px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links a { font-size: 11px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links a::before { margin-right: 10px; }
+}
+
+@media (max-width: 768px) {
+  .statement { padding: 80px 20px; }
+}
+
+@media (max-width: 768px) {
+  .statement + .statement { padding-top: 0; }
+}
+
+@media (max-width: 768px) {
+  .process { padding: 80px 20px; }
+}
+
+@media (max-width: 768px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .step { border-right: none !important; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 768px) {
+  .step:last-child { border-bottom: none; }
+}
+
+@media (max-width: 768px) {
+  .featured { padding: 80px 20px; }
+}
+
+@media (max-width: 768px) {
+  .featured-image { width: 100%; height: 60vh; }
+}
+
+@media (max-width: 768px) {
+  .featured-meta-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .cta { padding: 80px 20px; }
+}
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 48px; }
+}
+
+@media (max-width: 768px) {
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .footer-meta { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+}
+
+@media (max-width: 768px) {
+  .footer-meta .meta-left, .footer-meta .meta-right { justify-content: center; }
 }
 
 /* ─── HAMBURGER + MOBILE MENU ──────────────────────────── */
@@ -537,5 +620,23 @@ body {
 .menu-cta-btn:hover { background: #1f4dd6; }
 
 .menu-cta-btn .arrow { width: 18px; height: 18px; flex-shrink: 0; }
+
+@media (max-width: 768px) {
+  /* ── Bottom nav bar — transparent, icon only ── */
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  .nav {
+    top: auto;
+    bottom: 0;
+    height: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0 30px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .nav .nav-logo .wordmark { display: none; }
+  .nav-hamburger { display: block; }
+  .nav-links { display: none; }
+  /* Sheet floats above the nav bar */
+  .mobile-menu { bottom: 0; }
+  .menu-cta { padding: 16px 24px 20px; }
+}
 
 .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
