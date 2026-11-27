@@ -116,15 +116,42 @@ function normalizeServices(input) {
   return unique;
 }
 
+// Find-your-fit quiz answers -> HubSpot properties. These must exist in HubSpot and be on the form,
+// or HubSpot rejects the submission and the fallback sends only the core fields (quiz answers dropped).
+const QUIZ_PROPERTIES = {
+  industry: 'quiz_industry',
+  goals: 'quiz_goals',
+  platform: 'quiz_platform',
+  aiUses: 'quiz_ai_uses',
+  leadTools: 'quiz_lead_tools',
+  timeline: 'quiz_timeline',
+  recommended: 'quiz_recommended_pillar',
+  message: 'quiz_message'
+};
+
+function quizFields(quiz) {
+  if (!quiz || typeof quiz !== 'object') return [];
+  const rows = [];
+  for (const [key, property] of Object.entries(QUIZ_PROPERTIES)) {
+    const raw = quiz[key];
+    const max = key === 'message' ? 1000 : 120;
+    const value = Array.isArray(raw)
+      ? raw.map((item) => str(item, 120)).filter(Boolean).join('; ')
+      : str(raw, max);
+    if (value) rows.push(field(property, value.slice(0, max)));
+  }
+  return rows;
+}
+
 function field(name, value) {
   return { objectTypeId: '0-1', name, value };
 }
 
-function buildFields({ fullName, email, website, services, budget, utm_source, utm_medium, utm_campaign, gclid }, extras) {
+function buildFields({ fullName, email, company, website, services, budget, utm_source, utm_medium, utm_campaign, gclid, quiz }, extras) {
   const { firstname, lastname } = splitName(fullName);
   const servicesNeeded = services.map((key) => SERVICE_LABELS[key]).join('; ');
   const rows = [
-    field('company', companyFromWebsite(website, fullName)),
+    field('company', company || companyFromWebsite(website, fullName)),
     field('email', email),
     field('service_type', servicesNeeded || 'Not specified'),
     field('budget_range', budget || 'Not specified')
@@ -138,6 +165,7 @@ function buildFields({ fullName, email, website, services, budget, utm_source, u
   if (utm_medium) rows.push(field('utm_medium', utm_medium));
   if (utm_campaign) rows.push(field('utm_campaign', utm_campaign));
   if (gclid) rows.push(field('gclid', gclid));
+  rows.push(...quizFields(quiz));
   return rows.filter((f) => f.value !== '');
 }
 
@@ -186,7 +214,9 @@ module.exports = async function handler(req, res) {
 
   const fullName = str(body.fullName, 120);
   const email = str(body.email, 254).toLowerCase();
+  const company = str(body.company, 255);
   const website = str(body.website, 500);
+  const quiz = body.quiz && typeof body.quiz === 'object' ? body.quiz : null;
   const services = normalizeServices(body.services);
   const budget = BUDGET_VALUES.has(str(body.budget, 40)) ? str(body.budget, 40) : '';
   const utm_source = str(body.utm_source, 120);
@@ -210,7 +240,7 @@ module.exports = async function handler(req, res) {
 
   const payload = {
     fields: buildFields(
-      { fullName, email, website, services, budget, utm_source, utm_medium, utm_campaign, gclid },
+      { fullName, email, company, website, services, budget, utm_source, utm_medium, utm_campaign, gclid, quiz },
       true
     ),
     context
@@ -230,7 +260,7 @@ module.exports = async function handler(req, res) {
     let result = await submitHubSpot(payload);
     if (!result.ok && isUnknownPropertyError(result.body)) {
       payload.fields = buildFields(
-        { fullName, email, website, services, budget, utm_source, utm_medium, utm_campaign, gclid },
+        { fullName, email, company, website, services, budget, utm_source, utm_medium, utm_campaign, gclid, quiz },
         false
       );
       result = await submitHubSpot(payload);

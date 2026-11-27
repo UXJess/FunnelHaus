@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find your fit — FunnelHaus</title>
-  <meta name="description" content="Three quick questions and we'll point you to the right pillar to start with — Design & Build, Creative & Content, or Growth & Performance." />
+  <meta name="description" content="A few quick questions, under three minutes. We'll point you to the right pillar to start with — Design & Build, Creative & Content, or Growth & Performance." />
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/logos/funnelhaus-logo-blue.svg" type="image/svg+xml" />
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="FunnelHaus" />
   <meta property="og:title" content="Find your fit — FunnelHaus" />
-  <meta property="og:description" content="Three quick questions. We'll point you to the right pillar to start with." />
+  <meta property="og:description" content="A few quick questions, under three minutes. We'll point you to the right pillar to start with." />
   <meta property="og:url" content="https://www.funnelhaus.ca/find-your-fit" />
   <link rel="canonical" href="https://www.funnelhaus.ca/find-your-fit" />
   <meta name="twitter:card" content="summary" />
@@ -902,6 +902,65 @@
       .menu-cta { padding: 16px 24px 20px; }
     }
     .nav--light .nav-links a.is-current { color: rgba(0,0,0,0.4); }
+
+    /* Contact step (last screen of the quiz) */
+    .quiz-form {
+      width: 100%;
+      max-width: 30rem;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .quiz-contact-helper { margin-top: -24px; }
+    .quiz-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .quiz-field label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      font-weight: 500;
+    }
+    .quiz-field label span {
+      text-transform: none;
+      letter-spacing: 0.02em;
+      color: var(--ink-30);
+      font-weight: 400;
+    }
+    .quiz-field input,
+    .quiz-field textarea {
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+      outline: none;
+      width: 100%;
+      border-radius: 0;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    .quiz-field input:focus,
+    .quiz-field textarea:focus { border-bottom-color: var(--ink); }
+    .quiz-field.is-invalid input { border-bottom-color: var(--red); }
+    .quiz-hp {
+      position: absolute !important;
+      left: -9999px !important;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+    .quiz-error {
+      color: #ff8a86;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
   </style>
 </head>
 <body>
@@ -989,9 +1048,9 @@
             <span class="ital">take a short quiz and find out</span>
           </h1>
           <p class="intro-lede">
-            That's the most common place to be. Three quick questions, two
-            minutes — and we'll point you to the right pillar to start with.
-            No commitment, no follow-up sales sequence.
+            That's the most common place to be. A few quick questions, under
+            three minutes — and we'll point you to the right pillar to start with.
+            No commitment. Share your details at the end and we'll reply with a suggestion.
           </p>
         </div>
         <div class="intro-actions">
@@ -1019,6 +1078,45 @@
             <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
           </button>
         </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACT SCREEN ─── (shown after the last question) -->
+    <section class="screen" id="screen-contact">
+      <div class="q-inner">
+        <h2 class="q-title">Where should we send your starting point?</h2>
+        <p class="q-helper quiz-contact-helper">Name, email and company are required. Everything else is optional.</p>
+        <form class="quiz-form" id="quizForm" novalidate>
+          <div class="quiz-field">
+            <label for="qFullName">Full name</label>
+            <input id="qFullName" name="fullName" type="text" autocomplete="name" required />
+          </div>
+          <div class="quiz-field">
+            <label for="qEmail">Work email</label>
+            <input id="qEmail" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="quiz-field">
+            <label for="qCompany">Company</label>
+            <input id="qCompany" name="company" type="text" autocomplete="organization" required />
+          </div>
+          <div class="quiz-field">
+            <label for="qWebsite">Website or LinkedIn <span>(optional)</span></label>
+            <input id="qWebsite" name="website" type="text" autocomplete="url" />
+          </div>
+          <div class="quiz-field">
+            <label for="qMessage">Anything else we should know? <span>(optional)</span></label>
+            <textarea id="qMessage" name="message" rows="3" maxlength="1000"></textarea>
+          </div>
+          <!-- Honeypot: hidden from people, bots tend to fill it in -->
+          <input class="quiz-hp" type="text" name="hp_website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="quiz-error" id="quizError" role="alert" hidden></p>
+          <div class="q-actions">
+            <button class="btn btn-primary" id="submitBtn" type="submit">
+              <span>See my starting point</span>
+              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5"/><path d="M7 5H11V9"/></svg>
+            </button>
+          </div>
+        </form>
       </div>
     </section>
 

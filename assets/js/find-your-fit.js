@@ -51,49 +51,111 @@
       });
     })();
 
-    // ─── QUIZ STATE MACHINE ─────────────────────────────────────────
-    // Edit `questions` to add/remove/reword. Each option awards points to
-    // pillars: db = Design & Build, cc = Creative & Content, gp = Growth
-    // & Performance. Empty scores object = neutral (counts toward the
-    // "let's talk" fallback if all answers are neutral).
+    // ─── QUIZ ───────────────────────────────────────────────────────
+    // Questions are asked in order. A question with `showIf` is only asked when the answers so far match it.
+    // Options with `scores` add points to pillars: db = Design & Build, cc = Creative & Content,
+    // gp = Growth & Performance. `exclusive` options (e.g. "Not sure yet") clear the other picks.
+    // Edit `questions` to add, remove or reword. Keep the whole quiz to about three minutes.
+    const PILLAR_SERVICE = { db: 'design-build', cc: 'creative-content', gp: 'growth-performance' };
+
+    function selectedValues(answers, id) {
+      const q = quiz.questions.find(x => x.id === id);
+      if (!q) return [];
+      return (answers[id] || []).map(i => q.options[i] && q.options[i].value).filter(Boolean);
+    }
+
     const quiz = {
-      step: 'intro',  // 'intro' | 'q0' | 'q1' | 'q2' | 'result'
-      currentQ: 0,
-      answers: [],
-      scores: { db: 0, cc: 0, gp: 0 },
+      currentId: null,
+      answers: {},   // question id -> array of selected option indexes
 
       questions: [
         {
-          title: "Which of these feels closest to where you're at?",
+          id: 'industry',
+          title: 'What kind of business are you in?',
           options: [
-            { label: "I'm starting something new",                            scores: { db: 2, cc: 1 } },
-            { label: "I have a website, but it's not working",                 scores: { db: 1, gp: 2 } },
-            { label: "I'm growing and things feel disconnected",               scores: { cc: 2 } },
-            { label: "I'm not sure — I just know something needs fixing",     scores: {} }
+            { label: 'Construction',               value: 'construction',  scores: {} },
+            { label: 'Trades or field service',    value: 'trades',        scores: {} },
+            { label: 'Professional services',      value: 'professional',  scores: {} },
+            { label: 'Retail or e-commerce',       value: 'retail',        scores: {} },
+            { label: 'Something else',             value: 'other',         scores: {} }
           ]
         },
         {
-          title: "What's the main challenge you're dealing with?",
-          options: [
-            { label: "My website doesn't reflect my business",                  scores: { db: 2 } },
-            { label: "I'm not getting enough leads or conversions",             scores: { gp: 2 } },
-            { label: "My brand or content feels unclear",                       scores: { cc: 2 } },
-            { label: "I don't know what's working or what to focus on",         scores: {} }
-          ]
-        },
-        {
-          // Multi-select with cap. Each pick adds points (halved vs Q1/Q2
-          // so multi-pick can't dominate clear single answers).
-          title: "What would \"working better\" look like?",
+          id: 'goals',
+          title: 'What would you most like help with?',
           multi: true,
           maxSelect: 3,
-          helper: "Choose up to 3.",
+          helper: 'Choose up to 3.',
           options: [
-            { label: "A clearer website and message",       scores: { db: 0.5, cc: 0.5 } },
-            { label: "Stronger conversions",                 scores: { gp: 1, db: 0.5 } },
-            { label: "Better brand presence",                scores: { cc: 1 } },
-            { label: "Clearer insight into performance",     scores: { gp: 1 } },
-            { label: "Confidence in what to do next",        scores: {} }
+            { label: 'A new website or a redesign',              value: 'website',   scores: { db: 2 } },
+            { label: 'Lead forms, booking or a sales funnel',    value: 'forms',     scores: { gp: 2 } },
+            { label: 'An AI chatbot or AI calling agent',        value: 'ai',        scores: { db: 2 } },
+            { label: 'Showing up on Google (SEO)',               value: 'seo',       scores: { gp: 2 } },
+            { label: 'Ads, social, photo or video',              value: 'content',   scores: { cc: 2 } },
+            { label: 'Analytics and tracking',                   value: 'analytics', scores: { gp: 1 } },
+            { label: 'Not sure yet',                             value: 'unsure',    scores: {}, exclusive: true }
+          ]
+        },
+        {
+          id: 'platform',
+          title: 'Which platform is your website on, or the one you would want?',
+          showIf: a => selectedValues(a, 'goals').includes('website'),
+          options: [
+            { label: 'Shopify',                      value: 'shopify',          scores: {} },
+            { label: 'WordPress',                    value: 'wordpress',        scores: {} },
+            { label: 'Squarespace or Wix',           value: 'squarespace-wix',  scores: {} },
+            { label: 'Custom-built',                 value: 'custom',           scores: {} },
+            { label: 'I have no website yet',        value: 'none',             scores: {} },
+            { label: 'Open to advice',               value: 'advice',           scores: {} }
+          ]
+        },
+        {
+          id: 'ai',
+          title: 'What would you want AI to do?',
+          multi: true,
+          maxSelect: 2,
+          helper: 'Choose up to 2.',
+          showIf: a => selectedValues(a, 'goals').includes('ai'),
+          options: [
+            { label: 'Answer visitor questions on my website (chatbot)', value: 'chatbot',  scores: {} },
+            { label: 'Call or book leads (AI calling agent)',            value: 'calling',  scores: {} },
+            { label: 'Write or repurpose content',                       value: 'content',  scores: {} },
+            { label: 'Automate work inside my team',                     value: 'internal', scores: {} },
+            { label: 'Not sure, I want advice',                          value: 'advice',   scores: {}, exclusive: true }
+          ]
+        },
+        {
+          id: 'leads',
+          title: 'Where do your leads and bookings go today?',
+          options: [
+            { label: 'A general CRM (HubSpot, Salesforce, Microsoft Dynamics)',                              value: 'general-crm',  scores: {} },
+            { label: 'Construction or trades software (Buildertrend, Procore, JobTread, Jobber, ServiceTitan)', value: 'industry-crm', scores: {} },
+            { label: 'Another tool',                                                                          value: 'other-tool',   scores: {} },
+            { label: 'Email or a spreadsheet',                                                                value: 'email-sheet',  scores: {} },
+            { label: 'Not sure, help me choose',                                                              value: 'unsure',       scores: {} }
+          ]
+        },
+        {
+          id: 'timeline',
+          title: 'When would you like to start?',
+          options: [
+            { label: 'This month',       value: 'now',        scores: {} },
+            { label: 'In 1 to 3 months', value: '1-3-months', scores: {} },
+            { label: 'In 3 to 6 months', value: '3-6-months', scores: {} },
+            { label: 'Just exploring',   value: 'exploring',  scores: {} }
+          ]
+        },
+        {
+          id: 'budget',
+          title: 'Which range feels right for this project?',
+          options: [
+            { label: 'Less than $5k',  value: '<5k',   scores: {} },
+            { label: '$5k to $7k',     value: '5-7k',  scores: {} },
+            { label: '$7k to $10k',    value: '7-10k', scores: {} },
+            { label: '$10k to $15k',   value: '10-15k', scores: {} },
+            { label: '$15k to $20k',   value: '15-20k', scores: {} },
+            { label: 'More than $20k', value: '20k+',  scores: {} },
+            { label: 'Not sure yet',   value: '',      scores: {} }
           ]
         }
       ],
@@ -134,17 +196,24 @@
       },
 
       init() {
-        document.getElementById('startBtn').addEventListener('click', () => this.startQuiz());
+        document.getElementById('startBtn').addEventListener('click', () => this.start());
         document.getElementById('backBtn').addEventListener('click', () => this.goBack());
         document.getElementById('nextBtn').addEventListener('click', () => this.goNext());
-        document.getElementById('restartBtn').addEventListener('click', () => this.restart());
+        document.getElementById('restartBtn').addEventListener('click', () => this.showIntro());
+        document.getElementById('quizForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.submitContact();
+        });
       },
 
-      startQuiz() {
-        this.currentQ = 0;
-        this.answers = [];
-        this.scores = { db: 0, cc: 0, gp: 0 };
-        this.showQuestion();
+      // The questions asked for the answers given so far
+      active() {
+        return this.questions.filter(q => !q.showIf || q.showIf(this.answers));
+      },
+
+      start() {
+        this.answers = {};
+        this.showQuestion(this.active()[0].id);
       },
 
       showScreen(id) {
@@ -168,21 +237,19 @@
         }
       },
 
-      showQuestion() {
-        const i = this.currentQ;
-        const q = this.questions[i];
-        const total = this.questions.length;
-        const pct = ((i + 1) / total) * 100;
+      showQuestion(id) {
+        const list = this.active();
+        const idx = list.findIndex(q => q.id === id);
+        const q = list[idx];
+        this.currentId = id;
+        if (!Array.isArray(this.answers[id])) this.answers[id] = [];
 
-        // Ensure answer slot is always an array
-        if (!Array.isArray(this.answers[i])) this.answers[i] = [];
-
-        this.updateProgress(pct);
-        this.updateTopbar(true, `Question ${i + 1} of ${total}`);
+        // The contact step counts as one more step at the end
+        this.updateProgress(((idx + 1) / (list.length + 1)) * 100);
+        this.updateTopbar(true, `Question ${idx + 1} of ${list.length}`);
 
         document.getElementById('qTitle').textContent = q.title;
 
-        // Helper text (e.g. "Choose up to 3.")
         const helperEl = document.getElementById('qHelper');
         if (q.helper) {
           helperEl.textContent = q.helper;
@@ -202,81 +269,77 @@
           const indicatorClass = q.multi ? 'checkbox' : 'radio';
           btn.innerHTML = `<span class="${indicatorClass}"></span><span class="label"></span>`;
           btn.querySelector('.label').textContent = opt.label;
-          btn.addEventListener('click', () => this.selectOption(i, optIdx));
+          btn.addEventListener('click', () => this.selectOption(optIdx));
           optionsEl.appendChild(btn);
         });
 
-        this.renderOptionStates(i);
-
-        const isLast = i === total - 1;
-        document.getElementById('nextLabel').textContent = isLast ? 'See result' : 'Next';
-
+        this.renderOptionStates();
+        document.getElementById('nextLabel').textContent = idx === list.length - 1 ? 'Continue' : 'Next';
         this.updateNextBtn();
 
         this.showScreen('screen-question');
         lenis.scrollTo(0, { duration: 0.6 });
       },
 
-      selectOption(qIdx, optIdx) {
-        const q = this.questions[qIdx];
-        const current = this.answers[qIdx] || [];
+      selectOption(optIdx) {
+        const q = this.questions.find(x => x.id === this.currentId);
+        const cur = this.answers[q.id] || [];
+        const opt = q.options[optIdx];
 
         if (q.multi) {
-          const isSelected = current.includes(optIdx);
-          if (isSelected) {
-            this.answers[qIdx] = current.filter(i => i !== optIdx);
+          if (cur.includes(optIdx)) {
+            this.answers[q.id] = cur.filter(i => i !== optIdx);
+          } else if (opt.exclusive) {
+            this.answers[q.id] = [optIdx];
           } else {
-            const max = q.maxSelect || Infinity;
-            if (current.length >= max) return;  // at cap, ignore click
-            this.answers[qIdx] = [...current, optIdx];
+            const others = cur.filter(i => !q.options[i].exclusive);
+            if (others.length >= (q.maxSelect || Infinity)) return;  // at cap, ignore click
+            this.answers[q.id] = [...others, optIdx];
           }
         } else {
-          this.answers[qIdx] = [optIdx];
+          this.answers[q.id] = [optIdx];
         }
 
-        this.renderOptionStates(qIdx);
+        this.renderOptionStates();
         this.updateNextBtn();
       },
 
-      renderOptionStates(qIdx) {
-        const q = this.questions[qIdx];
-        const selected = this.answers[qIdx] || [];
+      renderOptionStates() {
+        const q = this.questions.find(x => x.id === this.currentId);
+        const selected = this.answers[q.id] || [];
         const optionsEl = document.getElementById('qOptions');
         document.querySelectorAll('.q-option').forEach((el, i) => {
           el.classList.toggle('is-selected', selected.includes(i));
         });
-        if (q.multi) {
-          const max = q.maxSelect || Infinity;
-          optionsEl.classList.toggle('is-maxed', selected.length >= max);
-        } else {
-          optionsEl.classList.remove('is-maxed');
-        }
+        optionsEl.classList.toggle('is-maxed', !!q.multi && selected.length >= (q.maxSelect || Infinity));
       },
 
       updateNextBtn() {
-        const selected = this.answers[this.currentQ] || [];
-        const hasAnswer = selected.length > 0;
+        const hasAnswer = (this.answers[this.currentId] || []).length > 0;
         document.getElementById('nextBtn').setAttribute('aria-disabled', hasAnswer ? 'false' : 'true');
       },
 
       goNext() {
-        const selected = this.answers[this.currentQ] || [];
-        if (selected.length === 0) return;
-        if (this.currentQ < this.questions.length - 1) {
-          this.currentQ++;
-          this.showQuestion();
+        if (!(this.answers[this.currentId] || []).length) return;
+        const list = this.active();
+        const idx = list.findIndex(q => q.id === this.currentId);
+        if (idx < list.length - 1) {
+          this.showQuestion(list[idx + 1].id);
         } else {
-          this.computeAndShowResult();
+          this.showContact();
         }
       },
 
       goBack() {
-        if (this.currentQ === 0) {
-          this.showIntro();
-        } else {
-          this.currentQ--;
-          this.showQuestion();
+        const current = document.querySelector('.screen.is-active').id;
+        const list = this.active();
+        if (current === 'screen-contact') {
+          this.showQuestion(list[list.length - 1].id);
+          return;
         }
+        const idx = list.findIndex(q => q.id === this.currentId);
+        if (idx <= 0) this.showIntro();
+        else this.showQuestion(list[idx - 1].id);
       },
 
       showIntro() {
@@ -286,35 +349,108 @@
         lenis.scrollTo(0, { duration: 0.6 });
       },
 
-      computeAndShowResult() {
-        this.scores = { db: 0, cc: 0, gp: 0 };
-        this.answers.forEach((selected, qIdx) => {
-          if (!Array.isArray(selected)) return;
-          const opts = this.questions[qIdx].options;
-          selected.forEach(optIdx => {
-            const opt = opts[optIdx];
-            if (!opt) return;
-            Object.entries(opt.scores).forEach(([pillar, pts]) => {
-              this.scores[pillar] = (this.scores[pillar] || 0) + pts;
+      showContact() {
+        this.updateProgress(100);
+        this.updateTopbar(true, 'Almost there');
+        this.showScreen('screen-contact');
+        lenis.scrollTo(0, { duration: 0.6 });
+      },
+
+      score() {
+        const scores = { db: 0, cc: 0, gp: 0 };
+        this.active().forEach(q => {
+          (this.answers[q.id] || []).forEach(i => {
+            Object.entries(q.options[i].scores).forEach(([pillar, pts]) => {
+              scores[pillar] += pts;
             });
           });
         });
+        return scores;
+      },
 
-        const total = this.scores.db + this.scores.cc + this.scores.gp;
-        let winner;
-        if (total === 0) {
-          winner = 'talk';
-        } else {
-          // Tie-break: db > cc > gp
-          const sorted = Object.entries(this.scores).sort((a, b) => {
-            if (b[1] !== a[1]) return b[1] - a[1];
-            const order = { db: 0, cc: 1, gp: 2 };
-            return order[a[0]] - order[b[0]];
-          });
-          winner = sorted[0][0];
+      recommend(scores) {
+        const total = scores.db + scores.cc + scores.gp;
+        if (total === 0) return 'talk';
+        const order = { db: 0, cc: 1, gp: 2 };   // tie-break: db, then cc, then gp
+        return Object.entries(scores).sort((a, b) => (b[1] - a[1]) || (order[a[0]] - order[b[0]]))[0][0];
+      },
+
+      setError(message) {
+        const el = document.getElementById('quizError');
+        el.textContent = message;
+        el.hidden = !message;
+      },
+
+      validate(form) {
+        const fields = [
+          { el: form.fullName, ok: form.fullName.value.trim().length > 0 },
+          { el: form.email,    ok: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()) },
+          { el: form.company,  ok: form.company.value.trim().length > 0 }
+        ];
+        let first = null;
+        fields.forEach(({ el, ok }) => {
+          el.closest('.quiz-field').classList.toggle('is-invalid', !ok);
+          if (!ok && !first) first = el;
+        });
+        if (first) {
+          this.setError('Please fill in your name, a valid email and your company.');
+          first.focus();
+          return false;
         }
+        this.setError('');
+        return true;
+      },
 
-        this.showResult(winner);
+      payload(form) {
+        const scores = this.score();
+        const pick = id => selectedValues(this.answers, id);
+        return {
+          fullName: form.fullName.value.trim(),
+          email: form.email.value.trim(),
+          company: form.company.value.trim(),
+          website: form.website.value.trim(),
+          services: Object.keys(scores).filter(p => scores[p] > 0).map(p => PILLAR_SERVICE[p]),
+          budget: pick('budget')[0] || '',
+          hp_website: form.hp_website.value,
+          pageUri: location.href,
+          pageName: 'Find your fit quiz - FunnelHaus',
+          quiz: {
+            industry: pick('industry')[0] || '',
+            goals: pick('goals'),
+            platform: pick('platform')[0] || '',
+            aiUses: pick('ai'),
+            leadTools: pick('leads')[0] || '',
+            timeline: pick('timeline')[0] || '',
+            recommended: this.recommend(scores),
+            message: form.message.value.trim()
+          }
+        };
+      },
+
+      async submitContact() {
+        const form = document.getElementById('quizForm');
+        if (!this.validate(form)) return;
+
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.payload(form))
+          });
+          if (!res.ok) {
+            // 429 (too many tries) has a message written for people; other errors get a plain one
+            const data = res.status === 429 ? await res.json().catch(() => ({})) : {};
+            throw new Error(data.error || 'We could not send your details just now.');
+          }
+          this.showResult(this.recommend(this.score()));
+        } catch (err) {
+          this.setError((err && err.message ? err.message : 'Something went wrong.') +
+            ' You can also email hello@funnelhaus.ca.');
+        } finally {
+          btn.disabled = false;
+        }
       },
 
       showResult(pillar) {
@@ -329,23 +465,14 @@
         cardLink.href = r.link;
         cardLink.querySelector('span').textContent = pillar === 'talk' ? 'Open a conversation' : 'View capability';
 
-        // Pre-fill service in contact form via URL param
         const startProjectBtn = document.getElementById('startProjectBtn');
-        if (r.serviceParam) {
-          startProjectBtn.href = `contact.html?service=${r.serviceParam}#form`;
-        } else {
-          startProjectBtn.href = 'contact.html#form';
-        }
+        startProjectBtn.href = r.serviceParam ? `contact.html?service=${r.serviceParam}#form` : 'contact.html#form';
 
         this.updateProgress(null);
         this.updateTopbar(false, 'Your fit');
         this.showScreen('screen-result');
         lenis.scrollTo(0, { duration: 0.6 });
       },
-
-      restart() {
-        this.showIntro();
-      }
     };
 
     quiz.init();
